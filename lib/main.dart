@@ -20,6 +20,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const LoginView(),
+      locale: const Locale('ar'),
+      builder: (context, widget) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: widget!,
+        );
+      },
     );
   }
 }

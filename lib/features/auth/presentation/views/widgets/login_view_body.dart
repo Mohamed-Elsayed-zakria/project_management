@@ -15,7 +15,7 @@ class LoginViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Login",
+            "تسجيل الدخول",
             style: AppStyle.kTextStyle30,
           ),
           SizedBox(height: 20),

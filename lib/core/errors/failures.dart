@@ -8,7 +8,7 @@ class LocalFailures extends Failures {
   factory LocalFailures.errorMessage({String? error}) {
     switch (error) {
       case null:
-        return LocalFailures(errMessage: 'Something went wrong');
+        return LocalFailures(errMessage: "حدث خطأ ما حاول مرة اخرى");
       default:
         return LocalFailures(errMessage: error);
     }

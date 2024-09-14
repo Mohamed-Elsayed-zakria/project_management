@@ -5,7 +5,6 @@ import '/features/auth/data/model/login_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
-import '/core/utils/show_toast.dart';
 
 class LoginButtonSignIn extends StatelessWidget {
   const LoginButtonSignIn({super.key});
@@ -26,7 +25,7 @@ class LoginButtonSignIn extends StatelessWidget {
           );
         }
         if (state is LoginFailure) {
-          ShowToast.show(msg: state.errMessage);
+          // TODO: create toast
         }
       },
       builder: (context, state) {
@@ -41,7 +40,7 @@ class LoginButtonSignIn extends StatelessWidget {
               blocAccess.login(loginModel: loginModel);
             }
           },
-          text: "Login",
+          text: "تسجيل الدخول",
         );
       },
     );

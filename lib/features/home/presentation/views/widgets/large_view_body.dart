@@ -15,13 +15,13 @@ class _LargeViewBodyState extends State<LargeViewBody> {
     const Card(
       color: Colors.white,
       elevation: 3,
-      child: Text('statistics'),
+      child: Text('احصائيات'),
     ),
     const NewProjectView(),
     const Card(
       color: Colors.white,
       elevation: 3,
-      child: Text('All projects'),
+      child: Text('كل المشاريع'),
     ),
   ];
 

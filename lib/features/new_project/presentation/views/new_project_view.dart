@@ -1,41 +1,36 @@
-import 'package:project_management/core/constant/style.dart';
-
-import '/core/widgets/custom_form_field.dart';
-import '/core/widgets/custom_buttom.dart';
+import '/features/new_project/presentation/manager/new_project_cubit/new_project_cubit.dart';
+import '/features/new_project/data/repository/new_project_implement.dart';
+import 'widgets/new_project_button_create.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/new_project_take_data.dart';
 import 'package:flutter/material.dart';
+import '/core/constant/style.dart';
 
 class NewProjectView extends StatelessWidget {
   const NewProjectView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              const Text(
-                'New Project',
-                style: AppStyle.kTextStyle30,
-              ),
-              const SizedBox(height: 20),
-              const CustomFormField(
-                label: 'Project Name',
-                hintText: 'Enter Project Name',
-              ),
-              const CustomFormField(
-                label: 'Project Number',
-                hintText: 'Enter Project Number',
-              ),
-              CustomButton(
-                text: 'Submit',
-                onPressed: () {},
-              ),
-            ],
+    return BlocProvider(
+      create: (context) => NewProjectCubit(NewProjectImplement()),
+      child: const Card(
+        color: Colors.white,
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              children: [
+                Text(
+                  'مشروع جديد',
+                  style: AppStyle.kTextStyle30,
+                ),
+                SizedBox(height: 20),
+                NewProjectTakeData(),
+                NewProjectButtonCreate(),
+              ],
+            ),
           ),
         ),
       ),

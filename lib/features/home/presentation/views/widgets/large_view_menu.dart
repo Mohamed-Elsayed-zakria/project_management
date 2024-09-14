@@ -28,7 +28,7 @@ class LargeViewMenu extends StatelessWidget {
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    title: const Text('Welcome'),
+                    title: const Text('مرحبا'),
                     leading: const Icon(Icons.electric_bolt_rounded),
                   ),
                   const Divider(),
@@ -40,7 +40,7 @@ class LargeViewMenu extends StatelessWidget {
                       indexScreen = 0;
                       onTap(indexScreen);
                     },
-                    title: const Text('statistics'),
+                    title: const Text('احصائيات'),
                     leading: const Icon(IconlyBroken.chart),
                   ),
                   ListTile(
@@ -51,7 +51,7 @@ class LargeViewMenu extends StatelessWidget {
                       indexScreen = 1;
                       onTap(indexScreen);
                     },
-                    title: const Text('New project'),
+                    title: const Text('مشروع جديد'),
                     leading: const Icon(IconlyBroken.arrowUpSquare),
                   ),
                   ListTile(
@@ -62,7 +62,7 @@ class LargeViewMenu extends StatelessWidget {
                       indexScreen = 2;
                       onTap(indexScreen);
                     },
-                    title: const Text('All project'),
+                    title: const Text('كل المشاريع'),
                     leading: const Icon(IconlyBroken.document),
                   ),
                 ],
@@ -75,7 +75,7 @@ class LargeViewMenu extends StatelessWidget {
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  title: const Text('More'),
+                  title: const Text('المزيد'),
                   leading: const Icon(IconlyBroken.moreSquare),
                 ),
               ),

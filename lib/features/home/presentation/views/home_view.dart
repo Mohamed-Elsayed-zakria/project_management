@@ -8,7 +8,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor:AppColors.kBackgroundColor,
+      backgroundColor: AppColors.kBackgroundColor,
       body: LargeViewBody(),
     );
   }

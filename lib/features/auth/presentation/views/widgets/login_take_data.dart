@@ -21,12 +21,12 @@ class LoginTakeData extends StatelessWidget {
                 CustomFormField(
                   controller: blocAccess.getUserName,
                   keyboardType: TextInputType.text,
-                  label: "Username",
-                  hintText: "Enter your username",
+                  label: "اسم المستخدم",
+                  hintText: "ادخل اسم المستخدم",
                   prefixIcon: const Icon(Icons.person_outline),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required";
+                      return "مطلوب";
                     } else {
                       return null;
                     }
@@ -34,8 +34,8 @@ class LoginTakeData extends StatelessWidget {
                 ),
                 CustomFormField(
                   controller: blocAccess.getPassword,
-                  label: "Password",
-                  hintText: "Enter your password",
+                  label: "كلمة المرور",
+                  hintText: "ادخل كلمة المرور",
                   prefixIcon: const Icon(Icons.lock_outline),
                   obscureText: blocAccess.passwordVisibility,
                   suffixIcon: IconButton(
@@ -47,7 +47,7 @@ class LoginTakeData extends StatelessWidget {
                   keyboardType: TextInputType.visiblePassword,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Required";
+                      return "مطلوب";
                     } else {
                       return null;
                     }

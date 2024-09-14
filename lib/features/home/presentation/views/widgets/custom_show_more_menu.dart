@@ -39,7 +39,7 @@ class _CustomShowMoreMenuState extends State<CustomShowMoreMenu> {
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              title: const Text('Setting'),
+              title: const Text('الاعدادات'),
               leading: const Icon(IconlyBroken.setting),
             ),
           ),
@@ -50,7 +50,7 @@ class _CustomShowMoreMenuState extends State<CustomShowMoreMenu> {
             shape: BeveledRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
-            title: const Text('Profile'),
+            title: const Text('الملف الشخصي'),
             leading: const Icon(IconlyBroken.profile),
           ),
         ),
@@ -60,7 +60,7 @@ class _CustomShowMoreMenuState extends State<CustomShowMoreMenu> {
             shape: BeveledRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
-            title: const Text('Sign out'),
+            title: const Text('تسجيل الخروج'),
             leading: const Icon(IconlyBroken.logout),
           ),
         ),
