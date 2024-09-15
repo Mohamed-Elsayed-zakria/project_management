@@ -1,6 +1,5 @@
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter/material.dart';
-import 'custom_show_more_menu.dart';
 
 class LargeViewMenu extends StatelessWidget {
   final Function(int) onTap;
@@ -65,20 +64,41 @@ class LargeViewMenu extends StatelessWidget {
                     title: const Text('كل المشاريع'),
                     leading: const Icon(IconlyBroken.document),
                   ),
+                  ListTile(
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    onTap: () {
+                      indexScreen = 3;
+                      onTap(indexScreen);
+                    },
+                    title: const Text('الملف الشخصي'),
+                    leading: const Icon(IconlyBroken.profile),
+                  ),
+                  ListTile(
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    onTap: () {
+                      indexScreen = 4;
+                      onTap(indexScreen);
+                    },
+                    title: const Text('الاعدادات'),
+                    leading: const Icon(IconlyBroken.setting),
+                  ),
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 14),
-              child: CustomShowMoreMenu(
-                child: ListTile(
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  title: const Text('المزيد'),
-                  leading: const Icon(IconlyBroken.moreSquare),
-                ),
+            ListTile(
+              shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
               ),
+              onTap: () {
+                indexScreen = 5;
+                onTap(indexScreen);
+              },
+              title: const Text('تسجيل الخروج'),
+              leading: const Icon(IconlyBroken.logout),
             ),
           ],
         ),

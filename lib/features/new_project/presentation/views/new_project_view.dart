@@ -22,11 +22,13 @@ class NewProjectView extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                Text(
-                  'مشروع جديد',
-                  style: AppStyle.kTextStyle30,
+                Padding(
+                  padding: EdgeInsets.all(14),
+                  child: Text(
+                    'مشروع جديد',
+                    style: AppStyle.kTextStyle26,
+                  ),
                 ),
-                SizedBox(height: 20),
                 NewProjectTakeData(),
                 NewProjectButtonCreate(),
               ],

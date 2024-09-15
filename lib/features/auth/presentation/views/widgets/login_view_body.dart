@@ -16,7 +16,7 @@ class LoginViewBody extends StatelessWidget {
         children: [
           Text(
             "تسجيل الدخول",
-            style: AppStyle.kTextStyle30,
+            style: AppStyle.kTextStyle26,
           ),
           SizedBox(height: 20),
           LoginTakeData(),
