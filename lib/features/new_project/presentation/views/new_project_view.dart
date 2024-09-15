@@ -20,18 +20,21 @@ class NewProjectView extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: SizedBox(
             width: double.infinity,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(14),
-                  child: Text(
-                    'مشروع جديد',
-                    style: AppStyle.kTextStyle26,
+            height: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(14),
+                    child: Text(
+                      'مشروع جديد',
+                      style: AppStyle.kTextStyle26,
+                    ),
                   ),
-                ),
-                NewProjectTakeData(),
-                NewProjectButtonCreate(),
-              ],
+                  NewProjectTakeData(),
+                  NewProjectButtonCreate(),
+                ],
+              ),
             ),
           ),
         ),

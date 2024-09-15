@@ -1,7 +1,10 @@
+import '/features/show_projects/presentation/views/show_projects_view.dart';
 import '/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import '/features/home/presentation/manager/home_cubit/home_state.dart';
 import '/features/new_project/presentation/views/new_project_view.dart';
+import '/features/statistics/presentation/views/statistics_view.dart';
 import '/features/settings/presentation/views/setting_view.dart';
+import '/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
@@ -13,24 +16,12 @@ class LargeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeCubit cubit = BlocProvider.of<HomeCubit>(context);
-    final List<Widget> screens = [
-      const Card(
-        color: Colors.white,
-        elevation: 3,
-        child: Text('احصائيات'),
-      ),
-      const NewProjectView(),
-      const Card(
-        color: Colors.white,
-        elevation: 3,
-        child: Text('كل المشاريع'),
-      ),
-      const Card(
-        color: Colors.white,
-        elevation: 3,
-        child: Text('الملف الشخصي'),
-      ),
-      const SettingView(),
+    const List<Widget> screens = [
+      StatisticsView(),
+      NewProjectView(),
+      ShowProjectsView(),
+      ProfileView(),
+      SettingView(),
     ];
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {

@@ -1,5 +1,4 @@
-import '/core/widgets/show_up_animation.dart';
-import '/core/widgets/accordion_item.dart';
+import 'widgets/setting_company_info.dart';
 import 'package:flutter/material.dart';
 
 class SettingView extends StatelessWidget {
@@ -7,21 +6,19 @@ class SettingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
+    return Card(
       color: Colors.white,
       elevation: 3,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            AccordionItem(
-              content: ShowUp(
-                delay: 10,
-                child: Text('data'),
-              ),
-              title: "معلومات الشركة",
-            ),
-          ],
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.all(8.0),
+        child: const SingleChildScrollView(
+          child: Column(
+            children: [
+              SettingCompanyInfo(),
+            ],
+          ),
         ),
       ),
     );
