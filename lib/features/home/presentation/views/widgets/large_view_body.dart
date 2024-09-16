@@ -18,8 +18,8 @@ class LargeViewBody extends StatelessWidget {
     HomeCubit cubit = BlocProvider.of<HomeCubit>(context);
     const List<Widget> screens = [
       StatisticsView(),
-      NewProjectView(),
       ShowProjectsView(),
+      NewProjectView(),
       ProfileView(),
       SettingView(),
     ];

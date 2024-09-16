@@ -1,0 +1,1 @@
+enum ProjectSearchType { projectName, projectNumber }

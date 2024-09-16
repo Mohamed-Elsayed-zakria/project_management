@@ -1,5 +1,10 @@
+import '/features/show_projects/presentation/views/show_projects_view.dart';
+import '/features/new_project/presentation/views/new_project_view.dart';
 import '/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import '/features/home/presentation/manager/home_cubit/home_state.dart';
+import '/features/statistics/presentation/views/statistics_view.dart';
+import '/features/settings/presentation/views/setting_view.dart';
+import '/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +35,12 @@ class SmallViewBody extends StatelessWidget {
                 label: 'احصائيات',
               ),
               BottomNavigationBarItem(
-                icon: Icon(IconlyBroken.arrowUpSquare),
-                label: 'مشروع جديد',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(IconlyBroken.document),
                 label: 'كل المشاريع',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(IconlyBroken.arrowUpSquare),
+                label: 'مشروع جديد',
               ),
               BottomNavigationBarItem(
                 icon: Icon(IconlyBroken.profile),
@@ -50,21 +55,11 @@ class SmallViewBody extends StatelessWidget {
           body: IndexedStack(
             index: cubit.indexScreen,
             children: const [
-              Center(
-                child: Text('احصائيات'),
-              ),
-              Center(
-                child: Text('مشروع جديد'),
-              ),
-              Center(
-                child: Text('كل المشاريع'),
-              ),
-              Center(
-                child: Text('الملف الشخصي'),
-              ),
-              Center(
-                child: Text('الاعدادات'),
-              ),
+              StatisticsView(),
+              ShowProjectsView(),
+              NewProjectView(),
+              ProfileView(),
+              SettingView(),
             ],
           ),
         );

@@ -75,6 +75,62 @@ class NewProjectTakeData extends StatelessWidget {
                     }
                   },
                 ),
+                CustomFormField(
+                  controller: blocAccess.projectManager,
+                  label: "مدير المشروع",
+                  hintText: "ادخل مدير المشروع",
+                  prefixIcon: const Icon(Icons.person_outline_outlined),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "مطلوب";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                CustomFormField(
+                  controller: blocAccess.projectOwner,
+                  label: "الجهة المالكة",
+                  hintText: "ادخل الجهة المالكة",
+                  prefixIcon: const Icon(Icons.business_outlined),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "مطلوب";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                CustomFormField(
+                  controller: blocAccess.projectArea,
+                  label: "المنطقة",
+                  hintText: "ادخل المنطقة",
+                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "مطلوب";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                CustomFormField(
+                  controller: blocAccess.projectCity,
+                  label: "المدينة",
+                  hintText: "ادخل المدينة",
+                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "مطلوب";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
                 const NewProjectTakeDatePo(),
                 CustomListTileValidator(
                   validator: blocAccess.projectPickFilePoValidator,

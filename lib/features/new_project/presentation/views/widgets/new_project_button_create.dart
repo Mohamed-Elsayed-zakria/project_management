@@ -20,6 +20,10 @@ class NewProjectButtonCreate extends StatelessWidget {
           blocAccess.projectNumber.clear();
           blocAccess.projectPrice.clear();
           blocAccess.projectDurationPerDay.clear();
+          blocAccess.projectManager.clear();
+          blocAccess.projectOwner.clear();
+          blocAccess.projectArea.clear();
+          blocAccess.projectCity.clear();
           blocAccess.projectDatePo = null;
         }
         if (state is NewProjectFailure) {
@@ -47,6 +51,10 @@ class NewProjectButtonCreate extends StatelessWidget {
                     projectPrice: projectPrice.toString(),
                     projectDurationPerDay:
                         blocAccess.projectDurationPerDay.text,
+                    projectManager: blocAccess.projectManager.text,
+                    projectOwner: blocAccess.projectOwner.text,
+                    projectArea: blocAccess.projectArea.text,
+                    projectCity: blocAccess.projectCity.text,
                     projectDatePo: blocAccess.projectDatePo.toString(),
                     projectFilePo: "",
                     projectFilesBoq: "",

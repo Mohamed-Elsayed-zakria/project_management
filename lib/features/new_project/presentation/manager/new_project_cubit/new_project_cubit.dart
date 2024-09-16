@@ -16,6 +16,10 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final TextEditingController projectNumber = TextEditingController();
   final TextEditingController projectPrice = TextEditingController();
   final TextEditingController projectDurationPerDay = TextEditingController();
+  final TextEditingController projectManager = TextEditingController();
+  final TextEditingController projectOwner = TextEditingController();
+  final TextEditingController projectArea = TextEditingController();
+  final TextEditingController projectCity = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool projectDatePoValidator = true;

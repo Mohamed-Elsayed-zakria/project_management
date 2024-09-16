@@ -56,7 +56,7 @@ class ProjectDetailsSiteReceiptListTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "خطاب ارشادي",
+            "النموذج",
             style: AppStyle.tabTextStyle.copyWith(
               color: AppColors.kPrimaryColor,
             ),

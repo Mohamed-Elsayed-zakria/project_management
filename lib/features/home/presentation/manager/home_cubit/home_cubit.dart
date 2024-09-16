@@ -6,7 +6,10 @@ class HomeCubit extends Cubit<HomeState> {
   int indexScreen = 0;
 
   void changeIndexScreen(int index) {
-    indexScreen = index;
+    if (index == 5) {
+    } else {
+      indexScreen = index;
+    }
     emit(HomeChangeIndexScreen());
   }
 }

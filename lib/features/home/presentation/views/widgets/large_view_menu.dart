@@ -50,8 +50,8 @@ class LargeViewMenu extends StatelessWidget {
                       indexScreen = 1;
                       onTap(indexScreen);
                     },
-                    title: const Text('مشروع جديد'),
-                    leading: const Icon(IconlyBroken.arrowUpSquare),
+                    title: const Text('كل المشاريع'),
+                    leading: const Icon(IconlyBroken.document),
                   ),
                   ListTile(
                     shape: BeveledRectangleBorder(
@@ -61,8 +61,8 @@ class LargeViewMenu extends StatelessWidget {
                       indexScreen = 2;
                       onTap(indexScreen);
                     },
-                    title: const Text('كل المشاريع'),
-                    leading: const Icon(IconlyBroken.document),
+                    title: const Text('مشروع جديد'),
+                    leading: const Icon(IconlyBroken.arrowUpSquare),
                   ),
                   ListTile(
                     shape: BeveledRectangleBorder(

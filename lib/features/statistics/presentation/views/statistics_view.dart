@@ -8,7 +8,15 @@ class StatisticsView extends StatelessWidget {
     return const Card(
       color: Colors.white,
       elevation: 3,
-      child: Text('احصائيات'),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: [
+            Text('احصائيات'),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
-  const ProjectDetailsPrimaryTableBoq({super.key});
+class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
+  const ProjectDetailsModifiedTableTwoBoq({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  "النوذج",
+                  "ارفاق ملف",
                   style: AppStyle.tabTextStyle.copyWith(
                     color: AppColors.kPrimaryColor,
                   ),
@@ -60,7 +60,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: Text(
-            "الجدول الأساسي",
+            "الجدول المعدل اتنين",
             textAlign: TextAlign.center,
             style: AppStyle.tabTextStyle.copyWith(
               color: AppColors.kPrimaryColor,
