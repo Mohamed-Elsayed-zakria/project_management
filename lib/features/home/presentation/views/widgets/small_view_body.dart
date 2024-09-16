@@ -26,24 +26,24 @@ class SmallViewBody extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(IconlyBroken.home),
-                label: 'Home',
+                icon: Icon(IconlyBroken.chart),
+                label: 'احصائيات',
               ),
               BottomNavigationBarItem(
-                icon: Icon(IconlyBroken.notification),
-                label: 'Notice',
+                icon: Icon(IconlyBroken.arrowUpSquare),
+                label: 'مشروع جديد',
               ),
               BottomNavigationBarItem(
-                icon: Icon(IconlyBroken.video),
-                label: 'Videos',
+                icon: Icon(IconlyBroken.document),
+                label: 'كل المشاريع',
               ),
               BottomNavigationBarItem(
-                icon: Icon(IconlyBroken.category),
-                label: 'Services',
+                icon: Icon(IconlyBroken.profile),
+                label: 'الملف الشخصي',
               ),
               BottomNavigationBarItem(
                 icon: Icon(IconlyBroken.setting),
-                label: 'Settings',
+                label: 'الاعدادات',
               ),
             ],
           ),
@@ -51,19 +51,19 @@ class SmallViewBody extends StatelessWidget {
             index: cubit.indexScreen,
             children: const [
               Center(
-                child: Text('Notice Screen'),
+                child: Text('احصائيات'),
               ),
               Center(
-                child: Text('Video Screen'),
+                child: Text('مشروع جديد'),
               ),
               Center(
-                child: Text('Services Screen'),
+                child: Text('كل المشاريع'),
               ),
               Center(
-                child: Text('Settings Screen'),
+                child: Text('الملف الشخصي'),
               ),
               Center(
-                child: Text('Test Screen'),
+                child: Text('الاعدادات'),
               ),
             ],
           ),
