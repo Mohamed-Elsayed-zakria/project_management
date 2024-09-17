@@ -1,3 +1,4 @@
+import 'widgets/projects_setting/setting_projects_info.dart';
 import 'widgets/setting_company_info.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class SettingView extends StatelessWidget {
           child: Column(
             children: [
               SettingCompanyInfo(),
+              SettingProjectsInfo(),
             ],
           ),
         ),

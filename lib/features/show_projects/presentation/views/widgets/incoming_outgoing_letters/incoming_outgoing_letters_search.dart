@@ -1,26 +1,28 @@
-import '/features/show_projects/data/models/enum/project_search_type.dart';
+import '/features/show_projects/data/models/enum/letters_search_type.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
-class ShowProjectSearch extends StatefulWidget {
-  const ShowProjectSearch({super.key});
+class IncomingOutgoingLettersSearch extends StatefulWidget {
+  const IncomingOutgoingLettersSearch({super.key});
 
   @override
-  State<ShowProjectSearch> createState() => _ShowProjectSearchState();
+  State<IncomingOutgoingLettersSearch> createState() =>
+      _IncomingOutgoingLettersSearchState();
 }
 
-class _ShowProjectSearchState extends State<ShowProjectSearch> {
-  ProjectSearchType searchType = ProjectSearchType.projectName;
+class _IncomingOutgoingLettersSearchState
+    extends State<IncomingOutgoingLettersSearch> {
+  LettersSearchType searchType = LettersSearchType.letterTopic;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
       constraints: const BoxConstraints(
-        maxWidth: 600,
+        maxWidth: 630,
       ),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -34,24 +36,24 @@ class _ShowProjectSearchState extends State<ShowProjectSearch> {
               ),
             ),
             child: DropdownButtonHideUnderline(
-              child: DropdownButton<ProjectSearchType>(
+              child: DropdownButton<LettersSearchType>(
                 value: searchType,
                 isExpanded: true,
-                onChanged: (ProjectSearchType? newValue) {
+                onChanged: (LettersSearchType? newValue) {
                   setState(() {
                     searchType = newValue!;
                   });
                 },
-                items: ProjectSearchType.values
-                    .map<DropdownMenuItem<ProjectSearchType>>(
-                  (ProjectSearchType value) {
-                    return DropdownMenuItem<ProjectSearchType>(
+                items: LettersSearchType.values
+                    .map<DropdownMenuItem<LettersSearchType>>(
+                  (LettersSearchType value) {
+                    return DropdownMenuItem<LettersSearchType>(
                       value: value,
                       child: Center(
                         child: Text(
-                          value == ProjectSearchType.projectName
-                              ? 'اسم المشروع'
-                              : 'رقم المشروع',
+                          value == LettersSearchType.letterTopic
+                              ? "موضوع الخطاب"
+                              : 'رقم الخطاب',
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.black),
                         ),
@@ -78,8 +80,8 @@ class _ShowProjectSearchState extends State<ShowProjectSearch> {
             child: CustomButton(
               text: "بحث",
               onPressed: () {
-                if (searchType == ProjectSearchType.projectName) {
-                } else if (searchType == ProjectSearchType.projectNumber) {}
+                if (searchType == LettersSearchType.letterTopic) {
+                } else if (searchType == LettersSearchType.letterNumber) {}
               },
             ),
           ),

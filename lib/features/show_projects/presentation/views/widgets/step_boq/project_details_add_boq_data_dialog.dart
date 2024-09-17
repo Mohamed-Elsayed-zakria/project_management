@@ -3,9 +3,9 @@ import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsAddBoqData extends StatelessWidget {
+class ProjectDetailsAddBoqDataDialog extends StatelessWidget {
   final Function() onPressed;
-  const ProjectDetailsAddBoqData({
+  const ProjectDetailsAddBoqDataDialog({
     super.key,
     required this.onPressed,
   });

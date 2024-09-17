@@ -3,11 +3,11 @@ import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
-class SettingCustomDialogEditCompanyInfo extends StatelessWidget {
+class SettingCustomDialogEditInfo extends StatelessWidget {
   final String title;
   final String hintText;
   final Function() onPressed;
-  const SettingCustomDialogEditCompanyInfo({
+  const SettingCustomDialogEditInfo({
     super.key,
     required this.title,
     required this.hintText,
@@ -17,9 +17,9 @@ class SettingCustomDialogEditCompanyInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-       shape: const RoundedRectangleBorder(
-         borderRadius: BorderRadius.all(Radius.circular(12)),
-       ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
       title: Text(
         "تعديل $title",
         textAlign: TextAlign.center,

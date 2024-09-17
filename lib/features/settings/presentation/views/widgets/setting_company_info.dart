@@ -46,8 +46,8 @@ class SettingCompanyInfo extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 6,
             itemBuilder: (context, index) {
-              return SettingCompanyFileItem(
-                fileName: "$index اسم الملف",
+              return const SettingCompanyFileItem(
+                fileName: "اسم الملف",
               );
             },
           ),

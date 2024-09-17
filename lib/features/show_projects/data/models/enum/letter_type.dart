@@ -1,0 +1,1 @@
+enum LetterType { newletter, replyToLetter }

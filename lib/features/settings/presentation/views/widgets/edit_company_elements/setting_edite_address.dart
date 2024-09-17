@@ -1,4 +1,4 @@
-import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_company_info.dart';
+import '../setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
 
 class SettingEditeAddress extends StatelessWidget {
@@ -13,7 +13,7 @@ class SettingEditeAddress extends StatelessWidget {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => SettingCustomDialogEditCompanyInfo(
+            builder: (context) => SettingCustomDialogEditInfo(
               title: "العنوان",
               hintText: "ادخل العنوان الجديد",
               onPressed: () {

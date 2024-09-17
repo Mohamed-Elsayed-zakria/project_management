@@ -1,21 +1,21 @@
-import '../setting_custom_dialog_edit_info.dart';
+import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
 
-class SettingEditePhoneNumber extends StatelessWidget {
-  const SettingEditePhoneNumber({super.key});
+class SettingEditeTax extends StatelessWidget {
+  const SettingEditeTax({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text('رقم الهاتف'),
-      subtitle: const Text("1234567890"),
+      title: const Text("ضريبة القيمة المضافة"),
+      subtitle: const Text("% 15"),
       trailing: IconButton(
         onPressed: () {
           showDialog(
             context: context,
             builder: (context) => SettingCustomDialogEditInfo(
-              title: 'رقم الهاتف',
-              hintText: "ادخل رقم الهاتف الجديد",
+              title: "ضريبة القيمة المضافة",
+              hintText: "ادخل الضريبة الجديدة",
               onPressed: () {
                 Navigator.pop(context);
               },

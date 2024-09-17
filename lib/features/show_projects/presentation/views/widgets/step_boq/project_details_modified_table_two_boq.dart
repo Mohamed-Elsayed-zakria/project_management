@@ -1,4 +1,4 @@
-import 'project_details_add_boq_data.dart';
+import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
@@ -17,7 +17,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
               onTap: () {
                 showDialog(
                   context: context,
-                  builder: (context) => ProjectDetailsAddBoqData(
+                  builder: (context) => ProjectDetailsAddBoqDataDialog(
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -71,6 +71,9 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
           border: TableBorder.all(
             color: AppColors.kPrimaryColor,
           ),
+          columnWidths: const {
+            5: FixedColumnWidth(90),
+          },
           children: [
             TableRow(
               children: [
@@ -127,6 +130,18 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
                     padding: const EdgeInsets.all(6),
                     child: Text(
                       'السعر الاجمالي',
+                      textAlign: TextAlign.center,
+                      style: AppStyle.tabTextStyle.copyWith(
+                        color: AppColors.kPrimaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Text(
+                      "تعديل الكمية",
                       textAlign: TextAlign.center,
                       style: AppStyle.tabTextStyle.copyWith(
                         color: AppColors.kPrimaryColor,
@@ -230,9 +245,9 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
   }
 
   TableRow buildTableRowBoqNewElements() {
-    return const TableRow(
+    return TableRow(
       children: [
-        TableCell(
+        const TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Padding(
             padding: EdgeInsets.all(6),
@@ -243,7 +258,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
             ),
           ),
         ),
-        TableCell(
+        const TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Padding(
             padding: EdgeInsets.all(6),
@@ -254,7 +269,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
             ),
           ),
         ),
-        TableCell(
+        const TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Padding(
             padding: EdgeInsets.all(6),
@@ -265,7 +280,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
             ),
           ),
         ),
-        TableCell(
+        const TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Padding(
             padding: EdgeInsets.all(6),
@@ -276,7 +291,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
             ),
           ),
         ),
-        TableCell(
+        const TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: Padding(
             padding: EdgeInsets.all(6),
@@ -285,6 +300,21 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
               textAlign: TextAlign.center,
               style: AppStyle.tabTextStyle,
             ),
+          ),
+        ),
+        TableCell(
+          verticalAlignment: TableCellVerticalAlignment.middle,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.edit,
+                  color: AppColors.kPrimaryColor,
+                ),
+              ),
+            ],
           ),
         ),
       ],

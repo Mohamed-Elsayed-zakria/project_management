@@ -1,0 +1,1 @@
+enum LettersSearchType {  letterTopic , letterNumber }
