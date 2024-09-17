@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
-  const ProjectDetailsModifiedTableTwoBoq({super.key});
+class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
+  const ProjectDetailsCreateNewBoqTable({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8),
           child: Text(
-            "الجدول المعدل اتنين",
+            "الجدول المعدل واحد",
             textAlign: TextAlign.center,
             style: AppStyle.tabTextStyle.copyWith(
               color: AppColors.kPrimaryColor,
@@ -307,10 +307,10 @@ class ProjectDetailsModifiedTableTwoBoq extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.edit,
+              InkWell(
+                onTap: () {},
+                child: const Icon(
+                  Icons.edit_outlined,
                   color: AppColors.kPrimaryColor,
                 ),
               ),

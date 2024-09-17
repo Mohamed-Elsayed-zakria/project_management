@@ -1,3 +1,4 @@
+import 'add_new_outcoming_letter_take_date.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'add_new_letter_type_letter.dart';
@@ -28,6 +29,8 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
             CustomFormField(
               label: "الرقم",
               hintText: "ادخل الرقم",
+              prefixIcon: const Icon(Icons.numbers_outlined),
+              keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "مطلوب";
@@ -36,20 +39,11 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
                 }
               },
             ),
-            CustomFormField(
-              label: "التاريخ",
-              hintText: "ادخل التاريخ",
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "مطلوب";
-                } else {
-                  return null;
-                }
-              },
-            ),
+            const AddNewOutcomingLetterTakeDate(),
             CustomFormField(
               label: "الموضوع",
               hintText: "ادخل الموضوع",
+              prefixIcon: const Icon(Icons.subject_outlined),
               validator: (value) {
                 if (value!.isEmpty) {
                   return "مطلوب";

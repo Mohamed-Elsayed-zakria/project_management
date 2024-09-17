@@ -18,7 +18,7 @@ class SettingCompanyInfoTitle extends StatelessWidget {
           ),
           SizedBox(height: 5),
           FormDivider(
-            width: 160,
+            width: 147,
           ),
         ],
       ),

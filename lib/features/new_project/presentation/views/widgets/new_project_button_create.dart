@@ -35,7 +35,7 @@ class NewProjectButtonCreate extends StatelessWidget {
           isLoading: state is NewProjectLoading,
           text: 'انشاء',
           onPressed: () {
-            blocAccess.validatorAgeField();
+            blocAccess.validatorProjectDateField();
             bool validateFields = blocAccess.formKey.currentState!.validate();
             if (validateFields && blocAccess.projectDatePoValidator) {
               double? projectPrice = ParseArabicNumber.parseArabicNumber(

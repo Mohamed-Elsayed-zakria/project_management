@@ -33,7 +33,7 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final DateTime lastDate = MyDateUtil.currentDateTimeFromDevice()
       .add(const Duration(days: 365 * 20));
 
-  void validatorAgeField() {
+  void validatorProjectDateField() {
     if (projectDatePo == null) {
       projectDatePoValidator = false;
       emit(NewProjectInitial());

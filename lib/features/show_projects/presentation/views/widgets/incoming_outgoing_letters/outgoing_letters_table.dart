@@ -15,7 +15,6 @@ class OutgoingLettersTable extends StatelessWidget {
           color: AppColors.kPrimaryColor,
         ),
         columnWidths: const {
-          0: FixedColumnWidth(80),
           5: FixedColumnWidth(120),
         },
         children: [

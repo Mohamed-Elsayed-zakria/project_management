@@ -1,3 +1,4 @@
+import '/features/show_projects/presentation/manager/outgoing_letter_cubit/outgoing_letter_cubit.dart';
 import '/features/show_projects/presentation/manager/letters_cubit/letters_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'incoming_outgoing_letters_search.dart';
@@ -20,11 +21,21 @@ class OutgoingLettersContent extends StatelessWidget {
           children: [
             AddNewLetterButton(
               onTap: () {
-                LettersCubit cubit = BlocProvider.of<LettersCubit>(context);
+                LettersCubit lettersCubit =
+                    BlocProvider.of<LettersCubit>(context);
+                OutgoingLetterCubit outgoingLetterCubit =
+                    BlocProvider.of<OutgoingLetterCubit>(context);
                 showDialog(
                   context: context,
-                  builder: (context) => BlocProvider.value(
-                    value: cubit,
+                  builder: (context) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider.value(
+                        value: lettersCubit,
+                      ),
+                      BlocProvider.value(
+                        value: outgoingLetterCubit,
+                      ),
+                    ],
                     child: const AddNewOutgoingLetterDialog(),
                   ),
                 );

@@ -35,7 +35,7 @@ class AddNewLetterTypeLetter extends StatelessWidget {
                             }
                           },
                         ),
-                        const Text("خطاب جديد"),
+                        const Text("جديد"),
                       ],
                     ),
                     const SizedBox(width: 10),

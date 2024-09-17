@@ -12,14 +12,14 @@ class NewProjectTakeDatePo extends StatelessWidget {
     NewProjectCubit blocAccess = BlocProvider.of<NewProjectCubit>(context);
     return BlocBuilder<NewProjectCubit, NewProjectState>(
       builder: (context, state) {
-        DateTime? dateOfBirth = blocAccess.projectDatePo;
+        DateTime? dateTime = blocAccess.projectDatePo;
         return CustomListTileValidator(
           validator: blocAccess.projectDatePoValidator,
           onTap: () async =>
               await blocAccess.customShowDatePicker(context: context),
           title: blocAccess.projectDatePo == null
               ? 'تاريخ - PO'
-              : "${dateOfBirth!.year}/${dateOfBirth.month}/${dateOfBirth.day}",
+              : "${dateTime!.year}/${dateTime.month}/${dateTime.day}",
           leading: const Icon(Icons.date_range_outlined),
         );
       },

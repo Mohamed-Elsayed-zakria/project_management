@@ -1,5 +1,6 @@
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter/material.dart';
+import '/core/constant/colors.dart';
 
 class LargeViewMenu extends StatelessWidget {
   final Function(int) onTap;
@@ -27,8 +28,12 @@ class LargeViewMenu extends StatelessWidget {
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    title: const Text('مرحبا'),
-                    leading: const Icon(Icons.electric_bolt_rounded),
+                    title: const Text('اسم المستخدم'),
+                    leading: const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: AppColors.kBackgroundColor,
+                      child: Icon(Icons.electric_bolt_rounded),
+                    ),
                   ),
                   const Divider(),
                   ListTile(
@@ -94,8 +99,7 @@ class LargeViewMenu extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               onTap: () {
-                indexScreen = 5;
-                onTap(indexScreen);
+                Navigator.pop(context);
               },
               title: const Text('تسجيل الخروج'),
               leading: const Icon(IconlyBroken.logout),
