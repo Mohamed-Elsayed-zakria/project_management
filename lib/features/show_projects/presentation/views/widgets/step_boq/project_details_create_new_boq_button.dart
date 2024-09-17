@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:project_management/core/constant/colors.dart';
-import 'package:project_management/core/constant/style.dart';
-
 import 'project_details_create_new_boq_dialog.dart';
+import 'package:flutter/material.dart';
+import '/core/constant/colors.dart';
+import '/core/constant/style.dart';
 
 class ProjectDetailsCreateNewBoqButton extends StatelessWidget {
   const ProjectDetailsCreateNewBoqButton({super.key});

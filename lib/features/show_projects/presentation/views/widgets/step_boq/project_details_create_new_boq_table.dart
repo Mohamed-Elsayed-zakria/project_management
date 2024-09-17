@@ -1,3 +1,4 @@
+import 'project_details_edite_quantity_boq_dialog.dart';
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
@@ -151,9 +152,9 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
                 ),
               ],
             ),
-            buildTableRowBoqNewElements(),
-            buildTableRowBoqNewElements(),
-            buildTableRowBoqNewElements(),
+            buildTableRowBoqNewElements(context: context),
+            buildTableRowBoqNewElements(context: context),
+            buildTableRowBoqNewElements(context: context),
           ],
         ),
         Table(
@@ -244,7 +245,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
     );
   }
 
-  TableRow buildTableRowBoqNewElements() {
+  TableRow buildTableRowBoqNewElements({required BuildContext context}) {
     return TableRow(
       children: [
         const TableCell(
@@ -308,7 +309,13 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        const ProjectDetailsEditeQuantityBoqDialog(),
+                  );
+                },
                 child: const Icon(
                   Icons.edit_outlined,
                   color: AppColors.kPrimaryColor,

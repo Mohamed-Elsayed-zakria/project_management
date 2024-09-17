@@ -3,8 +3,8 @@ import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsCreateNewBoqDialog extends StatelessWidget {
-  const ProjectDetailsCreateNewBoqDialog({super.key});
+class ProjectDetailsEditeQuantityBoqDialog extends StatelessWidget {
+  const ProjectDetailsEditeQuantityBoqDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ProjectDetailsCreateNewBoqDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       title: const Text(
-        "اضافة جدول معدل جديد",
+        "تعديل الكمية",
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),
@@ -25,13 +25,13 @@ class ProjectDetailsCreateNewBoqDialog extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             const CustomFormField(
-              label: "اسم الجدول المعدل",
-              hintText: "ادخل اسم الجدول",
-              prefixIcon: Icon(Icons.table_rows_outlined),
+              label: "الكمية الجديدة",
+              hintText: "ادخل الكمية الجديدة",
+              prefixIcon: Icon(Icons.numbers_outlined),
             ),
             const SizedBox(height: 10),
             CustomButton(
-              text: 'اضافة',
+              text: 'تعديل',
               onPressed: () {
                 Navigator.pop(context);
               },
