@@ -98,9 +98,7 @@ class LargeViewMenu extends StatelessWidget {
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              onTap: () {
-                Navigator.pop(context);
-              },
+              onTap: () {},
               title: const Text('تسجيل الخروج'),
               leading: const Icon(IconlyBroken.logout),
             ),

@@ -1,4 +1,4 @@
-class NewProjectBasicDataModel {
+class NewProjectModel {
   final String projectName;
   final String projectNumber;
   final String projectPrice;
@@ -8,10 +8,11 @@ class NewProjectBasicDataModel {
   final String projectArea;
   final String projectCity;
   final String projectDatePo;
+  final String projectReceiptDate;
   final String projectFilePo;
   final String projectFilesBoq;
 
-  NewProjectBasicDataModel({
+  NewProjectModel({
     required this.projectName,
     required this.projectNumber,
     required this.projectPrice,
@@ -21,6 +22,7 @@ class NewProjectBasicDataModel {
     required this.projectArea,
     required this.projectCity,
     required this.projectDatePo,
+    required this.projectReceiptDate,
     required this.projectFilePo,
     required this.projectFilesBoq,
   });
@@ -32,6 +34,7 @@ class NewProjectBasicDataModel {
       'projectPrice': projectPrice,
       'projectDurationPerDay': projectDurationPerDay,
       'projectDatePo': projectDatePo,
+      'projectReceiptDate': projectReceiptDate,
       'projectFilePo': projectFilePo,
       'projectFilesBoq': projectFilesBoq,
       'projectManager': projectManager,

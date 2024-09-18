@@ -1,5 +1,6 @@
-import '../setting_custom_dialog_edit_info.dart';
+import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 
 class SettingEditeWebsite extends StatelessWidget {
   const SettingEditeWebsite({super.key});
@@ -17,7 +18,7 @@ class SettingEditeWebsite extends StatelessWidget {
               title: "الموقع الالكتروني",
               hintText: "ادخل الموقع الالكتروني الجديد",
               onPressed: () {
-                Navigator.pop(context);
+                AppPages.back(context);
               },
             ),
           );

@@ -1,5 +1,6 @@
-import '../setting_custom_dialog_edit_info.dart';
+import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 
 class SettingEditeCompanyName extends StatelessWidget {
   const SettingEditeCompanyName({super.key});
@@ -17,7 +18,7 @@ class SettingEditeCompanyName extends StatelessWidget {
               title: "اسم الشركة",
               hintText: "ادخل اسم الشركة الجديدة",
               onPressed: () {
-                Navigator.pop(context);
+                AppPages.back(context);
               },
             ),
           );

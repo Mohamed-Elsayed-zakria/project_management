@@ -1,19 +1,20 @@
-import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsSiteReceiptListTile extends StatelessWidget {
+class ProjectDetailsFormShapeListTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final Function() guidanceLetterOnTap;
-  // final Function() outgoingIncomingLettersOnTap;
-  const ProjectDetailsSiteReceiptListTile({
+  final Function() outgoingIncomingLettersOnTap;
+  const ProjectDetailsFormShapeListTile({
     super.key,
     required this.title,
     required this.subtitle,
     required this.guidanceLetterOnTap,
-    // required this.outgoingIncomingLettersOnTap,
+    required this.outgoingIncomingLettersOnTap,
   });
 
   @override
@@ -33,11 +34,9 @@ class ProjectDetailsSiteReceiptListTile extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const IncomingOutgoingLettersView(),
-                  ),
+                AppPages.to(
+                  path: AppRoutes.incomingOutgoingLetters,
+                  context: context,
                 );
               },
               child: Text(

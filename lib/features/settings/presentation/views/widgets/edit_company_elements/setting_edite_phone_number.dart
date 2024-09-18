@@ -1,5 +1,6 @@
-import '../setting_custom_dialog_edit_info.dart';
+import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 
 class SettingEditePhoneNumber extends StatelessWidget {
   const SettingEditePhoneNumber({super.key});
@@ -17,7 +18,7 @@ class SettingEditePhoneNumber extends StatelessWidget {
               title: 'رقم الهاتف',
               hintText: "ادخل رقم الهاتف الجديد",
               onPressed: () {
-                Navigator.pop(context);
+                AppPages.back(context);
               },
             ),
           );

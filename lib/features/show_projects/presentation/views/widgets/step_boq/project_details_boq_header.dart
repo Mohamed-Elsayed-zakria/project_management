@@ -1,8 +1,9 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
-import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
 import 'project_details_create_new_boq_button.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
 import '/core/utils/size_screen.dart';
+import '/core/routes/app_pages.dart';
 
 class ProjectDetailsBoqHeader extends StatelessWidget {
   const ProjectDetailsBoqHeader({super.key});
@@ -16,13 +17,17 @@ class ProjectDetailsBoqHeader extends StatelessWidget {
             children: [
               const ProjectDetailsCreateNewBoqButton(),
               ProjectDetailsAddOnsLetters(
-                otherAdditionsOnTap: () {},
-                formsOnTap: () {},
-                lettersOnTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const IncomingOutgoingLettersView(),
-                  ),
+                otherAdditionsOnTap: () => AppPages.to(
+                  path: AppRoutes.otherAdditions,
+                  context: context,
+                ),
+                formsOnTap: () => AppPages.to(
+                  path: AppRoutes.forms,
+                  context: context,
+                ),
+                lettersOnTap: () => AppPages.to(
+                  path: AppRoutes.incomingOutgoingLetters,
+                  context: context,
                 ),
               ),
             ],
@@ -30,13 +35,17 @@ class ProjectDetailsBoqHeader extends StatelessWidget {
         : Column(
             children: [
               ProjectDetailsAddOnsLetters(
-                otherAdditionsOnTap: () {},
-                formsOnTap: () {},
-                lettersOnTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const IncomingOutgoingLettersView(),
-                  ),
+                otherAdditionsOnTap: () => AppPages.to(
+                  path: AppRoutes.otherAdditions,
+                  context: context,
+                ),
+                formsOnTap: () => AppPages.to(
+                  path: AppRoutes.forms,
+                  context: context,
+                ),
+                lettersOnTap: () => AppPages.to(
+                  path: AppRoutes.incomingOutgoingLetters,
+                  context: context,
                 ),
               ),
               const Divider(),

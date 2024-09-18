@@ -1,8 +1,7 @@
-import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
-import '/features/show_projects/presentation/views/project_details_view.dart';
-import '/features/show_projects/presentation/views/project_info_view.dart';
 import '/core/widgets/custom_details_button.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
@@ -28,33 +27,27 @@ class ShowProjectsProjectItem extends StatelessWidget {
                       const Text("رقم المشروع"),
                       const SizedBox(height: 8),
                       CustomDetailsButton(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProjectInfoView(),
-                          ),
+                        onTap: () => AppPages.to(
+                          path: AppRoutes.projectInfo,
+                          context: context,
                         ),
                       ),
                     ],
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProjectDetailsView(),
-                    ),
+                  AppPages.to(
+                    path: AppRoutes.projectDetails,
+                    context: context,
                   );
                 },
               ),
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const IncomingOutgoingLettersView(),
-                  ),
+                AppPages.to(
+                  path: AppRoutes.incomingOutgoingLetters,
+                  context: context,
                 );
               },
               child: Padding(

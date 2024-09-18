@@ -1,5 +1,5 @@
-import '/features/new_project/data/models/new_project_basic_data_model.dart';
 import '/features/new_project/data/repository/new_project_repo.dart';
+import '/features/new_project/data/models/new_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +12,10 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final NewProjectRepo _newProjectRepo;
   NewProjectCubit(this._newProjectRepo) : super(NewProjectInitial());
 
+  //================================================================
+  DateTime? projectDatePo;
+  DateTime? projectReceiptDate;
+
   final TextEditingController projectName = TextEditingController();
   final TextEditingController projectNumber = TextEditingController();
   final TextEditingController projectPrice = TextEditingController();
@@ -20,6 +24,7 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final TextEditingController projectOwner = TextEditingController();
   final TextEditingController projectArea = TextEditingController();
   final TextEditingController projectCity = TextEditingController();
+  //================================================================
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool projectDatePoValidator = true;
@@ -27,8 +32,6 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   bool projectPickFilePoValidator = true;
   bool projectPickFileBoqValidator = true;
 
-  DateTime? projectDatePo;
-  DateTime? projectReceiptDate;
   final DateTime dateNow = MyDateUtil.currentDateTimeFromDevice();
   final DateTime firstDate = MyDateUtil.currentDateTimeFromDevice()
       .subtract(const Duration(days: 365 * 20));
@@ -122,7 +125,7 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   }
 
   Future<void> createNewProject({
-    required NewProjectBasicDataModel projectBasicData,
+    required NewProjectModel projectBasicData,
   }) async {
     emit(NewProjectLoading());
     Either<Failures, void> result = await _newProjectRepo.createNewProject(

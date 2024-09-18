@@ -1,7 +1,8 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
-import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
 import 'project_details_site_receipt_add_forms_button.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 
 class ProjectDetailsSiteReceiptHeader extends StatelessWidget {
@@ -17,12 +18,13 @@ class ProjectDetailsSiteReceiptHeader extends StatelessWidget {
             const ProjectDetailsSiteReceiptAddFormsButton(),
             ProjectDetailsAddOnsLetters(
               mainAxisAlignment: MainAxisAlignment.end,
-              otherAdditionsOnTap: () {},
-              lettersOnTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const IncomingOutgoingLettersView(),
-                ),
+              otherAdditionsOnTap: () => AppPages.to(
+                path: AppRoutes.otherAdditions,
+                context: context,
+              ),
+              lettersOnTap: () => AppPages.to(
+                path: AppRoutes.incomingOutgoingLetters,
+                context: context,
               ),
             ),
           ],

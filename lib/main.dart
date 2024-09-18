@@ -1,7 +1,7 @@
-import 'features/auth/presentation/views/login_view.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter/material.dart';
 import 'core/config/hive_config.dart';
+import 'core/routes/app_pages.dart';
 import 'core/constant/style.dart';
 import 'dart:io';
 
@@ -13,18 +13,17 @@ void main() async {
     await windowManager.setMinimumSize(const Size(670, 600));
     await windowManager.center();
   }
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Project management',
       debugShowCheckedModeBanner: false,
       theme: AppStyle.appTheme(),
-      home: const LoginView(),
       locale: const Locale('ar'),
       builder: (context, widget) {
         return Directionality(
@@ -32,6 +31,7 @@ class MyApp extends StatelessWidget {
           child: widget!,
         );
       },
+      routerConfig: AppPages.router,
     );
   }
 }

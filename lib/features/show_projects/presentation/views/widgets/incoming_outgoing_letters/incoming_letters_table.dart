@@ -15,7 +15,8 @@ class IncomingLettersTable extends StatelessWidget {
           color: AppColors.kPrimaryColor,
         ),
         columnWidths: const {
-          5: FixedColumnWidth(120),
+          5: FixedColumnWidth(85),
+          6: FixedColumnWidth(110),
         },
         children: [
           TableRow(
@@ -73,6 +74,18 @@ class IncomingLettersTable extends StatelessWidget {
                   padding: const EdgeInsets.all(6),
                   child: Text(
                     'حالة الرد',
+                    textAlign: TextAlign.center,
+                    style: AppStyle.tabTextStyle.copyWith(
+                      color: AppColors.kPrimaryColor,
+                    ),
+                  ),
+                ),
+              ),
+              TableCell(
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Text(
+                    "الخطاب",
                     textAlign: TextAlign.center,
                     style: AppStyle.tabTextStyle.copyWith(
                       color: AppColors.kPrimaryColor,
@@ -156,6 +169,19 @@ class IncomingLettersTable extends StatelessWidget {
               "لم يتم الرد",
               textAlign: TextAlign.center,
               style: AppStyle.tabTextStyle,
+            ),
+          ),
+        ),
+        TableCell(
+          verticalAlignment: TableCellVerticalAlignment.middle,
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: InkWell(
+              onTap: () {},
+              child: const Icon(
+                Icons.visibility_outlined,
+                color: Colors.blue,
+              ),
             ),
           ),
         ),

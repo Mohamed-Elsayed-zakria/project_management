@@ -1,5 +1,6 @@
 import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 
 class SettingEditeTax extends StatelessWidget {
   const SettingEditeTax({super.key});
@@ -17,7 +18,7 @@ class SettingEditeTax extends StatelessWidget {
               title: "ضريبة القيمة المضافة",
               hintText: "ادخل الضريبة الجديدة",
               onPressed: () {
-                Navigator.pop(context);
+                AppPages.back(context);
               },
             ),
           );

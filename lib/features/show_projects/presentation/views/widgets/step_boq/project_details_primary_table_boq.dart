@@ -1,5 +1,6 @@
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
@@ -18,7 +19,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
                   context: context,
                   builder: (context) => ProjectDetailsAddBoqDataDialog(
                     onPressed: () {
-                      Navigator.pop(context);
+                      AppPages.back(context);
                     },
                   ),
                 );

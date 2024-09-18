@@ -1,6 +1,6 @@
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_cubit.dart';
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_state.dart';
-import '/features/new_project/data/models/new_project_basic_data_model.dart';
+import '/features/new_project/data/models/new_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
@@ -11,21 +11,21 @@ class NewProjectButtonCreate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NewProjectCubit blocAccess = BlocProvider.of<NewProjectCubit>(context);
+    NewProjectCubit cubit = BlocProvider.of<NewProjectCubit>(context);
     return BlocConsumer<NewProjectCubit, NewProjectState>(
       listener: (context, state) {
         if (state is NewProjectSuccess) {
           // TODO: create toast
-          blocAccess.projectName.clear();
-          blocAccess.projectNumber.clear();
-          blocAccess.projectPrice.clear();
-          blocAccess.projectDurationPerDay.clear();
-          blocAccess.projectManager.clear();
-          blocAccess.projectOwner.clear();
-          blocAccess.projectArea.clear();
-          blocAccess.projectCity.clear();
-          blocAccess.projectDatePo = null;
-          blocAccess.projectReceiptDate = null;
+          cubit.projectName.clear();
+          cubit.projectNumber.clear();
+          cubit.projectPrice.clear();
+          cubit.projectDurationPerDay.clear();
+          cubit.projectManager.clear();
+          cubit.projectOwner.clear();
+          cubit.projectArea.clear();
+          cubit.projectCity.clear();
+          cubit.projectDatePo = null;
+          cubit.projectReceiptDate = null;
         }
         if (state is NewProjectFailure) {
           // TODO: create toast
@@ -36,30 +36,30 @@ class NewProjectButtonCreate extends StatelessWidget {
           isLoading: state is NewProjectLoading,
           text: 'انشاء',
           onPressed: () {
-            blocAccess.validatorProjectDateField();
-            blocAccess.validatorProjectReceiptDateField();
-            bool validateFields = blocAccess.formKey.currentState!.validate();
+            cubit.validatorProjectDateField();
+            cubit.validatorProjectReceiptDateField();
+            bool validateFields = cubit.formKey.currentState!.validate();
             if (validateFields &&
-                blocAccess.projectDatePoValidator &&
-                blocAccess.projectReceiptDateValidator) {
+                cubit.projectDatePoValidator &&
+                cubit.projectReceiptDateValidator) {
               double? projectPrice = ParseArabicNumber.parseArabicNumber(
-                blocAccess.projectPrice.text,
+                cubit.projectPrice.text,
               );
               if (projectPrice == null) {
                 print("========== سعر المشروع غير مكتوب بشكل صحيح");
               } else {
-                blocAccess.createNewProject(
-                  projectBasicData: NewProjectBasicDataModel(
-                    projectName: blocAccess.projectName.text,
-                    projectNumber: blocAccess.projectNumber.text,
+                cubit.createNewProject(
+                  projectBasicData: NewProjectModel(
+                    projectName: cubit.projectName.text,
+                    projectNumber: cubit.projectNumber.text,
                     projectPrice: projectPrice.toString(),
-                    projectDurationPerDay:
-                        blocAccess.projectDurationPerDay.text,
-                    projectManager: blocAccess.projectManager.text,
-                    projectOwner: blocAccess.projectOwner.text,
-                    projectArea: blocAccess.projectArea.text,
-                    projectCity: blocAccess.projectCity.text,
-                    projectDatePo: blocAccess.projectDatePo.toString(),
+                    projectDurationPerDay: cubit.projectDurationPerDay.text,
+                    projectManager: cubit.projectManager.text,
+                    projectOwner: cubit.projectOwner.text,
+                    projectArea: cubit.projectArea.text,
+                    projectCity: cubit.projectCity.text,
+                    projectReceiptDate: cubit.projectReceiptDate.toString(),
+                    projectDatePo: cubit.projectDatePo.toString(),
                     projectFilePo: "",
                     projectFilesBoq: "",
                   ),

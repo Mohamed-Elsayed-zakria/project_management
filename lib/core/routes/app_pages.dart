@@ -1,0 +1,76 @@
+import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
+import '/features/show_projects/presentation/views/project_details_view.dart';
+import '/features/show_projects/presentation/views/other_additions_view.dart';
+import '/features/show_projects/presentation/views/project_info_view.dart';
+import '/features/show_projects/presentation/views/forms_view.dart';
+import '/features/auth/presentation/views/login_view.dart';
+import '/features/home/presentation/views/home_view.dart';
+import 'package:go_router/go_router.dart';
+import '/core/routes/app_routes.dart';
+import 'package:flutter/widgets.dart';
+
+class AppPages {
+  static final GoRouter router = GoRouter(
+    initialLocation: AppRoutes.login,
+    routes: <RouteBase>[
+      GoRoute(
+        path: AppRoutes.login,
+        builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: AppRoutes.home,
+        builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: AppRoutes.projectInfo,
+        builder: (context, state) => const ProjectInfoView(),
+      ),
+      GoRoute(
+        path: AppRoutes.projectDetails,
+        builder: (context, state) => const ProjectDetailsView(),
+      ),
+      GoRoute(
+        path: AppRoutes.incomingOutgoingLetters,
+        builder: (context, state) => const IncomingOutgoingLettersView(),
+      ),
+      GoRoute(
+        path: AppRoutes.forms,
+        builder: (context, state) => const FormsView(),
+      ),
+      GoRoute(
+        path: AppRoutes.otherAdditions,
+        builder: (context, state) => const OtherAdditionsView(),
+      ),
+    ],
+  );
+  static void to({
+    required String path,
+    required BuildContext context,
+    Object? data,
+  }) {
+    GoRouter.of(context).push(path, extra: data);
+  }
+
+  static void off({
+    required String path,
+    required BuildContext context,
+    Object? data,
+  }) {
+    GoRouter.of(context).go(path, extra: data);
+  }
+
+  static void offAll({
+    required String path,
+    required BuildContext context,
+    Object? data,
+  }) {
+    GoRouter.of(context).go(
+      path,
+      extra: {'reset': true, 'data': data},
+    );
+  }
+
+  static void back(BuildContext context) {
+    GoRouter.of(context).pop();
+  }
+}

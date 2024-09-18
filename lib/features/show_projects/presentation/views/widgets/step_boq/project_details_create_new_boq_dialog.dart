@@ -1,6 +1,7 @@
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/style.dart';
 
 class ProjectDetailsCreateNewBoqDialog extends StatelessWidget {
@@ -33,7 +34,7 @@ class ProjectDetailsCreateNewBoqDialog extends StatelessWidget {
             CustomButton(
               text: 'اضافة',
               onPressed: () {
-                Navigator.pop(context);
+                AppPages.back(context);
               },
             ),
             const SizedBox(height: 10),

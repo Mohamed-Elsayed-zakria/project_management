@@ -4,24 +4,26 @@ import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsSiteReceiptAddFormsButton extends StatelessWidget {
-  const ProjectDetailsSiteReceiptAddFormsButton({super.key});
+class OtherAdditionsAddAdditionButton extends StatelessWidget {
+  const OtherAdditionsAddAdditionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => showDialog(
-        context: context,
-        builder: (context) => ProjectDetailsAddFormsDialog(
-          onPressed: () {
-            AppPages.back(context);
-          },
-        ),
-      ),
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => ProjectDetailsAddFormsDialog(
+            onPressed: () {
+              AppPages.back(context);
+            },
+          ),
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          "اضافة نموذج",
+          "اضافة عنصر جديد",
           style: AppStyle.tabTextStyle.copyWith(
             color: AppColors.kPrimaryColor,
           ),

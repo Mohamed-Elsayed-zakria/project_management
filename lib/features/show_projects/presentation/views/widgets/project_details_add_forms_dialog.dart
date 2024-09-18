@@ -19,7 +19,7 @@ class ProjectDetailsAddFormsDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       title: const Text(
-        "اضافة نموذج جديد",
+        "اضافة عنصر جديد",
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),

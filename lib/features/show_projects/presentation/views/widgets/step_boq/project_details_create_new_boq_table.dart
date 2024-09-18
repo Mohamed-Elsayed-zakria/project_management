@@ -1,6 +1,7 @@
 import 'project_details_edite_quantity_boq_dialog.dart';
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
@@ -20,7 +21,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
                   context: context,
                   builder: (context) => ProjectDetailsAddBoqDataDialog(
                     onPressed: () {
-                      Navigator.pop(context);
+                      AppPages.back(context);
                     },
                   ),
                 );
@@ -73,7 +74,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
             color: AppColors.kPrimaryColor,
           ),
           columnWidths: const {
-            6: FixedColumnWidth(90),
+            6: FixedColumnWidth(80),
           },
           children: [
             TableRow(
@@ -142,7 +143,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(6),
                     child: Text(
-                      "النسبة المئوية للكمية",
+                      "النسبة للكمية",
                       textAlign: TextAlign.center,
                       style: AppStyle.tabTextStyle.copyWith(
                         color: AppColors.kPrimaryColor,
@@ -328,23 +329,21 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
         ),
         TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) =>
-                        const ProjectDetailsEditeQuantityBoqDialog(),
-                  );
-                },
-                child: const Icon(
-                  Icons.edit_outlined,
-                  color: AppColors.kPrimaryColor,
-                ),
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: InkWell(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      const ProjectDetailsEditeQuantityBoqDialog(),
+                );
+              },
+              child: const Icon(
+                Icons.edit_outlined,
+                color: AppColors.kPrimaryColor,
               ),
-            ],
+            ),
           ),
         ),
       ],

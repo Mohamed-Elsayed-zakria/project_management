@@ -1,10 +1,11 @@
 import '/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import '/features/auth/presentation/manager/login_cubit/login_state.dart';
-import '/features/home/presentation/views/home_view.dart';
 import '/features/auth/data/model/login_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 
 class LoginButtonSignIn extends StatelessWidget {
   const LoginButtonSignIn({super.key});
@@ -17,11 +18,9 @@ class LoginButtonSignIn extends StatelessWidget {
         if (state is LoginSuccess) {
           blocAccess.getUserName.clear();
           blocAccess.getPassword.clear();
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomeView(),
-            ),
+          AppPages.off(
+            path: AppRoutes.home,
+            context: context,
           );
         }
         if (state is LoginFailure) {
