@@ -1,3 +1,4 @@
+import 'add_new_incoming_letter_take_file.dart';
 import 'add_new_incoming_letter_take_date.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
@@ -39,7 +40,6 @@ class AddNewIncomingLetterDialog extends StatelessWidget {
                 }
               },
             ),
-            const AddNewIncomingLetterTakeDate(),
             CustomFormField(
               label: "الموضوع",
               hintText: "ادخل الموضوع",
@@ -52,6 +52,8 @@ class AddNewIncomingLetterDialog extends StatelessWidget {
                 }
               },
             ),
+            const AddNewIncomingLetterTakeDate(),
+            const AddNewIncomingLetterTakeFile(),
             const SizedBox(height: 10),
             const AddNewLetterTypeLetter(),
             const SizedBox(height: 10),

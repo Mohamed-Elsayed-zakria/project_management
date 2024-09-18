@@ -25,6 +25,7 @@ class NewProjectButtonCreate extends StatelessWidget {
           blocAccess.projectArea.clear();
           blocAccess.projectCity.clear();
           blocAccess.projectDatePo = null;
+          blocAccess.projectReceiptDate = null;
         }
         if (state is NewProjectFailure) {
           // TODO: create toast
@@ -36,8 +37,11 @@ class NewProjectButtonCreate extends StatelessWidget {
           text: 'انشاء',
           onPressed: () {
             blocAccess.validatorProjectDateField();
+            blocAccess.validatorProjectReceiptDateField();
             bool validateFields = blocAccess.formKey.currentState!.validate();
-            if (validateFields && blocAccess.projectDatePoValidator) {
+            if (validateFields &&
+                blocAccess.projectDatePoValidator &&
+                blocAccess.projectReceiptDateValidator) {
               double? projectPrice = ParseArabicNumber.parseArabicNumber(
                 blocAccess.projectPrice.text,
               );

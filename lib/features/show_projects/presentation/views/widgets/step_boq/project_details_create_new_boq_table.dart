@@ -73,7 +73,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
             color: AppColors.kPrimaryColor,
           ),
           columnWidths: const {
-            5: FixedColumnWidth(90),
+            6: FixedColumnWidth(90),
           },
           children: [
             TableRow(
@@ -131,6 +131,18 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
                     padding: const EdgeInsets.all(6),
                     child: Text(
                       'السعر الاجمالي',
+                      textAlign: TextAlign.center,
+                      style: AppStyle.tabTextStyle.copyWith(
+                        color: AppColors.kPrimaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                TableCell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Text(
+                      "النسبة المئوية للكمية",
                       textAlign: TextAlign.center,
                       style: AppStyle.tabTextStyle.copyWith(
                         color: AppColors.kPrimaryColor,
@@ -298,6 +310,17 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
             padding: EdgeInsets.all(6),
             child: Text(
               "50",
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle,
+            ),
+          ),
+        ),
+        const TableCell(
+          verticalAlignment: TableCellVerticalAlignment.middle,
+          child: Padding(
+            padding: EdgeInsets.all(6),
+            child: Text(
+              "1 %",
               textAlign: TextAlign.center,
               style: AppStyle.tabTextStyle,
             ),

@@ -23,10 +23,12 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool projectDatePoValidator = true;
+  bool projectReceiptDateValidator = true;
   bool projectPickFilePoValidator = true;
   bool projectPickFileBoqValidator = true;
 
   DateTime? projectDatePo;
+  DateTime? projectReceiptDate;
   final DateTime dateNow = MyDateUtil.currentDateTimeFromDevice();
   final DateTime firstDate = MyDateUtil.currentDateTimeFromDevice()
       .subtract(const Duration(days: 365 * 20));
@@ -41,6 +43,40 @@ class NewProjectCubit extends Cubit<NewProjectState> {
       projectDatePoValidator = true;
       emit(NewProjectInitial());
     }
+  }
+
+  void validatorProjectReceiptDateField() {
+    if (projectReceiptDate == null) {
+      projectReceiptDateValidator = false;
+      emit(NewProjectInitial());
+    } else {
+      projectReceiptDateValidator = true;
+      emit(NewProjectInitial());
+    }
+  }
+
+  Future<void> projectReceiptDatePicker({
+    required BuildContext context,
+  }) async {
+    projectReceiptDate = await showDatePicker(
+      context: context,
+      initialDate: dateNow,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.kPrimaryColor,
+              onSurface: Colors.black,
+            ),
+            dialogBackgroundColor: Colors.white,
+          ),
+          child: child!,
+        );
+      },
+    );
+    emit(NewProjectInitial());
   }
 
   Future<void> customShowDatePicker({

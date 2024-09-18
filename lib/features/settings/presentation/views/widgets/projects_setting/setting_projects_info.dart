@@ -8,7 +8,6 @@ class SettingProjectsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double maxWidth = 700;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

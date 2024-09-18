@@ -24,7 +24,10 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               title: const Text('دورة المشروع'),
-              leading: const Icon(Icons.electric_bolt_rounded),
+              leading: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add_outlined),
+              ),
             ),
             const Divider(),
             ListTile(

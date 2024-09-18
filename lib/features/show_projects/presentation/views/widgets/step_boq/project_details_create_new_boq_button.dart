@@ -8,26 +8,22 @@ class ProjectDetailsCreateNewBoqButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => const ProjectDetailsCreateNewBoqDialog(),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "اضافة جدول معدل جديد",
-              style: AppStyle.tabTextStyle.copyWith(
-                color: AppColors.kPrimaryColor,
-              ),
-            ),
+    return InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => const ProjectDetailsCreateNewBoqDialog(),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "اضافة جدول معدل جديد",
+          style: AppStyle.tabTextStyle.copyWith(
+            color: AppColors.kPrimaryColor,
           ),
         ),
-      ],
+      ),
     );
   }
 }

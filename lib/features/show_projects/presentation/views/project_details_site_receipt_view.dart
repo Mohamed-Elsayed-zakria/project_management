@@ -1,3 +1,4 @@
+import '/features/show_projects/presentation/views/widgets/site_receipt/project_details_site_receipt_header.dart';
 import 'widgets/site_receipt/project_details_site_receipt_list_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ class ProjectDetailsSiteReceiptView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const ProjectDetailsSiteReceiptHeader(),
+                const SizedBox(height: 10),
                 ProjectDetailsSiteReceiptListTile(
                   title: "PMF-007-INT-028",
                   subtitle:

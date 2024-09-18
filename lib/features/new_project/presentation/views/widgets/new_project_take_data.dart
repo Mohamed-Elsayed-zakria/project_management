@@ -1,6 +1,7 @@
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_cubit.dart';
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_state.dart';
 import '/core/widgets/custom_list_tile_validator.dart';
+import 'new_project_take_project_receipt_date.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
@@ -131,6 +132,7 @@ class NewProjectTakeData extends StatelessWidget {
                     }
                   },
                 ),
+                const NewProjectTakeProjectReceiptDate(),
                 const NewProjectTakeDatePo(),
                 CustomListTileValidator(
                   validator: blocAccess.projectPickFilePoValidator,

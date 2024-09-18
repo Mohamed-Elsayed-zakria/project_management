@@ -1,6 +1,9 @@
-import 'widgets/step_boq/project_details_create_new_boq_button.dart';
 import 'widgets/step_boq/project_details_create_new_boq_table.dart';
 import 'widgets/step_boq/project_details_primary_table_boq.dart';
+import '/core/widgets/accordion/custom_accordion_list.dart';
+import 'widgets/step_boq/project_details_boq_header.dart';
+import '/core/widgets/accordion/accordion_items.dart';
+import '/core/widgets/accordion/accordion_type.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 
@@ -22,41 +25,28 @@ class ProjectDetailsBoqView extends StatelessWidget {
               const SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    ProjectDetailsPrimaryTableBoq(),
-                    SizedBox(height: 20),
+                    ProjectDetailsBoqHeader(),
                     Divider(
                       thickness: 2,
                       color: AppColors.kPrimaryColor,
                     ),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),
-              SliverList.separated(
-                separatorBuilder: (context, index) => const Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Divider(
-                    thickness: 2,
-                    color: AppColors.kPrimaryColor,
+              CustomAccordionList(
+                accordionType: AccordionType.sliverList,
+                children: [
+                  AccordionItems(
+                    title: "الجدول الأساسي",
+                    content: const ProjectDetailsPrimaryTableBoq(),
                   ),
-                ),
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  return const ProjectDetailsCreateNewBoqTable();
-                },
+                  AccordionItems(
+                    title: "الجدول المعدل واحد",
+                    content: const ProjectDetailsCreateNewBoqTable(),
+                  ),
+                ],
               ),
-              const SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Divider(
-                      thickness: 2,
-                      color: AppColors.kPrimaryColor,
-                    ),
-                    ProjectDetailsCreateNewBoqButton(),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              )
             ],
           ),
         ),

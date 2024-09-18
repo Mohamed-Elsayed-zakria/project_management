@@ -9,6 +9,8 @@ class AccordionItem extends StatefulWidget {
   final String? liftContent;
   final Color? liftColor;
   final Color? rightColor;
+  final bool isOpen;
+  final VoidCallback onPressed;
 
   const AccordionItem({
     super.key,
@@ -18,6 +20,8 @@ class AccordionItem extends StatefulWidget {
     this.liftContent,
     this.liftColor,
     this.rightColor,
+    required this.isOpen,
+    required this.onPressed,
   });
 
   @override
@@ -25,7 +29,6 @@ class AccordionItem extends StatefulWidget {
 }
 
 class _AccordionItemState extends State<AccordionItem> {
-  bool state = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,11 +42,7 @@ class _AccordionItemState extends State<AccordionItem> {
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onTap: () {
-              setState(() {
-                state = !state;
-              });
-            },
+            onTap: widget.onPressed,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
@@ -69,7 +68,7 @@ class _AccordionItemState extends State<AccordionItem> {
                             color: widget.liftColor ?? AppColors.kPrimaryColor,
                           ),
                         )
-                      : state
+                      : widget.isOpen
                           ? const Icon(
                               Icons.arrow_drop_up,
                               color: AppColors.kPrimaryColor,
@@ -83,7 +82,7 @@ class _AccordionItemState extends State<AccordionItem> {
             ),
           ),
           Visibility(
-            visible: state,
+            visible: widget.isOpen,
             child: Column(
               children: [
                 const Divider(

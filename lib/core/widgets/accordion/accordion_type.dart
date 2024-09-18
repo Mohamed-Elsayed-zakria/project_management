@@ -1,0 +1,1 @@
+enum AccordionType { listView, sliverList }

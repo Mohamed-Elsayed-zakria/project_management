@@ -11,7 +11,6 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
               onTap: () {
@@ -35,19 +34,6 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  "النوذج",
-                  style: AppStyle.tabTextStyle.copyWith(
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            )
           ],
         ),
         const SizedBox(height: 10),

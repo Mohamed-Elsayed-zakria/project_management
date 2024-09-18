@@ -42,7 +42,9 @@ class StatisticsView extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 4),
+            const Divider(),
           ],
         ),
       ),

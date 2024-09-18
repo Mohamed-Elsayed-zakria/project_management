@@ -1,11 +1,13 @@
+import '/core/widgets/custom_list_tile_validator.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
-class ProjectDetailsAddBoqDataDialog extends StatelessWidget {
+class ProjectDetailsAddFormsDialog extends StatelessWidget {
   final Function() onPressed;
-  const ProjectDetailsAddBoqDataDialog({
+
+  const ProjectDetailsAddFormsDialog({
     super.key,
     required this.onPressed,
   });
@@ -17,7 +19,7 @@ class ProjectDetailsAddBoqDataDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       title: const Text(
-        "اضافة جديدة",
+        "اضافة نموذج جديد",
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),
@@ -29,24 +31,19 @@ class ProjectDetailsAddBoqDataDialog extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             const CustomFormField(
-              label: "الرقم",
-              hintText: "ادخل الرقم",
+              label: "وصف النوذج",
+              hintText: "ادخل وصف النوذج",
+              prefixIcon: Icon(Icons.description_outlined),
+            ),
+            const CustomFormField(
+              label: "رقم النوذج",
+              hintText: "ادخل رقم النوذج",
               prefixIcon: Icon(Icons.numbers_outlined),
             ),
-            const CustomFormField(
-              label: "البند",
-              hintText: "ادخل البند",
-              prefixIcon: Icon(Icons.list_alt_outlined),
-            ),
-            const CustomFormField(
-              label: "الكمية",
-              hintText: "ادخل الكمية",
-              prefixIcon: Icon(Icons.production_quantity_limits_outlined),
-            ),
-            const CustomFormField(
-              label: "السعر الافرادي",
-              hintText: "ادخل السعر الافرادي",
-              prefixIcon: Icon(Icons.price_change_outlined),
+            CustomListTileValidator(
+              leading: const Icon(Icons.file_copy_outlined),
+              title: "ارفاق ملف",
+              onTap: () {},
             ),
             const SizedBox(height: 10),
             CustomButton(
