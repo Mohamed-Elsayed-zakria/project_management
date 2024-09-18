@@ -45,6 +45,7 @@ dependencies:
   window_manager: ^0.4.2
   fl_chart: ^0.69.0
   auto_size_text: ^3.0.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   hive_generator: ^2.0.1
