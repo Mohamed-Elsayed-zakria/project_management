@@ -2,8 +2,6 @@ import '/core/widgets/custom_details_button.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
-import '/core/constant/colors.dart';
-import '/core/constant/style.dart';
 
 class ShowProjectsProjectItem extends StatelessWidget {
   const ShowProjectsProjectItem({super.key});
@@ -18,22 +16,9 @@ class ShowProjectsProjectItem extends StatelessWidget {
             Expanded(
               child: ListTile(
                 title: const Text("اسم المشروع"),
-                subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text("رقم المشروع"),
-                      const SizedBox(height: 8),
-                      CustomDetailsButton(
-                        onTap: () => AppPages.to(
-                          path: AppRoutes.projectInfo,
-                          context: context,
-                        ),
-                      ),
-                    ],
-                  ),
+                subtitle: const Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text("رقم المشروع"),
                 ),
                 onTap: () {
                   AppPages.to(
@@ -43,21 +28,12 @@ class ShowProjectsProjectItem extends StatelessWidget {
                 },
               ),
             ),
-            InkWell(
-              onTap: () {
-                AppPages.to(
-                  path: AppRoutes.incomingOutgoingLetters,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomDetailsButton(
+                onTap: () => AppPages.to(
+                  path: AppRoutes.projectInfo,
                   context: context,
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "خطابات المشروع",
-                  style: AppStyle.tabTextStyle.copyWith(
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  textAlign: TextAlign.start,
                 ),
               ),
             ),

@@ -43,7 +43,7 @@ class ProfileView extends StatelessWidget {
                         Divider(),
                         ListTile(
                           title: Text(
-                            'رقم االهاتف',
+                            'رقم الهاتف',
                             style: AppStyle.tabTextStyle,
                           ),
                           subtitle: Text('0123456789'),
@@ -71,14 +71,6 @@ class ProfileView extends StatelessWidget {
                             style: AppStyle.tabTextStyle,
                           ),
                           subtitle: Text("عامل"),
-                        ),
-                        Divider(),
-                        ListTile(
-                          title: Text(
-                            "المسئوليات",
-                            style: AppStyle.tabTextStyle,
-                          ),
-                          subtitle: Text("فني"),
                         ),
                         Divider(),
                       ],

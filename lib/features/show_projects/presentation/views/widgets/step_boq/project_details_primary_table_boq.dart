@@ -1,5 +1,7 @@
+import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
@@ -12,6 +14,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
               onTap: () {
@@ -35,9 +38,24 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
                 ),
               ),
             ),
+            ProjectDetailsAddOnsLetters(
+              otherAdditionsOnTap: () => AppPages.to(
+                path: AppRoutes.otherAdditions,
+                context: context,
+              ),
+              formsOnTap: () => AppPages.to(
+                path: AppRoutes.forms,
+                context: context,
+              ),
+              lettersOnTap: () => AppPages.to(
+                path: AppRoutes.incomingOutgoingLetters,
+                context: context,
+              ),
+            ),
           ],
         ),
-        const SizedBox(height: 10),
+        const Divider(),
+        const SizedBox(height: 12),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(

@@ -3,10 +3,4 @@ import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
-  int indexScreen = 0;
-
-  void changeIndexScreen(int index) {
-    indexScreen = index;
-    emit(HomeChangeIndexScreen());
-  }
 }

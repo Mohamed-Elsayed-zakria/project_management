@@ -4,10 +4,12 @@ import '/core/constant/colors.dart';
 
 class LargeViewMenu extends StatelessWidget {
   final Function(int) onTap;
+  final int currentIndex;
 
   const LargeViewMenu({
     super.key,
     required this.onTap,
+    required this.currentIndex,
   });
 
   @override
@@ -37,6 +39,8 @@ class LargeViewMenu extends StatelessWidget {
                   ),
                   const Divider(),
                   ListTile(
+                    selected: currentIndex == 0, 
+                    selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -48,6 +52,8 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.chart),
                   ),
                   ListTile(
+                    selected: currentIndex == 1, 
+                    selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -59,6 +65,8 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.document),
                   ),
                   ListTile(
+                    selected: currentIndex == 2, 
+                    selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -70,6 +78,8 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.arrowUpSquare),
                   ),
                   ListTile(
+                    selected: currentIndex == 3, 
+                    selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -81,6 +91,8 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.profile),
                   ),
                   ListTile(
+                    selected: currentIndex == 4, 
+                    selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),

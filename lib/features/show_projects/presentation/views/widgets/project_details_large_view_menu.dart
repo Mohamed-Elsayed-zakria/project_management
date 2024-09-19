@@ -1,11 +1,16 @@
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 
 class ProjectDetailsLargeViewMenu extends StatelessWidget {
   final Function(int) onTap;
+  final int currentIndex;
 
   const ProjectDetailsLargeViewMenu({
     super.key,
     required this.onTap,
+    required this.currentIndex,
   });
 
   @override
@@ -17,48 +22,86 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         width: 215,
-        child: ListView(
+        child: Column(
           children: [
-            ListTile(
-              shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-              title: const Text('دورة المشروع'),
-              leading: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.add_outlined),
+            Expanded(
+              child: ListView(
+                children: [
+                  ListTile(
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Text('دورة المشروع'),
+                    leading: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.add_outlined),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    selected: currentIndex == 0, 
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'BOQ',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 0;
+                      onTap(indexScreen);
+                    },
+                  ),
+                  ListTile(
+                    selected: currentIndex == 1, 
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'استلام الموقع',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 1;
+                      onTap(indexScreen);
+                    },
+                  ),
+                  ListTile(
+                    selected: currentIndex == 2, 
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'KICK OF MEETING',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 2;
+                      onTap(indexScreen);
+                    },
+                  ),
+                ],
               ),
             ),
-            const Divider(),
             ListTile(
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              title: const Center(
-                child: Text(
-                  'BOQ',
-                  textAlign: TextAlign.center,
-                ),
+              onTap: () => AppPages.to(
+                path: AppRoutes.incomingOutgoingLetters,
+                context: context,
               ),
-              onTap: () {
-                indexScreen = 0;
-                onTap(indexScreen);
-              },
-            ),
-            ListTile(
-              shape: BeveledRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-              title: const Center(
-                child: Text(
-                  'استلام الموقع',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              onTap: () {
-                indexScreen = 1;
-                onTap(indexScreen);
-              },
+              title: const Text("الصادر و الوارد"),
+              leading: const Icon(IconlyBroken.document),
             ),
           ],
         ),

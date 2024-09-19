@@ -1,6 +1,8 @@
+import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
 import 'project_details_edite_quantity_boq_dialog.dart';
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
@@ -37,22 +39,24 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  "ارفاق ملف",
-                  style: AppStyle.tabTextStyle.copyWith(
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
+            ProjectDetailsAddOnsLetters(
+              otherAdditionsOnTap: () => AppPages.to(
+                path: AppRoutes.otherAdditions,
+                context: context,
               ),
-            )
+              formsOnTap: () => AppPages.to(
+                path: AppRoutes.forms,
+                context: context,
+              ),
+              lettersOnTap: () => AppPages.to(
+                path: AppRoutes.incomingOutgoingLetters,
+                context: context,
+              ),
+            ),
           ],
         ),
-        const SizedBox(height: 10),
+        const Divider(),
+        const SizedBox(height: 12),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(

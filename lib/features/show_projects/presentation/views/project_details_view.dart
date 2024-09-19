@@ -3,6 +3,7 @@ import 'project_details_site_receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'project_details_boq_view.dart';
 import '/core/constant/colors.dart';
+import 'kick_of_metting_view.dart';
 
 class ProjectDetailsView extends StatefulWidget {
   const ProjectDetailsView({super.key});
@@ -13,9 +14,10 @@ class ProjectDetailsView extends StatefulWidget {
 
 class _ProjectDetailsViewState extends State<ProjectDetailsView> {
   int indexScreen = 0;
-  final List<Widget> screens = [
-    const ProjectDetailsBoqView(),
-    const ProjectDetailsSiteReceiptView(),
+  final List<Widget> screens = const [
+    ProjectDetailsBoqView(),
+    ProjectDetailsSiteReceiptView(),
+    KickOfMettingView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
       body: Row(
         children: [
           ProjectDetailsLargeViewMenu(
+            currentIndex: indexScreen,
             onTap: (index) {
               indexScreen = index;
               setState(() {});
