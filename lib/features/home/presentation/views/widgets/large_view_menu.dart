@@ -147,6 +147,10 @@ class LargeViewMenu extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
+              onPressed: () => AppPages.back(context),
+              child: const Text("الغاء"),
+            ),
+            TextButton(
               onPressed: () {
                 AuthServices.logout();
                 AppPages.offAll(
@@ -155,10 +159,6 @@ class LargeViewMenu extends StatelessWidget {
                 );
               },
               child: const Text("نعم"),
-            ),
-            TextButton(
-              onPressed: () => AppPages.back(context),
-              child: const Text("الغاء"),
             ),
           ],
         );

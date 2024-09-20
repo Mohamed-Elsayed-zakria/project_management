@@ -137,14 +137,10 @@ class NewProjectTakeData extends StatelessWidget {
                 CustomListTileValidator(
                   validator: blocAccess.projectPickFilePoValidator,
                   leading: const Icon(Icons.file_copy_outlined),
-                  title: "ارفاق ملف - PO",
-                  onTap: () async {},
-                ),
-                CustomListTileValidator(
-                  validator: blocAccess.projectPickFileBoqValidator,
-                  leading: const Icon(Icons.file_copy_outlined),
-                  title: "ارفاق ملفات المشروع - BOQ",
-                  onTap: () async {},
+                  title: blocAccess.projectFilePo == null
+                      ? "ارفاق ملف - PO"
+                      : "تم ارفاق الملف",
+                  onTap: () => blocAccess.pickFilePo(),
                 ),
               ],
             ),

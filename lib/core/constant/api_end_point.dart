@@ -4,4 +4,5 @@ abstract class APIEndPoint {
   static const login = "auth/login";
   static const singup = "auth/singup";
   static const refreshToken = "auth/refreshToken";
+  static const projects = "projects";
 }

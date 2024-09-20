@@ -31,6 +31,7 @@ class NewProjectButtonCreate extends StatelessWidget {
           cubit.projectCity.clear();
           cubit.projectDatePo = null;
           cubit.projectReceiptDate = null;
+          cubit.projectFilePo = null;
         }
         if (state is NewProjectFailure) {
           ShowToast.show(
@@ -46,10 +47,12 @@ class NewProjectButtonCreate extends StatelessWidget {
           onPressed: () {
             cubit.validatorProjectDateField();
             cubit.validatorProjectReceiptDateField();
+            cubit.validatorTakePoFileField();
             bool validateFields = cubit.formKey.currentState!.validate();
             if (validateFields &&
                 cubit.projectDatePoValidator &&
-                cubit.projectReceiptDateValidator) {
+                cubit.projectReceiptDateValidator &&
+                cubit.projectPickFilePoValidator) {
               double? projectPrice = ParseArabicNumber.parseArabicNumberPrice(
                 cubit.projectPrice.text,
               );
@@ -71,16 +74,15 @@ class NewProjectButtonCreate extends StatelessWidget {
                   projectBasicData: NewProjectModel(
                     projectName: cubit.projectName.text,
                     projectNumber: cubit.projectNumber.text,
-                    projectPrice: projectPrice.toString(),
-                    projectDurationPerDay: cubit.projectDurationPerDay.text,
+                    projectPrice: projectPrice,
+                    projectDurationPerDay: durationPerDay,
                     projectManager: cubit.projectManager.text,
                     projectOwner: cubit.projectOwner.text,
                     projectArea: cubit.projectArea.text,
                     projectCity: cubit.projectCity.text,
                     projectReceiptDate: cubit.projectReceiptDate.toString(),
                     projectDatePo: cubit.projectDatePo.toString(),
-                    projectFilePo: "",
-                    projectFilesBoq: "",
+                    projectFilePo: cubit.projectFilePo!,
                   ),
                 );
               }

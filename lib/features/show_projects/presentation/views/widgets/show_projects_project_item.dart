@@ -1,10 +1,15 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/core/widgets/custom_details_button.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
 
 class ShowProjectsProjectItem extends StatelessWidget {
-  const ShowProjectsProjectItem({super.key});
+  final ProjectDetails projectDetails;
+  const ShowProjectsProjectItem({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +20,20 @@ class ShowProjectsProjectItem extends StatelessWidget {
           children: [
             Expanded(
               child: ListTile(
-                title: const Text("اسم المشروع"),
-                subtitle: const Padding(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text("رقم المشروع"),
+                title: Wrap(
+                  children: [
+                    const Text("اسم المشروع : "),
+                    Text("${projectDetails.projectName}"),
+                  ],
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Wrap(
+                    children: [
+                      const Text("رقم المشروع : "),
+                      Text("${projectDetails.projectNumber}"),
+                    ],
+                  ),
                 ),
                 onTap: () {
                   AppPages.to(
@@ -32,6 +47,7 @@ class ShowProjectsProjectItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CustomDetailsButton(
                 onTap: () => AppPages.to(
+                  data: projectDetails,
                   path: AppRoutes.projectInfo,
                   context: context,
                 ),

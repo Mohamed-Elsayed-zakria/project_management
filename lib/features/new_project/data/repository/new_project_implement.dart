@@ -1,25 +1,33 @@
 import '/features/new_project/data/models/new_project_model.dart';
+import 'package:file_picker/file_picker.dart';
+import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'new_project_repo.dart';
+import 'package:dio/dio.dart';
 
 class NewProjectImplement extends NewProjectRepo {
   @override
-  Future<Either<Failures, void>> createNewProject({
-    required NewProjectModel projectBasicData,
-  }) async {
+  Future<Either<Failures, String>> pickFilePo() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      return right(null);
-    } catch (e) {
-      return left(LocalFailures.errorMessage());
-    }
-  }
-
-  @override
-  Future<Either<Failures, void>> pickFilePo() async {
-    try {
-      return right(null);
+      // Pick any file
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.any, // Allows picking any type of file
+      );
+      if (result != null) {
+        String? filePath = result.files.single.path;
+        if (filePath != null) {
+          return right(filePath);
+        } else {
+          return left(
+            LocalFailures.errorMessage(error: "لم يتم اختيار أي ملف"),
+          );
+        }
+      } else {
+        return left(
+          LocalFailures.errorMessage(error: "لم يتم اختيار أي ملف"),
+        );
+      }
     } catch (e) {
       return left(
         LocalFailures.errorMessage(error: "حدث خطأ أثناء تحميل الملف"),
@@ -28,12 +36,27 @@ class NewProjectImplement extends NewProjectRepo {
   }
 
   @override
-  Future<Either<Failures, void>> pickFileBoq() async {
+  Future<Either<Failures, void>> createNewProject({
+    required NewProjectModel projectBasicData,
+  }) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
+      const String url = "${APIEndPoint.url}${APIEndPoint.projects}";
+      await dio.post(
+        url,
+        data: projectBasicData.toFormDataJson(
+          filePoPath: projectBasicData.projectFilePo,
+        ),
+      );
       return right(null);
     } catch (e) {
-      return left(LocalFailures.errorMessage());
+      if (e is DioException) {
+        return left(
+          ServerFailures.fromDioError(dioError: e),
+        );
+      }
+      return left(
+        ServerFailures(errMessage: 'Something went wrong'),
+      );
     }
   }
 }

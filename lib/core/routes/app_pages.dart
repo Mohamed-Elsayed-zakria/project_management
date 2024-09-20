@@ -1,4 +1,5 @@
 import '/features/show_projects/presentation/views/incoming_outgoing_letters_view.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/show_projects/presentation/views/project_details_view.dart';
 import '/features/show_projects/presentation/views/other_additions_view.dart';
 import '/features/show_projects/presentation/views/project_info_view.dart';
@@ -28,7 +29,12 @@ class AppPages {
       ),
       GoRoute(
         path: AppRoutes.projectInfo,
-        builder: (context, state) => const ProjectInfoView(),
+        builder: (context, state) {
+          final type = state.extra as ProjectDetails;
+          return ProjectInfoView(
+            projectDetails: type,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.projectDetails,

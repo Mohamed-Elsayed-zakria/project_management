@@ -1,8 +1,12 @@
+import 'package:path/path.dart';
+import 'package:uuid/uuid.dart';
+import 'package:dio/dio.dart';
+
 class NewProjectModel {
   final String projectName;
   final String projectNumber;
-  final String projectPrice;
-  final String projectDurationPerDay;
+  final double projectPrice;
+  final int projectDurationPerDay;
   final String projectManager;
   final String projectOwner;
   final String projectArea;
@@ -10,7 +14,6 @@ class NewProjectModel {
   final String projectDatePo;
   final String projectReceiptDate;
   final String projectFilePo;
-  final String projectFilesBoq;
 
   NewProjectModel({
     required this.projectName,
@@ -24,23 +27,27 @@ class NewProjectModel {
     required this.projectDatePo,
     required this.projectReceiptDate,
     required this.projectFilePo,
-    required this.projectFilesBoq,
   });
 
-  Map<String, dynamic> toJson() {
-    return {
+  FormData toFormDataJson({required String filePoPath}) {
+    String generatId = const Uuid().v1();
+    String fileName = basename(projectFilePo);
+    FormData formData = FormData.fromMap({
       'projectName': projectName,
       'projectNumber': projectNumber,
       'projectPrice': projectPrice,
       'projectDurationPerDay': projectDurationPerDay,
       'projectDatePo': projectDatePo,
       'projectReceiptDate': projectReceiptDate,
-      'projectFilePo': projectFilePo,
-      'projectFilesBoq': projectFilesBoq,
       'projectManager': projectManager,
       'projectOwner': projectOwner,
       'projectArea': projectArea,
       'projectCity': projectCity,
-    };
+      'projectFilePo': MultipartFile.fromFileSync(
+        filePoPath,
+        filename: "$generatId-$fileName",
+      ),
+    });
+    return formData;
   }
 }

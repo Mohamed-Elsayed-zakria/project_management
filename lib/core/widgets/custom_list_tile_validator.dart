@@ -49,7 +49,7 @@ class CustomListTileValidator extends StatelessWidget {
                 ),
               ),
               leading: leading,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
             ),
           ),
           Visibility(

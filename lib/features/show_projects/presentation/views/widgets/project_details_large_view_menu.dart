@@ -39,7 +39,7 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                   ),
                   const Divider(),
                   ListTile(
-                    selected: currentIndex == 0, 
+                    selected: currentIndex == 0,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -56,7 +56,7 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    selected: currentIndex == 1, 
+                    selected: currentIndex == 1,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -73,7 +73,7 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    selected: currentIndex == 2, 
+                    selected: currentIndex == 2,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),

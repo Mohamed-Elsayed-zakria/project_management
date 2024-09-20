@@ -13,9 +13,6 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   NewProjectCubit(this._newProjectRepo) : super(NewProjectInitial());
 
   //================================================================
-  DateTime? projectDatePo;
-  DateTime? projectReceiptDate;
-
   final TextEditingController projectName = TextEditingController();
   final TextEditingController projectNumber = TextEditingController();
   final TextEditingController projectPrice = TextEditingController();
@@ -24,13 +21,15 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   final TextEditingController projectOwner = TextEditingController();
   final TextEditingController projectArea = TextEditingController();
   final TextEditingController projectCity = TextEditingController();
+  DateTime? projectDatePo;
+  DateTime? projectReceiptDate;
+  String? projectFilePo;
   //================================================================
   final GlobalKey<FormState> formKey = GlobalKey();
 
   bool projectDatePoValidator = true;
   bool projectReceiptDateValidator = true;
   bool projectPickFilePoValidator = true;
-  bool projectPickFileBoqValidator = true;
 
   final DateTime dateNow = MyDateUtil.currentDateTimeFromDevice();
   final DateTime firstDate = MyDateUtil.currentDateTimeFromDevice()
@@ -39,11 +38,11 @@ class NewProjectCubit extends Cubit<NewProjectState> {
       .add(const Duration(days: 365 * 20));
 
   void validatorProjectDateField() {
-    if (projectDatePo == null) {
-      projectDatePoValidator = false;
+    if (projectFilePo == null) {
+      projectPickFilePoValidator = false;
       emit(NewProjectInitial());
     } else {
-      projectDatePoValidator = true;
+      projectPickFilePoValidator = true;
       emit(NewProjectInitial());
     }
   }
@@ -54,6 +53,16 @@ class NewProjectCubit extends Cubit<NewProjectState> {
       emit(NewProjectInitial());
     } else {
       projectReceiptDateValidator = true;
+      emit(NewProjectInitial());
+    }
+  }
+
+  void validatorTakePoFileField() {
+    if (projectDatePo == null) {
+      projectDatePoValidator = false;
+      emit(NewProjectInitial());
+    } else {
+      projectDatePoValidator = true;
       emit(NewProjectInitial());
     }
   }
@@ -107,20 +116,13 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   }
 
   Future<void> pickFilePo() async {
-    emit(NewProjectLoading());
-    Either<Failures, void> result = await _newProjectRepo.pickFilePo();
+    Either<Failures, String> result = await _newProjectRepo.pickFilePo();
     result.fold(
       (failure) => emit(NewProjectFailure(failure.errMessage)),
-      (result) => emit(NewProjectSuccess()),
-    );
-  }
-
-  Future<void> pickFileBoq() async {
-    emit(NewProjectLoading());
-    Either<Failures, void> result = await _newProjectRepo.pickFileBoq();
-    result.fold(
-      (failure) => emit(NewProjectFailure(failure.errMessage)),
-      (result) => emit(NewProjectSuccess()),
+      (result) {
+        projectFilePo = result;
+        emit(NewProjectInitial());
+      },
     );
   }
 
