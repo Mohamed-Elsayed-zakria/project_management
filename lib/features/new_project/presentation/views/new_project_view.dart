@@ -33,6 +33,7 @@ class NewProjectView extends StatelessWidget {
                   ),
                   NewProjectTakeData(),
                   NewProjectButtonCreate(),
+                  SizedBox(height: 20),
                 ],
               ),
             ),

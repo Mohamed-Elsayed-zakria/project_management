@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/utils/show_toast.dart';
 
 class NewProjectButtonCreate extends StatelessWidget {
   const NewProjectButtonCreate({super.key});
@@ -15,7 +16,11 @@ class NewProjectButtonCreate extends StatelessWidget {
     return BlocConsumer<NewProjectCubit, NewProjectState>(
       listener: (context, state) {
         if (state is NewProjectSuccess) {
-          // TODO: create toast
+          ShowToast.show(
+            context: context,
+            msg: 'تم انشاء المشروع بنجاح',
+            success: true,
+          );
           cubit.projectName.clear();
           cubit.projectNumber.clear();
           cubit.projectPrice.clear();
@@ -28,7 +33,10 @@ class NewProjectButtonCreate extends StatelessWidget {
           cubit.projectReceiptDate = null;
         }
         if (state is NewProjectFailure) {
-          // TODO: create toast
+          ShowToast.show(
+            context: context,
+            msg: state.errMessage,
+          );
         }
       },
       builder: (context, state) {
@@ -42,11 +50,22 @@ class NewProjectButtonCreate extends StatelessWidget {
             if (validateFields &&
                 cubit.projectDatePoValidator &&
                 cubit.projectReceiptDateValidator) {
-              double? projectPrice = ParseArabicNumber.parseArabicNumber(
+              double? projectPrice = ParseArabicNumber.parseArabicNumberPrice(
                 cubit.projectPrice.text,
               );
+              int? durationPerDay = ParseArabicNumber.parseArabicNumber(
+                cubit.projectDurationPerDay.text,
+              );
               if (projectPrice == null) {
-                print("========== سعر المشروع غير مكتوب بشكل صحيح");
+                ShowToast.show(
+                  context: context,
+                  msg: "خطأ في كتابة المبلغ",
+                );
+              } else if (durationPerDay == null) {
+                ShowToast.show(
+                  context: context,
+                  msg: "خطأ في كتابة المدة الزمنية باليوم",
+                );
               } else {
                 cubit.createNewProject(
                   projectBasicData: NewProjectModel(

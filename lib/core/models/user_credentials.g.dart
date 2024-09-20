@@ -19,23 +19,35 @@ class UserCredentialsAdapter extends TypeAdapter<UserCredentials> {
     return UserCredentials(
       id: fields[0] as String?,
       username: fields[1] as String?,
-      password: fields[2] as String?,
+      email: fields[2] as String?,
       active: fields[3] as bool?,
+      createdAt: fields[6] as String?,
+      updatedAt: fields[7] as String?,
+      token: fields[4] as String?,
+      role: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserCredentials obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.username)
       ..writeByte(2)
-      ..write(obj.password)
+      ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.active);
+      ..write(obj.active)
+      ..writeByte(4)
+      ..write(obj.token)
+      ..writeByte(5)
+      ..write(obj.role)
+      ..writeByte(6)
+      ..write(obj.createdAt)
+      ..writeByte(7)
+      ..write(obj.updatedAt);
   }
 
   @override

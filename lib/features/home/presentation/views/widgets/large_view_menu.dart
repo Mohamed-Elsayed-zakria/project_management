@@ -1,6 +1,10 @@
 import 'package:flutter_iconly/flutter_iconly.dart';
+import '/core/services/auth_services.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
+import '/core/constant/style.dart';
 
 class LargeViewMenu extends StatelessWidget {
   final Function(int) onTap;
@@ -39,7 +43,7 @@ class LargeViewMenu extends StatelessWidget {
                   ),
                   const Divider(),
                   ListTile(
-                    selected: currentIndex == 0, 
+                    selected: currentIndex == 0,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -52,7 +56,7 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.chart),
                   ),
                   ListTile(
-                    selected: currentIndex == 1, 
+                    selected: currentIndex == 1,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -65,7 +69,7 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.document),
                   ),
                   ListTile(
-                    selected: currentIndex == 2, 
+                    selected: currentIndex == 2,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -78,7 +82,7 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.arrowUpSquare),
                   ),
                   ListTile(
-                    selected: currentIndex == 3, 
+                    selected: currentIndex == 3,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -91,7 +95,7 @@ class LargeViewMenu extends StatelessWidget {
                     leading: const Icon(IconlyBroken.profile),
                   ),
                   ListTile(
-                    selected: currentIndex == 4, 
+                    selected: currentIndex == 4,
                     selectedTileColor: Colors.grey[300],
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
@@ -110,13 +114,55 @@ class LargeViewMenu extends StatelessWidget {
               shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              onTap: () {},
+              onTap: () => _showLogoutDialog(context),
               title: const Text('تسجيل الخروج'),
               leading: const Icon(IconlyBroken.logout),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          title: const Text(
+            "تأكيد الخروج",
+            style: TextStyle(fontSize: 18),
+          ),
+          content: const Text(
+            "هل تريد تسجيل الخروج؟",
+            style: AppStyle.kTextStyle16,
+          ),
+          contentPadding: const EdgeInsets.fromLTRB(24, 22, 24, 6),
+          actionsPadding: const EdgeInsets.symmetric(
+            horizontal: 18,
+            vertical: 10,
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                AuthServices.logout();
+                AppPages.offAll(
+                  path: AppRoutes.login,
+                  context: context,
+                );
+              },
+              child: const Text("نعم"),
+            ),
+            TextButton(
+              onPressed: () => AppPages.back(context),
+              child: const Text("الغاء"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

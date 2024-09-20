@@ -1,12 +1,16 @@
 import 'package:window_manager/window_manager.dart';
+import 'core/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'core/config/hive_config.dart';
+import 'core/config/dio_config.dart';
 import 'core/routes/app_pages.dart';
 import 'core/constant/style.dart';
 import 'dart:io';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SetupLocator().setup();
+  DioConfig().setupDio();
   await HiveConfig.initHive();
   if (Platform.isWindows) {
     await windowManager.ensureInitialized();

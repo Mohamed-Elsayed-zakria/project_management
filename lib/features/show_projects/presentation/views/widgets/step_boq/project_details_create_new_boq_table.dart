@@ -79,6 +79,7 @@ class ProjectDetailsCreateNewBoqTable extends StatelessWidget {
           ),
           columnWidths: const {
             6: FixedColumnWidth(80),
+            5: FixedColumnWidth(80),
           },
           children: [
             TableRow(

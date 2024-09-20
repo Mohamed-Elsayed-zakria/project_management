@@ -8,11 +8,16 @@ import '/features/home/presentation/views/home_view.dart';
 import 'package:go_router/go_router.dart';
 import '/core/routes/app_routes.dart';
 import 'package:flutter/widgets.dart';
+import '/initial_view.dart';
 
 class AppPages {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.login,
+    initialLocation: AppRoutes.initialScreen,
     routes: <RouteBase>[
+      GoRoute(
+        path: AppRoutes.initialScreen,
+        builder: (context, state) => const InitialView(),
+      ),
       GoRoute(
         path: AppRoutes.login,
         builder: (context, state) => const LoginView(),

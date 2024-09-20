@@ -1,5 +1,6 @@
 import '/features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import '/features/auth/presentation/manager/login_cubit/login_state.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +20,16 @@ class LoginTakeData extends StatelessWidget {
             child: Column(
               children: [
                 CustomFormField(
-                  controller: blocAccess.getUserName,
+                  controller: blocAccess.getEmail,
                   keyboardType: TextInputType.text,
-                  label: "اسم المستخدم",
-                  hintText: "ادخل اسم المستخدم",
-                  prefixIcon: const Icon(Icons.person_outline),
+                  label: "البريد الالكتروني",
+                  hintText: "ادخل البريد الالكتروني",
+                  prefixIcon: const Icon(Icons.email_outlined),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "مطلوب";
+                    } else if (!EmailValidator.validate(value)) {
+                      return "البريد الالكتروني غير صالح";
                     } else {
                       return null;
                     }

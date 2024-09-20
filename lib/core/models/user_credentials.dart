@@ -4,25 +4,41 @@ part 'user_credentials.g.dart';
 @HiveType(typeId: 0)
 class UserCredentials extends HiveObject {
   @HiveField(0)
-  final String? id;
+  String? id;
   @HiveField(1)
-  final String? username;
+  String? username;
   @HiveField(2)
-  final String? password;
+  String? email;
   @HiveField(3)
-  final bool? active;
+  bool? active;
+  @HiveField(4)
+  String? token;
+  @HiveField(5)
+  String? role;
+  @HiveField(6)
+  String? createdAt;
+  @HiveField(7)
+  String? updatedAt;
 
   UserCredentials({
     this.id,
     this.username,
-    this.password,
+    this.email,
     this.active,
+    this.createdAt,
+    this.updatedAt,
+    this.token,
+    this.role,
   });
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'username': username,
-        'password': password,
+        'email': email,
         'active': active,
+        'createdAt': createdAt,
+        'updatedAt': updatedAt,
+        'token': token,
+        'role': role,
       };
 }
