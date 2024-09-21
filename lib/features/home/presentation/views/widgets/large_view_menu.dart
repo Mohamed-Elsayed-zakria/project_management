@@ -1,9 +1,9 @@
 import 'package:flutter_iconly/flutter_iconly.dart';
+import '/core/models/user_credentials.dart';
 import '/core/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
-import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
 class LargeViewMenu extends StatelessWidget {
@@ -18,6 +18,7 @@ class LargeViewMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserCredentials? credentials = AuthServices.readCredentials();
     int indexScreen = 0;
     return Card(
       color: Colors.white,
@@ -34,12 +35,8 @@ class LargeViewMenu extends StatelessWidget {
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    title: const Text('اسم المستخدم'),
-                    leading: const CircleAvatar(
-                      radius: 20,
-                      backgroundColor: AppColors.kBackgroundColor,
-                      child: Icon(Icons.electric_bolt_rounded),
-                    ),
+                    title: Text(credentials?.username ?? '--'),
+                    leading: const Icon(Icons.electric_bolt_rounded),
                   ),
                   const Divider(),
                   ListTile(

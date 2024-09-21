@@ -1,11 +1,9 @@
-import 'package:equatable/equatable.dart';
-
-class ProjectDetails extends Equatable {
+class ProjectDetails {
   final String? id;
   final String? projectName;
   final String? projectNumber;
   final String? projectPrice;
-  final int? projectDurationPerDay;
+  int? projectDurationPerDay;
   final String? projectManager;
   final String? projectOwner;
   final String? projectArea;
@@ -15,7 +13,7 @@ class ProjectDetails extends Equatable {
   final String? projectFilePo;
   final int? v;
 
-  const ProjectDetails({
+  ProjectDetails({
     this.id,
     this.projectName,
     this.projectNumber,
@@ -66,23 +64,4 @@ class ProjectDetails extends Equatable {
         'projectFilePo': projectFilePo,
         '__v': v,
       };
-
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      projectName,
-      projectNumber,
-      projectPrice,
-      projectDurationPerDay,
-      projectManager,
-      projectOwner,
-      projectArea,
-      projectCity,
-      projectDatePo,
-      projectReceiptDate,
-      projectFilePo,
-      v,
-    ];
-  }
 }

@@ -1,11 +1,10 @@
-import '/features/show_projects/presentation/manager/project_info_cubit/project_info_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
-import 'project_edite_duration_per_day_dialog.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '/core/constant/api_end_point.dart';
+import 'project_duration_per_day_item.dart';
+import 'project_receipt_date_item.dart';
 import 'package:flutter/material.dart';
-import '/core/utils/my_date_util.dart';
-import '/core/constant/colors.dart';
+import 'project_end_date_item.dart';
+import 'project_file_po_item.dart';
+import 'project_date_po_item.dart';
 
 class ProjectInfoViewBody extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -17,7 +16,6 @@ class ProjectInfoViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProjectInfoCubit cubit = BlocProvider.of<ProjectInfoCubit>(context);
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -52,48 +50,11 @@ class ProjectInfoViewBody extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
-                    ListTile(
-                      title: const Text("مدة المشروع باليوم"),
-                      subtitle: Text(
-                        projectDetails.projectDurationPerDay?.toString() ??
-                            '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => BlocProvider.value(
-                              value: cubit,
-                              child: ProjectEditeDurationPerDayDialog(
-                                projectDetails: projectDetails,
-                              ),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
-                        ),
-                      ),
-                    ),
+                    ProjectDurationPerDayItem(projectDetails: projectDetails),
                     const Divider(),
-                    ListTile(
-                      title: const Text("تاريخ استلام المشروع"),
-                      subtitle: Text(
-                        MyDateUtil.convertDateTime(
-                          historyAsText: projectDetails.projectReceiptDate!,
-                        ),
-                      ),
-                    ),
+                    ProjectReceiptDateItem(projectDetails: projectDetails),
                     const Divider(),
-                    ListTile(
-                      title: const Text("تاريخ انتهاء المشروع"),
-                      subtitle: Text(
-                        cubit.calculateProjectEndDate(
-                          projectDetails: projectDetails,
-                        ),
-                      ),
-                    ),
+                    ProjectEndDateItem(projectDetails: projectDetails),
                     const Divider(),
                     ListTile(
                       title: const Text("مدير المشروع"),
@@ -123,29 +84,9 @@ class ProjectInfoViewBody extends StatelessWidget {
                       ),
                     ),
                     const Divider(),
-                    ListTile(
-                      title: const Text("تاريخ ال - po"),
-                      subtitle: Text(
-                        MyDateUtil.convertDateTime(
-                          historyAsText: projectDetails.projectDatePo!,
-                        ),
-                      ),
-                    ),
+                    ProjectDatePoItem(projectDetails: projectDetails),
                     const Divider(),
-                    ListTile(
-                      title: const Text("ملف ال - po"),
-                      trailing: IconButton(
-                        icon: const Icon(
-                          Icons.visibility_outlined,
-                          color: AppColors.kPrimaryColor,
-                        ),
-                        onPressed: () async {
-                          await cubit.openFile(
-                            "${APIEndPoint.mediaBaseUrl}${projectDetails.projectFilePo}",
-                          );
-                        },
-                      ),
-                    ),
+                    ProjectFilePoItem(projectDetails: projectDetails),
                     const Divider(),
                     const SizedBox(height: 20),
                   ],
