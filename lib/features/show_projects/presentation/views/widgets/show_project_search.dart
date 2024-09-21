@@ -1,6 +1,7 @@
-import '/features/show_projects/data/models/enum/project_search_type.dart';
+import '/features/show_projects/presentation/manager/fetch_projects_cubit/fetch_projects_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
-import '/core/widgets/custom_buttom.dart';
+import 'show_project_search_drop_down.dart';
 import 'package:flutter/material.dart';
 
 class ShowProjectSearch extends StatefulWidget {
@@ -11,7 +12,16 @@ class ShowProjectSearch extends StatefulWidget {
 }
 
 class _ShowProjectSearchState extends State<ShowProjectSearch> {
-  ProjectSearchType searchType = ProjectSearchType.projectName;
+  late FetchProjectsCubit cubit;
+  @override
+  void initState() {
+    super.initState();
+    cubit = BlocProvider.of<FetchProjectsCubit>(context);
+    cubit.searchText.addListener(() {
+      cubit.projectsSearch();
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,54 +43,24 @@ class _ShowProjectSearchState extends State<ShowProjectSearch> {
                 color: Colors.black54,
               ),
             ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<ProjectSearchType>(
-                value: searchType,
-                isExpanded: true,
-                onChanged: (ProjectSearchType? newValue) {
-                  setState(() {
-                    searchType = newValue!;
-                  });
-                },
-                items: ProjectSearchType.values
-                    .map<DropdownMenuItem<ProjectSearchType>>(
-                  (ProjectSearchType value) {
-                    return DropdownMenuItem<ProjectSearchType>(
-                      value: value,
-                      child: Center(
-                        child: Text(
-                          value == ProjectSearchType.projectName
-                              ? 'اسم المشروع'
-                              : 'رقم المشروع',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    );
-                  },
-                ).toList(),
-                dropdownColor: Colors.white,
-                focusColor: Colors.white,
-              ),
-            ),
+            child: const ShowProjectSearchDropDown(),
           ),
           const SizedBox(width: 10),
-          const Expanded(
+          Expanded(
             child: CustomFormField(
+              controller: cubit.searchText,
               label: "بحث",
               hintText: "ادخل قيمة البحث",
-              prefixIcon: Icon(Icons.search_outlined),
-            ),
-          ),
-          const SizedBox(width: 10),
-          SizedBox(
-            width: 120,
-            child: CustomButton(
-              text: "بحث",
-              onPressed: () {
-                if (searchType == ProjectSearchType.projectName) {
-                } else if (searchType == ProjectSearchType.projectNumber) {}
-              },
+              prefixIcon: const Icon(Icons.search_outlined),
+              suffixIcon: Visibility(
+                visible: cubit.searchText.text.isNotEmpty,
+                child: IconButton(
+                  onPressed: () => cubit.searchText.clear(),
+                  icon: const Icon(
+                    Icons.clear_outlined,
+                  ),
+                ),
+              ),
             ),
           ),
         ],

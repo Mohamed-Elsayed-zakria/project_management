@@ -1,9 +1,9 @@
 import '/features/show_projects/presentation/manager/fetch_projects_cubit/fetch_projects_state.dart';
 import '/features/show_projects/presentation/manager/fetch_projects_cubit/fetch_projects_cubit.dart';
 import '/features/show_projects/presentation/views/widgets/show_projects_project_item.dart';
-import '/features/show_projects/data/repository/fetch_projects_implement.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/empty_placeholder.dart';
+import '/core/services/service_locator.dart';
 import '/core/widgets/loading_widget.dart';
 import 'widgets/show_project_search.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,7 @@ class ShowProjectsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FetchProjectsCubit(
-        FetchProjectsImplement(),
-      ),
+      create: (context) => SetupLocator.locator<FetchProjectsCubit>(),
       child: Card(
         color: Colors.white,
         elevation: 3,
@@ -32,16 +30,33 @@ class ShowProjectsView extends StatelessWidget {
                       BlocProvider.of<FetchProjectsCubit>(context);
                   if (state is FetchProjectsSuccess) {
                     return Expanded(
-                      child: cubit.allProjects.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: cubit.allProjects.length,
-                              itemBuilder: (context, index) {
-                                return ShowProjectsProjectItem(
-                                  projectDetails: cubit.allProjects[index],
-                                );
-                              },
-                            )
-                          : const EmptyPlaceholder(message: 'لا يوجد مشاريع'),
+                      child: cubit.searchText.text.isEmpty
+                          ? cubit.allProjects.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: cubit.allProjects.length,
+                                  itemBuilder: (context, index) {
+                                    return ShowProjectsProjectItem(
+                                      projectDetails: cubit.allProjects[index],
+                                    );
+                                  },
+                                )
+                              : const EmptyPlaceholder(
+                                  message: 'لا يوجد مشاريع',
+                                )
+                          : cubit.allAfterSearchProjects.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount:
+                                      cubit.allAfterSearchProjects.length,
+                                  itemBuilder: (context, index) {
+                                    return ShowProjectsProjectItem(
+                                      projectDetails:
+                                          cubit.allAfterSearchProjects[index],
+                                    );
+                                  },
+                                )
+                              : const EmptyPlaceholder(
+                                  message: 'لا يوجد مشاريع',
+                                ),
                     );
                   } else if (state is FetchProjectsFailure) {
                     return const Text("حدث خطأ ما");
