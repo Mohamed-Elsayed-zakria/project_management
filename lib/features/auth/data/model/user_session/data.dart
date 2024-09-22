@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class Data extends Equatable {
+class Data {
   final String? id;
   final String? username;
   final String? email;
@@ -42,18 +40,4 @@ class Data extends Equatable {
         'updatedAt': updatedAt,
         '__v': v,
       };
-
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      username,
-      email,
-      role,
-      active,
-      createdAt,
-      updatedAt,
-      v,
-    ];
-  }
 }

@@ -1,6 +1,5 @@
 import '/features/show_projects/data/models/enum/letters_search_type.dart';
 import '/core/widgets/custom_form_field.dart';
-import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 
 class IncomingOutgoingLettersSearch extends StatefulWidget {
@@ -72,17 +71,6 @@ class _IncomingOutgoingLettersSearchState
               label: "بحث",
               hintText: "ادخل قيمة البحث",
               prefixIcon: Icon(Icons.search_outlined),
-            ),
-          ),
-          const SizedBox(width: 10),
-          SizedBox(
-            width: 120,
-            child: CustomButton(
-              text: "بحث",
-              onPressed: () {
-                if (searchType == LettersSearchType.letterTopic) {
-                } else if (searchType == LettersSearchType.letterNumber) {}
-              },
             ),
           ),
         ],

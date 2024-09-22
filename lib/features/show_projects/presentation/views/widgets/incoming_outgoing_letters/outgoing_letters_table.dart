@@ -181,7 +181,7 @@ class OutgoingLettersTable extends StatelessWidget {
               onTap: () {},
               child: const Icon(
                 Icons.visibility_outlined,
-                color: Colors.blue,
+                color: AppColors.kPrimaryColor,
               ),
             ),
           ),

@@ -1,12 +1,13 @@
 import '/features/show_projects/presentation/manager/fetch_projects_cubit/fetch_projects_state.dart';
 import '/features/show_projects/presentation/manager/fetch_projects_cubit/fetch_projects_cubit.dart';
 import '/features/show_projects/presentation/views/widgets/show_projects_project_item.dart';
+import '/features/show_projects/data/repository/fetch_projects_implement.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/empty_placeholder.dart';
-import '/core/services/service_locator.dart';
 import '/core/widgets/loading_widget.dart';
 import 'widgets/show_project_search.dart';
 import 'package:flutter/material.dart';
+import '/core/constant/style.dart';
 
 class ShowProjectsView extends StatelessWidget {
   const ShowProjectsView({super.key});
@@ -14,7 +15,9 @@ class ShowProjectsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SetupLocator.locator<FetchProjectsCubit>(),
+      create: (context) => FetchProjectsCubit(
+        FetchProjectsImplement(),
+      ),
       child: Card(
         color: Colors.white,
         elevation: 3,
@@ -59,7 +62,10 @@ class ShowProjectsView extends StatelessWidget {
                                 ),
                     );
                   } else if (state is FetchProjectsFailure) {
-                    return const Text("حدث خطأ ما");
+                    return Text(
+                      state.errMessage,
+                      style: AppStyle.tabTextStyle,
+                    );
                   } else {
                     return const Expanded(
                       child: Center(

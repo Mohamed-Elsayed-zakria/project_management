@@ -38,7 +38,12 @@ class AppPages {
       ),
       GoRoute(
         path: AppRoutes.projectDetails,
-        builder: (context, state) => const ProjectDetailsView(),
+        builder: (context, state) {
+          final type = state.extra as ProjectDetails;
+          return ProjectDetailsView(
+            projectDetails: type,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.incomingOutgoingLetters,

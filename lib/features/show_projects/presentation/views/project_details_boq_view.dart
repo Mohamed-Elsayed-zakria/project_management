@@ -1,53 +1,51 @@
-import 'widgets/step_boq/project_details_create_new_boq_table.dart';
-import 'widgets/step_boq/project_details_primary_table_boq.dart';
-import '/core/widgets/accordion/custom_accordion_list.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/show_projects/presentation/manager/boq_cubit/boq_cubit.dart';
+import '/features/show_projects/data/repository/boq_implement.dart';
 import 'widgets/step_boq/project_details_boq_header.dart';
-import '/core/widgets/accordion/accordion_items.dart';
-import '/core/widgets/accordion/accordion_type.dart';
+import 'widgets/step_boq/boq_custom_accordion_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 
 class ProjectDetailsBoqView extends StatelessWidget {
-  const ProjectDetailsBoqView({super.key});
+  final ProjectDetails projectDetails;
+
+  const ProjectDetailsBoqView({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Card(
-        elevation: 3,
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CustomScrollView(
-            slivers: [
-              const SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    ProjectDetailsBoqHeader(),
-                    Divider(
-                      thickness: 2,
-                      color: AppColors.kPrimaryColor,
-                    ),
-                    SizedBox(height: 10),
-                  ],
+    return BlocProvider(
+      create: (context) => BoqCubit(BoqImplement()),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Card(
+          elevation: 3,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      ProjectDetailsBoqHeader(
+                        projectDetails: projectDetails,
+                      ),
+                      const Divider(
+                        thickness: 2,
+                        color: AppColors.kPrimaryColor,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
                 ),
-              ),
-              CustomAccordionList(
-                accordionType: AccordionType.sliverList,
-                children: [
-                  AccordionItems(
-                    title: "الجدول الأساسي",
-                    content: const ProjectDetailsPrimaryTableBoq(),
-                  ),
-                  AccordionItems(
-                    title: "الجدول المعدل واحد",
-                    content: const ProjectDetailsCreateNewBoqTable(),
-                  ),
-                ],
-              ),
-            ],
+                BoqCustomAccordionList(projectDetails: projectDetails),
+              ],
+            ),
           ),
         ),
       ),

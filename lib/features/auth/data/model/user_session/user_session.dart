@@ -1,9 +1,8 @@
 import '/core/models/user_credentials.dart';
 import '/core/models/enums/user_role.dart';
-import 'package:equatable/equatable.dart';
 import 'data.dart';
 
-class UserSession extends Equatable {
+class UserSession {
   final String? status;
   final Data? data;
   final String? token;
@@ -23,9 +22,6 @@ class UserSession extends Equatable {
         'data': data?.toJson(),
         'token': token,
       };
-
-  @override
-  List<Object?> get props => [status, data, token];
 
   UserCredentials convertToUserCredentials() {
     return UserCredentials(

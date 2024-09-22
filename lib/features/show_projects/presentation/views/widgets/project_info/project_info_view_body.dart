@@ -3,6 +3,7 @@ import 'project_duration_per_day_item.dart';
 import 'project_receipt_date_item.dart';
 import 'package:flutter/material.dart';
 import 'project_end_date_item.dart';
+import '/core/constant/colors.dart';
 import 'project_file_po_item.dart';
 import 'project_date_po_item.dart';
 
@@ -34,12 +35,26 @@ class ProjectInfoViewBody extends StatelessWidget {
                       subtitle: Text(
                         projectDetails.projectName ?? '--',
                       ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
                     ),
                     const Divider(),
                     ListTile(
                       title: const Text("رقم المشروع"),
                       subtitle: Text(
                         projectDetails.projectNumber ?? '--',
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
                       ),
                     ),
                     const Divider(),
@@ -48,18 +63,26 @@ class ProjectInfoViewBody extends StatelessWidget {
                       subtitle: Text(
                         projectDetails.projectPrice ?? '--',
                       ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
                     ),
-                    const Divider(),
-                    ProjectDurationPerDayItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectReceiptDateItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectEndDateItem(projectDetails: projectDetails),
                     const Divider(),
                     ListTile(
                       title: const Text("مدير المشروع"),
                       subtitle: Text(
                         projectDetails.projectManager ?? '--',
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
                       ),
                     ),
                     const Divider(),
@@ -68,12 +91,26 @@ class ProjectInfoViewBody extends StatelessWidget {
                       subtitle: Text(
                         projectDetails.projectOwner ?? '--',
                       ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
                     ),
                     const Divider(),
                     ListTile(
                       title: const Text("المنطقة"),
                       subtitle: Text(
                         projectDetails.projectArea ?? '--',
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
                       ),
                     ),
                     const Divider(),
@@ -82,9 +119,22 @@ class ProjectInfoViewBody extends StatelessWidget {
                       subtitle: Text(
                         projectDetails.projectCity ?? '--',
                       ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
                     ),
                     const Divider(),
                     ProjectDatePoItem(projectDetails: projectDetails),
+                    const Divider(),
+                    ProjectDurationPerDayItem(projectDetails: projectDetails),
+                    const Divider(),
+                    ProjectReceiptDateItem(projectDetails: projectDetails),
+                    const Divider(),
+                    ProjectEndDateItem(projectDetails: projectDetails),
                     const Divider(),
                     ProjectFilePoItem(projectDetails: projectDetails),
                     const Divider(),

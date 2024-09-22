@@ -1,9 +1,15 @@
 import '/features/show_projects/presentation/views/widgets/site_receipt/project_details_site_receipt_header.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'widgets/project_details_form_shape_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetailsSiteReceiptView extends StatelessWidget {
-  const ProjectDetailsSiteReceiptView({super.key});
+  final ProjectDetails projectDetails;
+
+  const ProjectDetailsSiteReceiptView({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {

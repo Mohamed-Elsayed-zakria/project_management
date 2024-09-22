@@ -37,6 +37,7 @@ class ShowProjectsProjectItem extends StatelessWidget {
                 ),
                 onTap: () {
                   AppPages.to(
+                    data: projectDetails,
                     path: AppRoutes.projectDetails,
                     context: context,
                   );

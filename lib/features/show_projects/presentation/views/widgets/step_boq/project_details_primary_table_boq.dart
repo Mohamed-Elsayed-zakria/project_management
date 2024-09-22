@@ -1,4 +1,5 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
+import '/features/show_projects/data/models/boq_data/boq_data.dart';
 import 'project_details_add_boq_data_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
@@ -7,7 +8,11 @@ import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
 class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
-  const ProjectDetailsPrimaryTableBoq({super.key});
+  final BoqData boqData;
+  const ProjectDetailsPrimaryTableBoq({
+    super.key,
+    required this.boqData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,72 +82,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
             color: AppColors.kPrimaryColor,
           ),
           children: [
-            TableRow(
-              children: [
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'الرقم',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'البند',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'الكمية',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'السعر الافرادي',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'السعر الاجمالي',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            buildTableRowBoqNewElements(),
-            buildTableRowBoqNewElements(),
+            boqPrimaryTableHeader(),
             buildTableRowBoqNewElements(),
           ],
         ),
@@ -151,46 +91,7 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
             color: AppColors.kPrimaryColor,
           ),
           children: [
-            TableRow(
-              children: [
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'المجموع الكلي',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'المجموع الكلي شامل الضريبة',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-                TableCell(
-                  child: Padding(
-                    padding: const EdgeInsets.all(6),
-                    child: Text(
-                      'النسبة المئوية',
-                      textAlign: TextAlign.center,
-                      style: AppStyle.tabTextStyle.copyWith(
-                        color: AppColors.kPrimaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            boqPrimaryTableFooter(),
             const TableRow(
               children: [
                 TableCell(
@@ -229,6 +130,73 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
               ],
             )
           ],
+        ),
+      ],
+    );
+  }
+
+  TableRow boqPrimaryTableHeader() {
+    return TableRow(
+      children: [
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'الرقم',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'البند',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'الكمية',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'السعر الافرادي',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'السعر الاجمالي',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -289,6 +257,49 @@ class ProjectDetailsPrimaryTableBoq extends StatelessWidget {
               "50",
               textAlign: TextAlign.center,
               style: AppStyle.tabTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  TableRow boqPrimaryTableFooter() {
+    return TableRow(
+      children: [
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'المجموع الكلي',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'المجموع الكلي شامل الضريبة',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+            ),
+          ),
+        ),
+        TableCell(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              'النسبة المئوية',
+              textAlign: TextAlign.center,
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
             ),
           ),
         ),

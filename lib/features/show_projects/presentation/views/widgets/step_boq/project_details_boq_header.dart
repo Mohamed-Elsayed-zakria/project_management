@@ -1,4 +1,5 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'project_details_create_new_boq_button.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
@@ -6,7 +7,12 @@ import '/core/utils/size_screen.dart';
 import '/core/routes/app_pages.dart';
 
 class ProjectDetailsBoqHeader extends StatelessWidget {
-  const ProjectDetailsBoqHeader({super.key});
+  final ProjectDetails projectDetails;
+
+  const ProjectDetailsBoqHeader({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,9 @@ class ProjectDetailsBoqHeader extends StatelessWidget {
         ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const ProjectDetailsCreateNewBoqButton(),
+              ProjectDetailsCreateNewBoqButton(
+                projectDetails: projectDetails,
+              ),
               ProjectDetailsAddOnsLetters(
                 otherAdditionsOnTap: () => AppPages.to(
                   path: AppRoutes.otherAdditions,
@@ -49,10 +57,12 @@ class ProjectDetailsBoqHeader extends StatelessWidget {
                 ),
               ),
               const Divider(),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ProjectDetailsCreateNewBoqButton(),
+                  ProjectDetailsCreateNewBoqButton(
+                    projectDetails: projectDetails,
+                  ),
                 ],
               ),
             ],

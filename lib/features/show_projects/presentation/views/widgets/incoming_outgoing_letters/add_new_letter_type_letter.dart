@@ -14,52 +14,67 @@ class AddNewLetterTypeLetter extends StatelessWidget {
     return BlocBuilder<LettersCubit, LettersState>(
       builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(4, 0, 4, 18),
+              child: Text(
+                "نوع الخطاب",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Text("نوع الخطاب"),
-                ),
                 Row(
                   children: [
-                    Row(
-                      children: [
-                        Radio<LetterType>(
-                          value: LetterType.newletter,
-                          groupValue: cubit.selectedLitterType,
-                          onChanged: (LetterType? value) {
-                            if (value != null) {
-                              cubit.changeSelectedLitterType(value);
-                            }
-                          },
-                        ),
-                        const Text("جديد"),
-                      ],
+                    Radio<LetterType>(
+                      value: LetterType.newletter,
+                      groupValue: cubit.selectedLitterType,
+                      onChanged: (LetterType? value) {
+                        if (value != null) {
+                          cubit.changeSelectedLitterType(value);
+                        }
+                      },
                     ),
-                    const SizedBox(width: 10),
-                    Row(
-                      children: [
-                        Radio<LetterType>(
-                          value: LetterType.replyToLetter,
-                          groupValue: cubit.selectedLitterType,
-                          onChanged: (LetterType? value) {
-                            if (value != null) {
-                              cubit.changeSelectedLitterType(value);
-                            }
-                          },
-                        ),
-                        const Text("رد على خطاب"),
-                      ],
-                    ),
+                    const Text("جديد"),
                   ],
-                )
+                ),
+                const SizedBox(width: 10),
+                Row(
+                  children: [
+                    Radio<LetterType>(
+                      value: LetterType.replyToLetter,
+                      groupValue: cubit.selectedLitterType,
+                      onChanged: (LetterType? value) {
+                        if (value != null) {
+                          cubit.changeSelectedLitterType(value);
+                        }
+                      },
+                    ),
+                    const Text("رد على خطاب"),
+                  ],
+                ),
+                const SizedBox(width: 10),
+                Row(
+                  children: [
+                    Radio<LetterType>(
+                      value: LetterType.replyWithClosure,
+                      groupValue: cubit.selectedLitterType,
+                      onChanged: (LetterType? value) {
+                        if (value != null) {
+                          cubit.changeSelectedLitterType(value);
+                        }
+                      },
+                    ),
+                    const Text("رد مع الغلق"),
+                  ],
+                ),
               ],
             ),
             const SizedBox(height: 10),
             Visibility(
-              visible: cubit.selectedLitterType == LetterType.replyToLetter,
+              visible: cubit.selectedLitterType != LetterType.newletter,
               child: CustomFormField(
                 label: "رقم الخطاب",
                 hintText: "ادخل رقم الخطاب",

@@ -1,1 +1,1 @@
-enum LetterType { newletter, replyToLetter }
+enum LetterType { newletter, replyToLetter, replyWithClosure }
