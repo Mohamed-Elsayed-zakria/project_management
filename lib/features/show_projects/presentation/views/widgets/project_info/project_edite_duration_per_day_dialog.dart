@@ -3,6 +3,7 @@ import '/features/show_projects/data/models/project_details/project_details.dart
 import 'project_edite_duration_per_day_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
+import '/core/utils/parse_arabic_number.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
@@ -39,8 +40,13 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
                 label: "مدة المشروع باليوم",
                 hintText: "ادخل المدة الجديدة باليوم",
                 validator: (value) {
+                  int? projectNewDuration = ParseArabicNumber.parseArabicNumber(
+                    cubit.editeDurationPerDay.text,
+                  );
                   if (value!.isEmpty) {
                     return "مطلوب";
+                  } else if (projectNewDuration == null) {
+                    return "خطأ في كتابة المدة";
                   } else {
                     return null;
                   }

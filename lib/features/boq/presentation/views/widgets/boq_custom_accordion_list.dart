@@ -8,7 +8,7 @@ import '/core/widgets/accordion/accordion_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
-import 'primary_table_boq.dart';
+import 'create_new_boq_table.dart';
 
 class BoqCustomAccordionList extends StatefulWidget {
   final ProjectDetails projectDetails;
@@ -61,11 +61,16 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
 
   List<AccordionItems> _buildAccordionItem(List<BoqData> item) {
     List<AccordionItems> accordionItems = [];
-    for (var element in item) {
+
+    for (var index = 0; index < item.length; index++) {
+      var element = item[index];
       accordionItems.add(
         AccordionItems(
           title: element.name ?? '--',
-          content: PrimaryTableBoq(boqData: element),
+          content: CreateNewBoqTable(
+            boqData: element,
+            index: index,
+          ),
         ),
       );
     }

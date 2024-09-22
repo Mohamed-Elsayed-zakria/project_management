@@ -1,4 +1,5 @@
 import '/features/boq/data/models/boq_data/boq_data.dart';
+import '/features/boq/data/models/add_boq_item.dart';
 import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -41,6 +42,30 @@ class BoqImplement extends BoqRepo {
         data: {
           "name": name,
         },
+      );
+      return right(null);
+    } catch (e) {
+      if (e is DioException) {
+        return left(
+          ServerFailures.fromDioError(dioError: e),
+        );
+      }
+      return left(
+        ServerFailures(errMessage: 'Something went wrong'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> addNewBoqItem({
+    required AddBoqItem boqItemData,
+  }) async {
+    try {
+      String url =
+          "${APIEndPoint.url}${APIEndPoint.boqItem}/boq/${boqItemData.boqId}";
+      await dio.post(
+        url,
+        data: boqItemData.toJson(),
       );
       return right(null);
     } catch (e) {

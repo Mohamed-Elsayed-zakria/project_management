@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 abstract class ShowToast {
   static void show({
     required BuildContext context,
-    String? title,
     required String msg,
     bool? success,
   }) {
@@ -15,7 +14,7 @@ abstract class ShowToast {
           : ToastificationType.success,
       style: ToastificationStyle.flat,
       autoCloseDuration: const Duration(seconds: 3),
-      title: Text(title == null ? 'Error' : "Success"),
+      title: Text(success == null ? 'Error' : "Success"),
       description: RichText(
         text: TextSpan(
           text: msg,

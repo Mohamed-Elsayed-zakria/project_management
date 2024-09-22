@@ -1,3 +1,4 @@
+import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/boq/presentation/manager/fetch_boq_cubit/fetch_boq_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_cubit.dart';
@@ -25,6 +26,9 @@ class BoqView extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AddBoqCubit(BoqImplement()),
+        ),
+        BlocProvider(
+          create: (context) => AddBoqItemCubit(BoqImplement()),
         ),
       ],
       child: SizedBox(

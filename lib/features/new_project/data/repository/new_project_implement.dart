@@ -1,3 +1,4 @@
+import 'package:project_management/core/services/auth_services.dart';
 import '/features/new_project/data/models/new_project_model.dart';
 import 'package:file_picker/file_picker.dart';
 import '/core/constant/api_end_point.dart';
@@ -39,8 +40,14 @@ class NewProjectImplement extends NewProjectRepo {
   Future<Either<Failures, void>> createNewProject({
     required NewProjectModel projectBasicData,
   }) async {
+    String? currentUserId = AuthServices.currentUserId();
     try {
-      const String url = "${APIEndPoint.url}${APIEndPoint.projects}";
+      if (currentUserId == null) {
+        return left(
+          ServerFailures(errMessage: 'Something went wrong'),
+        );
+      }
+      String url = "${APIEndPoint.url}${APIEndPoint.projects}/$currentUserId";
       await dio.post(
         url,
         data: projectBasicData.toFormDataJson(

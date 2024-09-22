@@ -6,7 +6,12 @@ class BoqData {
   String? name;
   List<BoqItem>? boqItems;
 
-  BoqData({this.id, this.projectId, this.name, this.boqItems});
+  BoqData({
+    this.id,
+    this.projectId,
+    this.name,
+    this.boqItems,
+  });
 
   factory BoqData.fromJson(Map<String, dynamic> json) => BoqData(
         id: json['_id'] as String?,

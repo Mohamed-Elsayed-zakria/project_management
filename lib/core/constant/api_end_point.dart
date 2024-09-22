@@ -6,5 +6,6 @@ abstract class APIEndPoint {
   static const refreshToken = "auth/refreshToken";
   static const projects = "projects";
   static const boq = "boq";
+  static const boqItem = "boqItem";
   static const projectDurationPerDay = "projectDurationPerDay";
 }

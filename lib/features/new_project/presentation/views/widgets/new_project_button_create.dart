@@ -2,7 +2,6 @@ import '/features/new_project/presentation/manager/new_project_cubit/new_project
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_state.dart';
 import '/features/new_project/data/models/new_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/show_toast.dart';
@@ -53,39 +52,25 @@ class NewProjectButtonCreate extends StatelessWidget {
                 cubit.projectDatePoValidator &&
                 cubit.projectReceiptDateValidator &&
                 cubit.projectPickFilePoValidator) {
-              double? projectPrice = ParseArabicNumber.parseArabicNumberPrice(
-                cubit.projectPrice.text,
-              );
-              int? durationPerDay = ParseArabicNumber.parseArabicNumber(
-                cubit.projectDurationPerDay.text,
-              );
-              if (projectPrice == null) {
-                ShowToast.show(
-                  context: context,
-                  msg: "خطأ في كتابة المبلغ",
-                );
-              } else if (durationPerDay == null) {
-                ShowToast.show(
-                  context: context,
-                  msg: "خطأ في كتابة المدة الزمنية باليوم",
-                );
-              } else {
-                cubit.createNewProject(
-                  projectBasicData: NewProjectModel(
-                    projectName: cubit.projectName.text,
-                    projectNumber: cubit.projectNumber.text,
-                    projectPrice: projectPrice,
-                    projectDurationPerDay: durationPerDay,
-                    projectManager: cubit.projectManager.text,
-                    projectOwner: cubit.projectOwner.text,
-                    projectArea: cubit.projectArea.text,
-                    projectCity: cubit.projectCity.text,
-                    projectReceiptDate: cubit.projectReceiptDate.toString(),
-                    projectDatePo: cubit.projectDatePo.toString(),
-                    projectFilePo: cubit.projectFilePo!,
+              cubit.createNewProject(
+                projectBasicData: NewProjectModel(
+                  projectName: cubit.projectName.text,
+                  projectNumber: cubit.projectNumber.text,
+                  projectPrice: double.parse(
+                    cubit.projectPrice.text,
                   ),
-                );
-              }
+                  projectDurationPerDay: int.parse(
+                    cubit.projectDurationPerDay.text,
+                  ),
+                  projectManager: cubit.projectManager.text,
+                  projectOwner: cubit.projectOwner.text,
+                  projectArea: cubit.projectArea.text,
+                  projectCity: cubit.projectCity.text,
+                  projectReceiptDate: cubit.projectReceiptDate.toString(),
+                  projectDatePo: cubit.projectDatePo.toString(),
+                  projectFilePo: cubit.projectFilePo!,
+                ),
+              );
             }
           },
         );

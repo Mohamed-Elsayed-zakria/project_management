@@ -2,7 +2,6 @@ import '/features/show_projects/presentation/manager/project_info_cubit/project_
 import '/features/show_projects/presentation/manager/project_info_cubit/project_info_state.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
@@ -38,20 +37,10 @@ class ProjectEditeDurationPerDayButton extends StatelessWidget {
           text: 'تعديل',
           onPressed: () {
             if (cubit.formKeyProjectInfo.currentState!.validate()) {
-              int? projectNewDuration = ParseArabicNumber.parseArabicNumber(
-                cubit.editeDurationPerDay.text,
+              cubit.changeDurationPerDay(
+                newDuration: int.parse(cubit.editeDurationPerDay.text),
+                projectDetails: projectDetails,
               );
-              if (projectNewDuration == null) {
-                ShowToast.show(
-                  context: context,
-                  msg: "خطأ في كتابة المدة",
-                );
-              } else {
-                cubit.changeDurationPerDay(
-                  newDuration: projectNewDuration,
-                  projectDetails: projectDetails,
-                );
-              }
             }
           },
         );

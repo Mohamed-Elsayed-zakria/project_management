@@ -3,6 +3,7 @@ import '/features/new_project/presentation/manager/new_project_cubit/new_project
 import '/core/widgets/custom_list_tile_validator.dart';
 import 'new_project_take_project_receipt_date.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 import 'new_project_take_date_po.dart';
@@ -55,8 +56,14 @@ class NewProjectTakeData extends StatelessWidget {
                   prefixIcon: const Icon(Icons.monetization_on_outlined),
                   keyboardType: TextInputType.number,
                   validator: (value) {
+                    double? projectPrice =
+                        ParseArabicNumber.parseArabicNumberPrice(
+                      blocAccess.projectPrice.text,
+                    );
                     if (value!.isEmpty) {
                       return "مطلوب";
+                    } else if (projectPrice == null) {
+                      return "خطأ في المبلغ";
                     } else {
                       return null;
                     }
@@ -69,8 +76,13 @@ class NewProjectTakeData extends StatelessWidget {
                   prefixIcon: const Icon(Icons.calendar_month_outlined),
                   keyboardType: TextInputType.number,
                   validator: (value) {
+                    int? durationPerDay = ParseArabicNumber.parseArabicNumber(
+                      blocAccess.projectDurationPerDay.text,
+                    );
                     if (value!.isEmpty) {
                       return "مطلوب";
+                    } else if (durationPerDay == null) {
+                      return "خطأ في المدة";
                     } else {
                       return null;
                     }
