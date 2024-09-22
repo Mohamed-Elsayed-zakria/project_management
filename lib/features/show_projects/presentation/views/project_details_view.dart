@@ -1,10 +1,10 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/kick_of_metting/presentation/views/kick_of_metting_view.dart';
+import '/features/site_receipt/presentation/views/site_receipt_view.dart';
+import '/features/boq/presentation/views/boq_view.dart';
 import 'widgets/project_details_large_view_menu.dart';
-import 'project_details_site_receipt_view.dart';
 import 'package:flutter/material.dart';
-import 'project_details_boq_view.dart';
 import '/core/constant/colors.dart';
-import 'kick_of_metting_view.dart';
 
 class ProjectDetailsView extends StatefulWidget {
   final ProjectDetails projectDetails;
@@ -23,10 +23,10 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      ProjectDetailsBoqView(
+      BoqView(
         projectDetails: widget.projectDetails,
       ),
-      ProjectDetailsSiteReceiptView(
+      SiteReceiptView(
         projectDetails: widget.projectDetails,
       ),
       KickOfMettingView(
