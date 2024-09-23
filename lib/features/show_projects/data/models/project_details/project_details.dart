@@ -2,13 +2,14 @@ class ProjectDetails {
   final String? id;
   final String? projectName;
   final String? projectNumber;
-  final String? projectPrice;
+  final num? projectPrice;
   int? projectDurationPerDay;
   final String? projectManager;
   final String? projectOwner;
   final String? projectArea;
   final String? projectCity;
   final String? projectDatePo;
+  final num? projectValueAddedTax;
   final String? projectReceiptDate;
   final String? projectFilePo;
   final int? v;
@@ -24,6 +25,7 @@ class ProjectDetails {
     this.projectArea,
     this.projectCity,
     this.projectDatePo,
+    this.projectValueAddedTax,
     this.projectReceiptDate,
     this.projectFilePo,
     this.v,
@@ -34,7 +36,7 @@ class ProjectDetails {
       id: json['_id'] as String?,
       projectName: json['projectName'] as String?,
       projectNumber: json['projectNumber'] as String?,
-      projectPrice: json['projectPrice'] as String?,
+      projectPrice: json['projectPrice'] as num?,
       projectDurationPerDay: json['projectDurationPerDay'] is String
           ? int.tryParse(json['projectDurationPerDay'])
           : json['projectDurationPerDay'] as int?,
@@ -42,8 +44,9 @@ class ProjectDetails {
       projectOwner: json['projectOwner'] as String?,
       projectArea: json['projectArea'] as String?,
       projectCity: json['projectCity'] as String?,
-      projectDatePo: json['projectDatePo'] as String,
-      projectReceiptDate: json['projectReceiptDate'] as String,
+      projectDatePo: json['projectDatePo'] as String?,
+      projectValueAddedTax: json['projectValueAddedTax'] as num? ?? 15.0,
+      projectReceiptDate: json['projectReceiptDate'] as String?,
       projectFilePo: json['projectFilePo'] as String?,
       v: json['__v'] as int?,
     );
@@ -60,6 +63,7 @@ class ProjectDetails {
         'projectArea': projectArea,
         'projectCity': projectCity,
         'projectDatePo': projectDatePo,
+        'projectValueAddedTax': projectValueAddedTax,
         'projectReceiptDate': projectReceiptDate,
         'projectFilePo': projectFilePo,
         '__v': v,

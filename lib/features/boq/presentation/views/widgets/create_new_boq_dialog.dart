@@ -1,4 +1,5 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/boq/presentation/manager/fetch_boq_cubit/fetch_boq_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,8 @@ class CreateNewBoqDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddBoqCubit cubit = BlocProvider.of<AddBoqCubit>(context);
+    AddBoqCubit addBoqCubit = BlocProvider.of<AddBoqCubit>(context);
+    FetchBoqCubit fetchBoqCubit = BlocProvider.of<FetchBoqCubit>(context);
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -37,9 +39,9 @@ class CreateNewBoqDialog extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             Form(
-              key: cubit.formKeyBoq,
+              key: addBoqCubit.formKeyBoq,
               child: CustomFormField(
-                controller: cubit.addNewBoqController,
+                controller: addBoqCubit.addNewBoqController,
                 label: "اسم الجدول المعدل",
                 hintText: "ادخل اسم الجدول",
                 prefixIcon: const Icon(Icons.table_rows_outlined),
@@ -49,6 +51,7 @@ class CreateNewBoqDialog extends StatelessWidget {
             BlocConsumer<AddBoqCubit, AddBoqState>(
               listener: (context, state) {
                 if (state is AddBoqSuccess) {
+                  addBoqCubit.addNewBoqController.clear();
                   AppPages.back(context);
                 }
                 if (state is AddBoqFailure) {
@@ -63,10 +66,11 @@ class CreateNewBoqDialog extends StatelessWidget {
                   isLoading: state is AddBoqLoading,
                   text: 'اضافة',
                   onPressed: () {
-                    if (cubit.formKeyBoq.currentState!.validate()) {
-                      cubit.addNewBoq(
-                        name: cubit.addNewBoqController.text,
+                    if (addBoqCubit.formKeyBoq.currentState!.validate()) {
+                      addBoqCubit.addNewBoq(
+                        name: addBoqCubit.addNewBoqController.text,
                         projectId: projectDetails.id!,
+                        boqData: fetchBoqCubit.boqData,
                       );
                     }
                   },

@@ -1,16 +1,15 @@
-import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
 class SettingCustomDialogEditInfo extends StatelessWidget {
   final String title;
-  final String hintText;
+  final Widget content;
   final Function() onPressed;
   const SettingCustomDialogEditInfo({
     super.key,
     required this.title,
-    required this.hintText,
+    required this.content,
     required this.onPressed,
   });
 
@@ -32,10 +31,7 @@ class SettingCustomDialogEditInfo extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 10),
-            CustomFormField(
-              label: title,
-              hintText: hintText,
-            ),
+            content,
             const SizedBox(height: 10),
             CustomButton(
               text: 'حفظ',

@@ -13,6 +13,7 @@ class NewProjectModel {
   final String projectCity;
   final String projectDatePo;
   final String projectReceiptDate;
+  final double projectValueAddedTax;
   final String projectFilePo;
 
   NewProjectModel({
@@ -25,6 +26,7 @@ class NewProjectModel {
     required this.projectArea,
     required this.projectCity,
     required this.projectDatePo,
+    required this.projectValueAddedTax,
     required this.projectReceiptDate,
     required this.projectFilePo,
   });
@@ -38,6 +40,7 @@ class NewProjectModel {
       'projectPrice': projectPrice,
       'projectDurationPerDay': projectDurationPerDay,
       'projectDatePo': projectDatePo,
+      'projectValueAddedTax': projectValueAddedTax,
       'projectReceiptDate': projectReceiptDate,
       'projectManager': projectManager,
       'projectOwner': projectOwner,

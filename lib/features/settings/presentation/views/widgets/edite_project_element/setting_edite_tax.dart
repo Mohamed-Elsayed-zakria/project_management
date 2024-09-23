@@ -1,4 +1,7 @@
 import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
+import '/features/settings/presentation/manager/cubit/setting_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
 
@@ -7,16 +10,21 @@ class SettingEditeTax extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingCubit cubit = BlocProvider.of<SettingCubit>(context);
     return ListTile(
       title: const Text("ضريبة القيمة المضافة"),
-      subtitle: const Text("% 15"),
+      subtitle: Text("${(cubit.valueAddedTax.text)} %"),
       trailing: IconButton(
         onPressed: () {
           showDialog(
             context: context,
             builder: (context) => SettingCustomDialogEditInfo(
               title: "ضريبة القيمة المضافة",
-              hintText: "ادخل الضريبة الجديدة",
+              content: CustomFormField(
+                controller: cubit.valueAddedTax,
+                label: "القيمة المضافة",
+                hintText: "ادخل الضريبة الجديدة",
+              ),
               onPressed: () {
                 AppPages.back(context);
               },

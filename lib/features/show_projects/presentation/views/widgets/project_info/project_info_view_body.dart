@@ -61,7 +61,7 @@ class ProjectInfoViewBody extends StatelessWidget {
                     ListTile(
                       title: const Text("مبلغ المشروع"),
                       subtitle: Text(
-                        projectDetails.projectPrice ?? '--',
+                        projectDetails.projectPrice?.toString() ?? '--',
                       ),
                       trailing: IconButton(
                         onPressed: () {},
@@ -118,6 +118,20 @@ class ProjectInfoViewBody extends StatelessWidget {
                       title: const Text("المدينة"),
                       subtitle: Text(
                         projectDetails.projectCity ?? '--',
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                          color: AppColors.kPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    ListTile(
+                      title: const Text("ضريب القيمة المضافة"),
+                      subtitle: Text(
+                        "${projectDetails.projectValueAddedTax?.toStringAsFixed(2)} %",
                       ),
                       trailing: IconButton(
                         onPressed: () {},

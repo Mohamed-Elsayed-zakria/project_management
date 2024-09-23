@@ -1,3 +1,4 @@
+import '/features/boq/data/models/boq_data/boq_item.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import '/features/boq/data/models/add_boq_item.dart';
 import '/core/constant/api_end_point.dart';
@@ -31,19 +32,21 @@ class BoqImplement extends BoqRepo {
   }
 
   @override
-  Future<Either<Failures, void>> addNewBoq({
+  Future<Either<Failures, BoqData>> addNewBoq({
     required String projectId,
     required String name,
   }) async {
     try {
       String url = "${APIEndPoint.url}${APIEndPoint.boq}/project/$projectId";
-      await dio.post(
+      final response = await dio.post(
         url,
         data: {
           "name": name,
         },
       );
-      return right(null);
+      final session = response.data["data"];
+      BoqData boqData = BoqData.fromJson(session);
+      return right(boqData);
     } catch (e) {
       if (e is DioException) {
         return left(
@@ -57,17 +60,19 @@ class BoqImplement extends BoqRepo {
   }
 
   @override
-  Future<Either<Failures, void>> addNewBoqItem({
+  Future<Either<Failures, BoqItem>> addNewBoqItem({
     required AddBoqItem boqItemData,
   }) async {
     try {
       String url =
           "${APIEndPoint.url}${APIEndPoint.boqItem}/boq/${boqItemData.boqId}";
-      await dio.post(
+      final response = await dio.post(
         url,
         data: boqItemData.toJson(),
       );
-      return right(null);
+      final session = response.data["data"];
+      BoqItem boqItem = BoqItem.fromJson(session);
+      return right(boqItem);
     } catch (e) {
       if (e is DioException) {
         return left(

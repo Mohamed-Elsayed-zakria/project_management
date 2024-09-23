@@ -37,11 +37,11 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
   Widget build(BuildContext context) {
     return BlocBuilder<FetchBoqCubit, FetchBoqState>(
       builder: (context, state) {
+        FetchBoqCubit cubit = BlocProvider.of<FetchBoqCubit>(context);
         if (state is FetchBoqSuccess) {
-          List<BoqData> boqData = state.result;
           return CustomAccordionList(
             accordionType: AccordionType.sliverList,
-            children: _buildAccordionItem(boqData),
+            children: _buildAccordionItem(cubit.boqData),
           );
         }
         if (state is FetchBoqFailure) {
@@ -68,6 +68,7 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
         AccordionItems(
           title: element.name ?? '--',
           content: CreateNewBoqTable(
+            projectDetails: widget.projectDetails,
             boqData: element,
             index: index,
           ),

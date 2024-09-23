@@ -9,6 +9,8 @@ class FetchBoqCubit extends Cubit<FetchBoqState> {
   final BoqRepo _boqRepo;
   FetchBoqCubit(this._boqRepo) : super(FetchBoqInitial());
 
+  List<BoqData> boqData = [];
+
   Future<void> fetchAllBoq({
     required String projectId,
   }) async {
@@ -18,7 +20,10 @@ class FetchBoqCubit extends Cubit<FetchBoqState> {
     );
     result.fold(
       (failures) => emit(FetchBoqFailure(errMessage: failures.errMessage)),
-      (result) => emit(FetchBoqSuccess(result)),
+      (result) {
+        boqData = result;
+        emit(FetchBoqSuccess());
+      },
     );
   }
 }

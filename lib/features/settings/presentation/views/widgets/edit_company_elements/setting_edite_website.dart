@@ -1,4 +1,5 @@
 import '/features/settings/presentation/views/widgets/setting_custom_dialog_edit_info.dart';
+import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
 
@@ -16,7 +17,10 @@ class SettingEditeWebsite extends StatelessWidget {
             context: context,
             builder: (context) => SettingCustomDialogEditInfo(
               title: "الموقع الالكتروني",
-              hintText: "ادخل الموقع الالكتروني الجديد",
+              content: const CustomFormField(
+                label: "الموقع الالكتروني",
+                hintText: "ادخل الموقع الالكتروني الجديد",
+              ),
               onPressed: () {
                 AppPages.back(context);
               },

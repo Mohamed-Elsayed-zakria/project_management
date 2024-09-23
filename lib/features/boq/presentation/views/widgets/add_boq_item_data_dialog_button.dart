@@ -25,6 +25,7 @@ class AddBoqItemDataDialogButton extends StatelessWidget {
           onPressed: () {
             if (cubit.addBoqItemformKey.currentState!.validate()) {
               cubit.addNewBoqItem(
+                boqData: boqData,
                 boqItemData: AddBoqItem(
                   boqId: boqData.id!,
                   itemNumber: int.parse(

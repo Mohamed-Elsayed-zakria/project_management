@@ -1,3 +1,4 @@
+import '/features/boq/data/models/boq_data/boq_data.dart';
 import '/features/boq/data/repository/boq_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -10,21 +11,25 @@ class AddBoqCubit extends Cubit<AddBoqState> {
 
   AddBoqCubit(this._boqRepo) : super(AddBoqInitial());
 
-  TextEditingController addNewBoqController = TextEditingController();
+  final TextEditingController addNewBoqController = TextEditingController();
   final GlobalKey<FormState> formKeyBoq = GlobalKey();
 
   Future<void> addNewBoq({
     required String projectId,
+    required List<BoqData> boqData,
     required String name,
   }) async {
     emit(AddBoqLoading());
-    Either<Failures, void> result = await _boqRepo.addNewBoq(
+    Either<Failures, BoqData> result = await _boqRepo.addNewBoq(
       projectId: projectId,
       name: name,
     );
     result.fold(
       (failures) => emit(AddBoqFailure(errMessage: failures.errMessage)),
-      (result) => emit(AddBoqSuccess()),
+      (result) {
+        boqData.add(result);
+        emit(AddBoqSuccess());
+      },
     );
   }
 }

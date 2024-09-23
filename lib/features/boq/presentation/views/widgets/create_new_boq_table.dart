@@ -1,6 +1,7 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
 import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_state.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'edite_quantity_boq_dialog.dart';
@@ -12,16 +13,19 @@ import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
 class CreateNewBoqTable extends StatelessWidget {
+  final ProjectDetails projectDetails;
   final BoqData boqData;
   final int index;
   const CreateNewBoqTable({
     super.key,
+    required this.projectDetails,
     required this.boqData,
     required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
+    AddBoqItemCubit cubit = BlocProvider.of<AddBoqItemCubit>(context);
     return Column(
       children: [
         Row(
@@ -65,6 +69,10 @@ class CreateNewBoqTable extends StatelessWidget {
         BlocConsumer<AddBoqItemCubit, AddBoqItemState>(
           listener: (context, state) {
             if (state is AddBoqItemSuccess) {
+              cubit.itemNumberGetText.clear();
+              cubit.itemGetText.clear();
+              cubit.quantityGetText.clear();
+              cubit.individualPriceGetText.clear();
               AppPages.back(context);
             }
           },
@@ -83,7 +91,8 @@ class CreateNewBoqTable extends StatelessWidget {
                       : [
                           createBoqModifiedTableHeader(),
                           ...buildTableRowBoqModifiedNewElements(
-                              context: context),
+                            context: context,
+                          ),
                         ],
                 ),
                 Table(
@@ -92,14 +101,16 @@ class CreateNewBoqTable extends StatelessWidget {
                   ),
                   children: [
                     boqTableFooter(),
-                    const TableRow(
+                    TableRow(
                       children: [
                         TableCell(
                           verticalAlignment: TableCellVerticalAlignment.middle,
                           child: Padding(
-                            padding: EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(6),
                             child: Text(
-                              '0.0',
+                              cubit
+                                  .calculateTotalPrice(boqData: boqData)
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style: AppStyle.tabTextStyle,
                             ),
@@ -108,9 +119,13 @@ class CreateNewBoqTable extends StatelessWidget {
                         TableCell(
                           verticalAlignment: TableCellVerticalAlignment.middle,
                           child: Padding(
-                            padding: EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(6),
                             child: Text(
-                              "172.5",
+                              cubit
+                                  .totalPriceIncludingTax(
+                                      boqData: boqData,
+                                      projectDetails: projectDetails)
+                                  .toString(),
                               textAlign: TextAlign.center,
                               style: AppStyle.tabTextStyle,
                             ),
@@ -119,9 +134,9 @@ class CreateNewBoqTable extends StatelessWidget {
                         TableCell(
                           verticalAlignment: TableCellVerticalAlignment.middle,
                           child: Padding(
-                            padding: EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(6),
                             child: Text(
-                              "1 %",
+                              "${cubit.percentageTotalPrice(projectDetails: projectDetails, boqData: boqData).toString()} %",
                               textAlign: TextAlign.center,
                               style: AppStyle.tabTextStyle,
                             ),

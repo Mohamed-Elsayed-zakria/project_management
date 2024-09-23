@@ -1,5 +1,6 @@
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_cubit.dart';
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_state.dart';
+import '/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import '/features/new_project/data/models/new_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_buttom.dart';
@@ -12,6 +13,7 @@ class NewProjectButtonCreate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     NewProjectCubit cubit = BlocProvider.of<NewProjectCubit>(context);
+    SettingCubit settingCubit = BlocProvider.of<SettingCubit>(context);
     return BlocConsumer<NewProjectCubit, NewProjectState>(
       listener: (context, state) {
         if (state is NewProjectSuccess) {
@@ -69,6 +71,9 @@ class NewProjectButtonCreate extends StatelessWidget {
                   projectReceiptDate: cubit.projectReceiptDate.toString(),
                   projectDatePo: cubit.projectDatePo.toString(),
                   projectFilePo: cubit.projectFilePo!,
+                  projectValueAddedTax: double.parse(
+                    settingCubit.valueAddedTax.text,
+                  ),
                 ),
               );
             }
