@@ -1,33 +1,41 @@
 import '/features/show_projects/presentation/manager/project_info_cubit/project_info_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/core/constant/api_end_point.dart';
+import 'project_edite_area_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 
-class ProjectFilePoItem extends StatelessWidget {
+class ProjectAreaItem extends StatelessWidget {
   final ProjectDetails projectDetails;
 
-  const ProjectFilePoItem({
+  const ProjectAreaItem({
     super.key,
     required this.projectDetails,
   });
 
   @override
   Widget build(BuildContext context) {
-    ProjectInfoCubit cubit = BlocProvider.of<ProjectInfoCubit>(context);
     return ListTile(
-      title: const Text("ملف ال - po"),
+      title: const Text("المنطقة"),
+      subtitle: Text(
+        projectDetails.projectArea ?? '--',
+      ),
       trailing: IconButton(
-        icon: const Icon(
-          Icons.visibility_outlined,
-          color: AppColors.kPrimaryColor,
-        ),
-        onPressed: () async {
-          await cubit.openFile(
-            "${APIEndPoint.mediaBaseUrl}${projectDetails.projectFilePo}",
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => BlocProvider.value(
+              value: BlocProvider.of<ProjectInfoCubit>(context),
+              child: ProjectEditeAreaDialog(
+                projectDetails: projectDetails,
+              ),
+            ),
           );
         },
+        icon: const Icon(
+          Icons.edit_outlined,
+          color: AppColors.kPrimaryColor,
+        ),
       ),
     );
   }

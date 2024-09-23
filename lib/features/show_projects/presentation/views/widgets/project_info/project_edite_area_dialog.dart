@@ -3,16 +3,15 @@ import '/features/show_projects/presentation/manager/project_info_cubit/project_
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
-import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
 import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
-class ProjectEditeDurationPerDayDialog extends StatelessWidget {
+class ProjectEditeAreaDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
-  const ProjectEditeDurationPerDayDialog({
+  const ProjectEditeAreaDialog({
     super.key,
     required this.projectDetails,
   });
@@ -25,7 +24,7 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       title: const Text(
-        "تعديل مدة المشروع باليوم",
+        "تعديل منطقة المشروع",
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),
@@ -35,7 +34,7 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
         child: BlocConsumer<ProjectInfoCubit, ProjectInfoState>(
           listener: (context, state) {
             if (state is UpdateProjectSuccess) {
-              cubit.editeDurationPerDay.clear();
+              cubit.editeProjectArea.clear();
               AppPages.back(context);
             }
             if (state is UpdateProjectFailure) {
@@ -46,27 +45,20 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            cubit.editeDurationPerDay.text =
-                projectDetails.projectDurationPerDay.toString();
+            cubit.editeProjectArea.text = projectDetails.projectArea ?? '';
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 10),
                 Form(
-                  key: cubit.formKeyChangeDurationPerDay,
+                  key: cubit.formKeyChangeArea,
                   child: CustomFormField(
-                    controller: cubit.editeDurationPerDay,
-                    label: "مدة المشروع باليوم",
-                    hintText: "ادخل المدة الجديدة باليوم",
+                    controller: cubit.editeProjectArea,
+                    label: "منطقة المشروع",
+                    hintText: "المنطقة الجديدة المشروع",
                     validator: (value) {
-                      int? projectNewDuration =
-                          ParseArabicNumber.parseArabicNumber(
-                        cubit.editeDurationPerDay.text,
-                      );
                       if (value!.isEmpty) {
                         return "مطلوب";
-                      } else if (projectNewDuration == null) {
-                        return "خطأ في كتابة المدة";
                       } else {
                         return null;
                       }
@@ -78,10 +70,9 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
                   isLoading: state is UpdateProjectLoading,
                   text: 'تعديل',
                   onPressed: () {
-                    if (cubit.formKeyChangeDurationPerDay.currentState!
-                        .validate()) {
-                      cubit.changeDurationPerDay(
-                        newDuration: int.parse(cubit.editeDurationPerDay.text),
+                    if (cubit.formKeyChangeArea.currentState!.validate()) {
+                      cubit.changeProjectArea(
+                        newArea: cubit.editeProjectArea.text,
                         projectDetails: projectDetails,
                       );
                     }

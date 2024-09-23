@@ -1,14 +1,14 @@
 import '/features/show_projects/presentation/manager/project_info_cubit/project_info_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
-import 'project_edite_duration_per_day_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'project_edite_owner_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 
-class ProjectDurationPerDayItem extends StatelessWidget {
+class ProjectOwnerItem extends StatelessWidget {
   final ProjectDetails projectDetails;
 
-  const ProjectDurationPerDayItem({
+  const ProjectOwnerItem({
     super.key,
     required this.projectDetails,
   });
@@ -16,9 +16,9 @@ class ProjectDurationPerDayItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: const Text("مدة المشروع باليوم"),
+      title: const Text("الجهة المالكة"),
       subtitle: Text(
-        projectDetails.projectDurationPerDay?.toString() ?? '--',
+        projectDetails.projectOwner ?? '--',
       ),
       trailing: IconButton(
         onPressed: () {
@@ -26,7 +26,7 @@ class ProjectDurationPerDayItem extends StatelessWidget {
             context: context,
             builder: (_) => BlocProvider.value(
               value: BlocProvider.of<ProjectInfoCubit>(context),
-              child: ProjectEditeDurationPerDayDialog(
+              child: ProjectEditeOwnerDialog(
                 projectDetails: projectDetails,
               ),
             ),

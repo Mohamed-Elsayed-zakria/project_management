@@ -1,12 +1,12 @@
 abstract class ProjectInfoState {}
 
-final class ProjectInfoInitial extends ProjectInfoState {}
+final class UpdateProjectInitial extends ProjectInfoState {}
 
-final class ChangeDurationPerDayLoading extends ProjectInfoState {}
+final class UpdateProjectLoading extends ProjectInfoState {}
 
-final class ChangeDurationPerDaySuccess extends ProjectInfoState {}
+final class UpdateProjectSuccess extends ProjectInfoState {}
 
-final class ChangeDurationPerDayFailure extends ProjectInfoState {
+final class UpdateProjectFailure extends ProjectInfoState {
   final String errMessage;
-  ChangeDurationPerDayFailure({required this.errMessage});
+  UpdateProjectFailure({required this.errMessage});
 }

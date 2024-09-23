@@ -10,9 +10,9 @@ import '/core/routes/app_pages.dart';
 import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
-class ProjectEditeDurationPerDayDialog extends StatelessWidget {
+class ProjectEditeValueAddedTaxDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
-  const ProjectEditeDurationPerDayDialog({
+  const ProjectEditeValueAddedTaxDialog({
     super.key,
     required this.projectDetails,
   });
@@ -25,7 +25,7 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       title: const Text(
-        "تعديل مدة المشروع باليوم",
+        "تعديل ضريبة القيمة المضافة المشروع",
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),
@@ -35,7 +35,7 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
         child: BlocConsumer<ProjectInfoCubit, ProjectInfoState>(
           listener: (context, state) {
             if (state is UpdateProjectSuccess) {
-              cubit.editeDurationPerDay.clear();
+              cubit.editeProjectValueAddedTax.clear();
               AppPages.back(context);
             }
             if (state is UpdateProjectFailure) {
@@ -46,27 +46,27 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            cubit.editeDurationPerDay.text =
-                projectDetails.projectDurationPerDay.toString();
+            cubit.editeProjectValueAddedTax.text =
+                projectDetails.projectValueAddedTax.toString();
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 10),
                 Form(
-                  key: cubit.formKeyChangeDurationPerDay,
+                  key: cubit.formKeyChangeTax,
                   child: CustomFormField(
-                    controller: cubit.editeDurationPerDay,
-                    label: "مدة المشروع باليوم",
-                    hintText: "ادخل المدة الجديدة باليوم",
+                    controller: cubit.editeProjectValueAddedTax,
+                    label: "ضريبة القيمة المضافة",
+                    hintText: "ادخل ضريبة القيمة المضافة الجديدة",
                     validator: (value) {
-                      int? projectNewDuration =
-                          ParseArabicNumber.parseArabicNumber(
-                        cubit.editeDurationPerDay.text,
+                      double? projectTax =
+                          ParseArabicNumber.parseArabicNumberPrice(
+                        cubit.editeProjectValueAddedTax.text,
                       );
                       if (value!.isEmpty) {
                         return "مطلوب";
-                      } else if (projectNewDuration == null) {
-                        return "خطأ في كتابة المدة";
+                      } else if (projectTax == null) {
+                        return "خطأ في كتابة القيمة";
                       } else {
                         return null;
                       }
@@ -78,10 +78,11 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
                   isLoading: state is UpdateProjectLoading,
                   text: 'تعديل',
                   onPressed: () {
-                    if (cubit.formKeyChangeDurationPerDay.currentState!
-                        .validate()) {
-                      cubit.changeDurationPerDay(
-                        newDuration: int.parse(cubit.editeDurationPerDay.text),
+                    if (cubit.formKeyChangeTax.currentState!.validate()) {
+                      cubit.changeProjectValueAddedTax(
+                        newTax: double.parse(
+                          cubit.editeProjectValueAddedTax.text,
+                        ),
                         projectDetails: projectDetails,
                       );
                     }

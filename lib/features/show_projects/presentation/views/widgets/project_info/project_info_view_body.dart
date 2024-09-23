@@ -1,11 +1,21 @@
+import '/features/show_projects/presentation/manager/project_info_cubit/project_info_cubit.dart';
+import '/features/show_projects/presentation/manager/project_info_cubit/project_info_state.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'project_duration_per_day_item.dart';
+import 'project_value_added_tax_item.dart';
 import 'project_receipt_date_item.dart';
 import 'package:flutter/material.dart';
 import 'project_end_date_item.dart';
-import '/core/constant/colors.dart';
+import 'project_manager_item.dart';
 import 'project_file_po_item.dart';
 import 'project_date_po_item.dart';
+import 'project_number_item.dart';
+import 'project_owner_item.dart';
+import 'project_price_item.dart';
+import 'project_area_item.dart';
+import 'project_city_item.dart';
+import 'project_name_item.dart';
 
 class ProjectInfoViewBody extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -28,132 +38,66 @@ class ProjectInfoViewBody extends StatelessWidget {
                 constraints: const BoxConstraints(
                   maxWidth: 700,
                 ),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: const Text("اسم المشروع"),
-                      subtitle: Text(
-                        projectDetails.projectName ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                child: BlocBuilder<ProjectInfoCubit, ProjectInfoState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        ProjectNameItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("رقم المشروع"),
-                      subtitle: Text(
-                        projectDetails.projectNumber ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectNumberItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("مبلغ المشروع"),
-                      subtitle: Text(
-                        projectDetails.projectPrice?.toString() ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectPriceItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("مدير المشروع"),
-                      subtitle: Text(
-                        projectDetails.projectManager ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectManagerItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("الجهة المالكة"),
-                      subtitle: Text(
-                        projectDetails.projectOwner ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectOwnerItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("المنطقة"),
-                      subtitle: Text(
-                        projectDetails.projectArea ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectAreaItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("المدينة"),
-                      subtitle: Text(
-                        projectDetails.projectCity ?? '--',
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectCityItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ListTile(
-                      title: const Text("ضريب القيمة المضافة"),
-                      subtitle: Text(
-                        "${projectDetails.projectValueAddedTax?.toStringAsFixed(2)} %",
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kPrimaryColor,
+                        const Divider(),
+                        ProjectValueAddedTaxItem(
+                          projectDetails: projectDetails,
                         ),
-                      ),
-                    ),
-                    const Divider(),
-                    ProjectDatePoItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectDurationPerDayItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectReceiptDateItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectEndDateItem(projectDetails: projectDetails),
-                    const Divider(),
-                    ProjectFilePoItem(projectDetails: projectDetails),
-                    const Divider(),
-                    const SizedBox(height: 20),
-                  ],
+                        const Divider(),
+                        ProjectDurationPerDayItem(
+                          projectDetails: projectDetails,
+                        ),
+                        const Divider(),
+                        ProjectReceiptDateItem(
+                          projectDetails: projectDetails,
+                        ),
+                        const Divider(),
+                        ProjectEndDateItem(
+                          projectDetails: projectDetails,
+                        ),
+                        const Divider(),
+                        ProjectDatePoItem(
+                          projectDetails: projectDetails,
+                        ),
+                        const Divider(),
+                        ProjectFilePoItem(
+                          projectDetails: projectDetails,
+                        ),
+                        const Divider(),
+                        const SizedBox(height: 20),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),

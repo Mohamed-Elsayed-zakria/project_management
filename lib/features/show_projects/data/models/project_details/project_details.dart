@@ -1,18 +1,18 @@
 class ProjectDetails {
-  final String? id;
-  final String? projectName;
-  final String? projectNumber;
-  final num? projectPrice;
+  String? id;
+  String? projectName;
+  String? projectNumber;
+  num? projectPrice;
   int? projectDurationPerDay;
-  final String? projectManager;
-  final String? projectOwner;
-  final String? projectArea;
-  final String? projectCity;
-  final String? projectDatePo;
-  final num? projectValueAddedTax;
-  final String? projectReceiptDate;
-  final String? projectFilePo;
-  final int? v;
+  String? projectManager;
+  String? projectOwner;
+  String? projectArea;
+  String? projectCity;
+  String? projectDatePo;
+  num? projectValueAddedTax;
+  String? projectReceiptDate;
+  String? projectFilePo;
+  int? v;
 
   ProjectDetails({
     this.id,
