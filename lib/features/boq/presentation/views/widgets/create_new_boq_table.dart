@@ -16,11 +16,13 @@ class CreateNewBoqTable extends StatelessWidget {
   final ProjectDetails projectDetails;
   final BoqData boqData;
   final int index;
+  final int length;
   const CreateNewBoqTable({
     super.key,
     required this.projectDetails,
     required this.boqData,
     required this.index,
+    required this.length,
   });
 
   @override
@@ -31,7 +33,10 @@ class CreateNewBoqTable extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            AddNewBoqItemButton(boqData: boqData),
+            Visibility(
+              visible: length == index + 1,
+              child: AddNewBoqItemButton(boqData: boqData),
+            ),
             ProjectDetailsAddOnsLetters(
               otherAdditionsOnTap: () => AppPages.to(
                 path: AppRoutes.otherAdditions,
@@ -80,6 +85,10 @@ class CreateNewBoqTable extends StatelessWidget {
             return Column(
               children: [
                 Table(
+                  columnWidths: const {
+                    5: FixedColumnWidth(95),
+                    6: FixedColumnWidth(95),
+                  },
                   border: TableBorder.all(
                     color: AppColors.kPrimaryColor,
                   ),

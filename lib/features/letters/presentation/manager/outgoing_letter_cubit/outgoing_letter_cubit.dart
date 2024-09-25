@@ -1,13 +1,34 @@
+import '/features/show_projects/data/models/enum/letter_type.dart';
+import '/features/letters/data/repository/letters_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
 import 'outgoing_letter_state.dart';
 import '/core/constant/colors.dart';
+import '/core/errors/failures.dart';
+import 'package:dartz/dartz.dart';
 
 class OutgoingLetterCubit extends Cubit<OutgoingLetterState> {
-  OutgoingLetterCubit() : super(OutgoingLetterInitial());
+  final LettersRepo _lettersRepo;
+
+  OutgoingLetterCubit(this._lettersRepo) : super(OutgoingLetterInitial());
   DateTime? newLetterDate;
   bool newLetterDateValidator = true;
+
+  final GlobalKey<FormState> formKeyLetter = GlobalKey();
+  final GlobalKey<FormState> letterNumberFormKey = GlobalKey();
+
+  final TextEditingController letterNumber = TextEditingController();
+  final TextEditingController letterSubject = TextEditingController();
+  final TextEditingController letterReplyNumber = TextEditingController();
+
+
+  LetterType selectedLitterType = LetterType.newletter;
+
+  void changeSelectedLitterType(LetterType value) {
+    selectedLitterType = value;
+    emit(OutgoingLetterInitial());
+  }
 
   final DateTime dateNow = MyDateUtil.currentDateTimeFromDevice();
   final DateTime firstDate = MyDateUtil.currentDateTimeFromDevice()
@@ -48,4 +69,31 @@ class OutgoingLetterCubit extends Cubit<OutgoingLetterState> {
       emit(OutgoingLetterInitial());
     }
   }
+
+  //=====================================
+
+  bool addLetterFileValidator = true;
+  String? addLetterFile;
+
+  void validatorTakeLetterFileField() {
+    if (addLetterFile == null) {
+      addLetterFileValidator = false;
+      emit(OutgoingLetterInitial());
+    } else {
+      addLetterFileValidator = true;
+      emit(OutgoingLetterInitial());
+    }
+  }
+
+  Future<void> pickLetterFile() async {
+    Either<Failures, String> result = await _lettersRepo.pickLetterFile();
+    result.fold(
+      (failure) => emit(OutgoingLetterFailure(failure.errMessage)),
+      (result) {
+        addLetterFile = result;
+        emit(OutgoingLetterInitial());
+      },
+    );
+  }
+  //=====================================
 }

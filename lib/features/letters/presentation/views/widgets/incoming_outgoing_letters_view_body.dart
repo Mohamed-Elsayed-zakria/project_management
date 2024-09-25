@@ -1,5 +1,5 @@
-import '../../manager/letters_cubit/letters_cubit.dart';
-import '../../manager/letters_cubit/letters_state.dart';
+import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
+import '/features/letters/presentation/manager/letters_cubit/letters_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'incoming_outgoing_letters_header.dart';
 import 'incoming_letters_content.dart';

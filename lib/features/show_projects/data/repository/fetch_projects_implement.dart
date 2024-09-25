@@ -3,7 +3,6 @@ import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'fetch_projects_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 class FetchProjectsImplement extends FetchProjectsRepo {
   @override
@@ -16,14 +15,7 @@ class FetchProjectsImplement extends FetchProjectsRepo {
           .toList();
       return right(session);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 }

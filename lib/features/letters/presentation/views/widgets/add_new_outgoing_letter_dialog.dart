@@ -1,10 +1,11 @@
+import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_cubit.dart';
+import 'add_new_outgoing_letter_dialog_button.dart';
 import 'add_new_outcoming_letter_take_file.dart';
 import 'add_new_outcoming_letter_take_date.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
-import '/core/widgets/custom_buttom.dart';
-import 'add_new_letter_type_letter.dart';
+import 'add_outcoming_letter_type.dart';
 import 'package:flutter/material.dart';
-import '/core/routes/app_pages.dart';
 import '/core/constant/style.dart';
 
 class AddNewOutgoingLetterDialog extends StatelessWidget {
@@ -12,6 +13,9 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OutgoingLetterCubit cubit = BlocProvider.of<OutgoingLetterCubit>(context);
+    cubit.newLetterDateValidator = true;
+    cubit.addLetterFileValidator = true;
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -24,48 +28,54 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
       contentPadding: const EdgeInsets.all(14),
       content: Container(
         constraints: const BoxConstraints(maxWidth: 360),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10),
-            CustomFormField(
-              label: "الرقم",
-              hintText: "ادخل الرقم",
-              prefixIcon: const Icon(Icons.numbers_outlined),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "مطلوب";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            CustomFormField(
-              label: "الموضوع",
-              hintText: "ادخل الموضوع",
-              prefixIcon: const Icon(Icons.subject_outlined),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "مطلوب";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            const AddNewOutcomingLetterTakeDate(),
-            const AddNewOutcomingLetterTakeFile(),
-            const SizedBox(height: 10),
-            const AddNewLetterTypeLetter(),
-            const SizedBox(height: 10),
-            CustomButton(
-              text: 'اضافة',
-              onPressed: () {
-                AppPages.back(context);
-              },
-            ),
-            const SizedBox(height: 10),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 10),
+              Form(
+                key: cubit.formKeyLetter,
+                child: Column(
+                  children: [
+                    CustomFormField(
+                      controller: cubit.letterNumber,
+                      label: "الرقم",
+                      hintText: "ادخل الرقم",
+                      prefixIcon: const Icon(Icons.numbers_outlined),
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "مطلوب";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    CustomFormField(
+                      controller: cubit.letterSubject,
+                      label: "الموضوع",
+                      hintText: "ادخل الموضوع",
+                      prefixIcon: const Icon(Icons.subject_outlined),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "مطلوب";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const AddNewOutcomingLetterTakeDate(),
+              const AddNewOutcomingLetterTakeFile(),
+              const SizedBox(height: 10),
+              const AddOutcomingLetterType(),
+              const SizedBox(height: 10),
+              const AddNewOutgoingLetterDialogButton(),
+              const SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );

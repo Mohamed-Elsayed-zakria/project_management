@@ -1,6 +1,8 @@
 import '/features/profile/presentation/manager/cubit/profile_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/profile_personal_picture.dart';
+import '/core/models/user_credentials.dart';
+import '/core/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
@@ -9,6 +11,7 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserCredentials? credentials = AuthServices.readCredentials();
     return BlocProvider(
       create: (context) => ProfileCubit(),
       child: Card(
@@ -24,55 +27,55 @@ class ProfileView extends StatelessWidget {
                     constraints: const BoxConstraints(
                       maxWidth: 700,
                     ),
-                    child: const Column(
+                    child:  Column(
                       children: [
-                        SizedBox(height: 10),
-                        Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           "الصورة الشخصية",
                           style: AppStyle.kTextStyle20,
                         ),
-                        ProfilePersonalPicture(),
-                        Divider(),
+                        const ProfilePersonalPicture(),
+                        const Divider(),
                         ListTile(
-                          title: Text(
+                          title: const Text(
                             'اسم المستخدم',
                             style: AppStyle.tabTextStyle,
                           ),
-                          subtitle: Text('محمد محمد'),
+                          subtitle: Text(credentials?.username ?? '--'),
                         ),
-                        Divider(),
-                        ListTile(
+                        const Divider(),
+                        const ListTile(
                           title: Text(
                             'رقم الهاتف',
                             style: AppStyle.tabTextStyle,
                           ),
                           subtitle: Text('0123456789'),
                         ),
-                        Divider(),
+                        const Divider(),
                         ListTile(
-                          title: Text(
+                          title: const Text(
                             "البريد الالكتروني",
                             style: AppStyle.tabTextStyle,
                           ),
-                          subtitle: Text('pT7pY@example.com'),
+                          subtitle: Text(credentials?.email ?? '--'),
                         ),
-                        Divider(),
-                        ListTile(
+                        const Divider(),
+                        const ListTile(
                           title: Text(
                             "الرقم الوظيفي",
                             style: AppStyle.tabTextStyle,
                           ),
                           subtitle: Text('0123456789'),
                         ),
-                        Divider(),
-                        ListTile(
+                        const Divider(),
+                        const ListTile(
                           title: Text(
                             "المهنة",
                             style: AppStyle.tabTextStyle,
                           ),
                           subtitle: Text("عامل"),
                         ),
-                        Divider(),
+                        const Divider(),
                       ],
                     ),
                   ),

@@ -5,7 +5,6 @@ import '/core/constant/api_end_point.dart';
 import '/core/services/auth_services.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 class LoginImplement extends LoginRepo {
   @override
@@ -25,14 +24,7 @@ class LoginImplement extends LoginRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 }

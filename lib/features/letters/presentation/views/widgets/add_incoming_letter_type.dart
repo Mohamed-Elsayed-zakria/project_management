@@ -1,17 +1,17 @@
-import '../../manager/letters_cubit/letters_cubit.dart';
-import '../../manager/letters_cubit/letters_state.dart';
+import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_state.dart';
+import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_cubit.dart';
 import '/features/show_projects/data/models/enum/letter_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 
-class AddNewLetterTypeLetter extends StatelessWidget {
-  const AddNewLetterTypeLetter({super.key});
+class AddIncomingLetterType extends StatelessWidget {
+  const AddIncomingLetterType({super.key});
 
   @override
   Widget build(BuildContext context) {
-    LettersCubit cubit = BlocProvider.of<LettersCubit>(context);
-    return BlocBuilder<LettersCubit, LettersState>(
+    IncomingLetterCubit cubit = BlocProvider.of<IncomingLetterCubit>(context);
+    return BlocBuilder<IncomingLetterCubit, IncomingLetterState>(
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,16 +75,20 @@ class AddNewLetterTypeLetter extends StatelessWidget {
             const SizedBox(height: 10),
             Visibility(
               visible: cubit.selectedLitterType != LetterType.newletter,
-              child: CustomFormField(
-                label: "رقم الخطاب",
-                hintText: "ادخل رقم الخطاب",
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "مطلوب";
-                  } else {
-                    return null;
-                  }
-                },
+              child: Form(
+                key: cubit.letterNumberFormKey,
+                child: CustomFormField(
+                  controller: cubit.letterReplyNumber,
+                  label: "رقم الخطاب",
+                  hintText: "ادخل رقم الخطاب",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "مطلوب";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
               ),
             ),
           ],

@@ -85,7 +85,7 @@ class IncomingLettersTable extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6),
                   child: Text(
-                    "الخطاب",
+                    "النموذج",
                     textAlign: TextAlign.center,
                     style: AppStyle.tabTextStyle.copyWith(
                       color: AppColors.kPrimaryColor,

@@ -4,7 +4,6 @@ import '/features/boq/data/models/add_boq_item.dart';
 import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'boq_repo.dart';
 
 class BoqImplement extends BoqRepo {
@@ -20,14 +19,7 @@ class BoqImplement extends BoqRepo {
           .toList();
       return right(session);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -48,14 +40,7 @@ class BoqImplement extends BoqRepo {
       BoqData boqData = BoqData.fromJson(session);
       return right(boqData);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -74,14 +59,7 @@ class BoqImplement extends BoqRepo {
       BoqItem boqItem = BoqItem.fromJson(session);
       return right(boqItem);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 }

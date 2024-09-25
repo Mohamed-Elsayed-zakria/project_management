@@ -5,7 +5,6 @@ import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'new_project_repo.dart';
-import 'package:dio/dio.dart';
 
 class NewProjectImplement extends NewProjectRepo {
   @override
@@ -56,14 +55,7 @@ class NewProjectImplement extends NewProjectRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 }

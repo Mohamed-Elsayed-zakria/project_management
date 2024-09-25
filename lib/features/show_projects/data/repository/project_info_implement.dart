@@ -3,7 +3,6 @@ import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'project_info_repo.dart';
-import 'package:dio/dio.dart';
 
 class ProjectInfoImplement extends ProjectInfoRepo {
   @override
@@ -22,14 +21,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -49,14 +41,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -76,14 +61,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -103,14 +81,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -130,14 +101,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -157,14 +121,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -184,14 +141,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -211,14 +161,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -238,14 +181,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -265,14 +201,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 
@@ -292,14 +221,7 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       );
       return right(null);
     } catch (e) {
-      if (e is DioException) {
-        return left(
-          ServerFailures.fromDioError(dioError: e),
-        );
-      }
-      return left(
-        ServerFailures(errMessage: 'Something went wrong'),
-      );
+      return left(returnDioException(e));
     }
   }
 }
