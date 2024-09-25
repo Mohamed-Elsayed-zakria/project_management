@@ -24,9 +24,12 @@ class SiteReceiptView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const ProjectDetailsSiteReceiptHeader(),
+                ProjectDetailsSiteReceiptHeader(
+                  projectDetails: projectDetails,
+                ),
                 const SizedBox(height: 10),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-028",
                   subtitle:
                       "خطاب طلب تسمية المقاول لمندوبه لاستلام موقع المشروع",
@@ -35,6 +38,7 @@ class SiteReceiptView extends StatelessWidget {
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-029",
                   subtitle: "قرار إداري لتشكيل لجنة تسليم موقع مشروع",
                   guidanceLetterOnTap: () {},
@@ -42,6 +46,7 @@ class SiteReceiptView extends StatelessWidget {
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-030",
                   subtitle: "محضر تسليم موقع",
                   guidanceLetterOnTap: () {},
@@ -49,6 +54,7 @@ class SiteReceiptView extends StatelessWidget {
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-031",
                   subtitle: "محضر تأجيل تسليم موقع",
                   guidanceLetterOnTap: () {},
@@ -56,6 +62,7 @@ class SiteReceiptView extends StatelessWidget {
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-032",
                   subtitle: "إنذار بسبب عدم حضور المقاول لتسليم الموقع",
                   guidanceLetterOnTap: () {},

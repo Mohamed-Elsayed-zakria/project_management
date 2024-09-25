@@ -39,14 +39,17 @@ class CreateNewBoqTable extends StatelessWidget {
             ),
             ProjectDetailsAddOnsLetters(
               otherAdditionsOnTap: () => AppPages.to(
+                data: projectDetails,
                 path: AppRoutes.otherAdditions,
                 context: context,
               ),
               formsOnTap: () => AppPages.to(
+                data: projectDetails,
                 path: AppRoutes.forms,
                 context: context,
               ),
               lettersOnTap: () => AppPages.to(
+                data: projectDetails,
                 path: AppRoutes.incomingOutgoingLetters,
                 context: context,
               ),

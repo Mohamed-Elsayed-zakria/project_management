@@ -24,9 +24,12 @@ class KickOfMettingView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const KickOfMettingHeader(),
+                KickOfMettingHeader(
+                  projectDetails: projectDetails,
+                ),
                 const SizedBox(height: 10),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-033",
                   subtitle: "Kick of Meeting Agenda",
                   guidanceLetterOnTap: () {},
@@ -34,6 +37,7 @@ class KickOfMettingView extends StatelessWidget {
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
                   title: "PMF-007-INT-034",
                   subtitle: "Kick-off Meeting Minutes",
                   guidanceLetterOnTap: () {},

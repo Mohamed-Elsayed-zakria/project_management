@@ -1,3 +1,4 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
@@ -5,6 +6,8 @@ import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
 class ProjectDetailsFormShapeListTile extends StatelessWidget {
+  final ProjectDetails projectDetails;
+
   final String title;
   final String subtitle;
   final Function() guidanceLetterOnTap;
@@ -15,6 +18,7 @@ class ProjectDetailsFormShapeListTile extends StatelessWidget {
     required this.subtitle,
     required this.guidanceLetterOnTap,
     required this.outgoingIncomingLettersOnTap,
+    required this.projectDetails,
   });
 
   @override
@@ -35,6 +39,7 @@ class ProjectDetailsFormShapeListTile extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 AppPages.to(
+                  data: projectDetails,
                   path: AppRoutes.incomingOutgoingLetters,
                   context: context,
                 );

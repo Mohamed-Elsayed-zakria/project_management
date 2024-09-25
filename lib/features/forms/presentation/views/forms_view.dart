@@ -1,8 +1,14 @@
-import 'widgets/forms_view_body.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter/material.dart';
+import 'widgets/forms_view_body.dart';
 
 class FormsView extends StatelessWidget {
-  const FormsView({super.key});
+  final ProjectDetails projectDetails;
+
+  const FormsView({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +17,9 @@ class FormsView extends StatelessWidget {
         title: const Text("النماذج"),
         centerTitle: true,
       ),
-      body: const FormsViewBody(),
+      body: FormsViewBody(
+        projectDetails: projectDetails,
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_cubit.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'add_new_outgoing_letter_dialog_button.dart';
 import 'add_new_outcoming_letter_take_file.dart';
 import 'add_new_outcoming_letter_take_date.dart';
@@ -9,7 +10,12 @@ import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
 
 class AddNewOutgoingLetterDialog extends StatelessWidget {
-  const AddNewOutgoingLetterDialog({super.key});
+  final ProjectDetails projectDetails;
+
+  const AddNewOutgoingLetterDialog({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,9 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
               const SizedBox(height: 10),
               const AddOutcomingLetterType(),
               const SizedBox(height: 10),
-              const AddNewOutgoingLetterDialogButton(),
+              AddNewOutgoingLetterDialogButton(
+                projectDetails: projectDetails,
+              ),
               const SizedBox(height: 10),
             ],
           ),

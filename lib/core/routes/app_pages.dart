@@ -47,16 +47,32 @@ class AppPages {
       ),
       GoRoute(
         path: AppRoutes.incomingOutgoingLetters,
-        builder: (context, state) => const IncomingOutgoingLettersView(),
+        builder: (context, state) {
+          final type = state.extra as ProjectDetails;
+          return IncomingOutgoingLettersView(
+            projectDetails: type,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.forms,
-        builder: (context, state) => const FormsView(),
+        builder: (context, state) {
+          final type = state.extra as ProjectDetails;
+          return FormsView(
+            projectDetails: type,
+          );
+        },
       ),
       GoRoute(
         path: AppRoutes.otherAdditions,
-        builder: (context, state) => const OtherAdditionsView(),
+        builder: (context, state) {
+          final type = state.extra as ProjectDetails;
+          return OtherAdditionsView(
+            projectDetails: type,
+          );
+        },
       ),
+      
     ],
   );
   static void to({

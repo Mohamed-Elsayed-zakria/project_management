@@ -1,4 +1,6 @@
+import '/features/letters/data/models/add_letter.dart';
 import 'package:file_picker/file_picker.dart';
+import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'letters_repo.dart';
@@ -29,6 +31,25 @@ class LettersImplement extends LettersRepo {
       return left(
         LocalFailures.errorMessage(error: "حدث خطأ أثناء تحميل الملف"),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> addNewLetter({
+    required AddLetter newLetterDate,
+  }) async {
+    try {
+      String url =
+          "${APIEndPoint.url}${APIEndPoint.letters}/${newLetterDate.projectId}";
+      await dio.post(
+        url,
+        data: newLetterDate.toFormDataJson(
+          letterFilePath: newLetterDate.letterFile,
+        ),
+      );
+      return right(null);
+    } catch (e) {
+      return left(returnDioException(e));
     }
   }
 }

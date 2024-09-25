@@ -8,4 +8,5 @@ abstract class APIEndPoint {
   static const boq = "boq";
   static const boqItem = "boqItem";
   static const projectDurationPerDay = "projectDurationPerDay";
+  static const letters = "letters";
 }

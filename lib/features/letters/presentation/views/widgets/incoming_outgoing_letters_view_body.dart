@@ -1,3 +1,4 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
 import '/features/letters/presentation/manager/letters_cubit/letters_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'outgoing_letters_content.dart';
 
 class IncomingOutgoingLettersViewBody extends StatelessWidget {
-  const IncomingOutgoingLettersViewBody({super.key});
+  final ProjectDetails projectDetails;
+  const IncomingOutgoingLettersViewBody({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +27,13 @@ class IncomingOutgoingLettersViewBody extends StatelessWidget {
               const SizedBox(height: 10),
               const Divider(),
               cubit.incomingLettersIsActive
-                  ? const IncomingLettersContent()
+                  ? IncomingLettersContent(
+                      projectDetails: projectDetails,
+                    )
                   : cubit.outgoingLettersIsActive
-                      ? const OutgoingLettersContent()
+                      ? OutgoingLettersContent(
+                          projectDetails: projectDetails,
+                        )
                       : const SizedBox(),
             ],
           ),

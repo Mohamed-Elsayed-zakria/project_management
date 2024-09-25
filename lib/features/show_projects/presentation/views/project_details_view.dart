@@ -42,6 +42,7 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
       body: Row(
         children: [
           ProjectDetailsLargeViewMenu(
+            projectDetails: widget.projectDetails,
             currentIndex: indexScreen,
             onTap: (index) {
               indexScreen = index;

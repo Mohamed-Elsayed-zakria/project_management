@@ -1,9 +1,14 @@
 import '/features/show_projects/presentation/views/widgets/project_details_form_shape_list_tile.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter/material.dart';
 import 'forms_header.dart';
 
 class FormsViewBody extends StatelessWidget {
-  const FormsViewBody({super.key});
+  final ProjectDetails projectDetails;
+  const FormsViewBody({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,7 @@ class FormsViewBody extends StatelessWidget {
             subtitle: "اسم النموذج",
             guidanceLetterOnTap: () {},
             outgoingIncomingLettersOnTap: () {},
+            projectDetails: projectDetails,
           ),
           const Divider(),
           ProjectDetailsFormShapeListTile(
@@ -25,6 +31,7 @@ class FormsViewBody extends StatelessWidget {
             subtitle: "اسم النموذج",
             guidanceLetterOnTap: () {},
             outgoingIncomingLettersOnTap: () {},
+            projectDetails: projectDetails,
           ),
           const Divider(),
         ],

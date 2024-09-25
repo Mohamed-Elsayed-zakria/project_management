@@ -1,4 +1,5 @@
-import '../../manager/incoming_letter_cubit/incoming_letter_cubit.dart';
+import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_cubit.dart';
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'incoming_outgoing_letters_search.dart';
 import 'add_new_incoming_letter_dialog.dart';
@@ -7,7 +8,12 @@ import 'incoming_letters_table.dart';
 import 'add_new_letter_button.dart';
 
 class IncomingLettersContent extends StatelessWidget {
-  const IncomingLettersContent({super.key});
+  final ProjectDetails projectDetails;
+
+  const IncomingLettersContent({
+    super.key,
+    required this.projectDetails,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,9 @@ class IncomingLettersContent extends StatelessWidget {
                   context: context,
                   builder: (context) => BlocProvider.value(
                     value: incomingLetterCubit,
-                    child: const AddNewIncomingLetterDialog(),
+                    child: AddNewIncomingLetterDialog(
+                      projectDetails: projectDetails,
+                    ),
                   ),
                 );
               },

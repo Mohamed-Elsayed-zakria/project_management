@@ -1,9 +1,11 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
 
 class ProjectDetailsLargeViewMenu extends StatelessWidget {
+  final ProjectDetails projectDetails;
   final Function(int) onTap;
   final int currentIndex;
 
@@ -11,6 +13,7 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.currentIndex,
+    required this.projectDetails,
   });
 
   @override
@@ -97,6 +100,7 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               onTap: () => AppPages.to(
+                data: projectDetails,
                 path: AppRoutes.incomingOutgoingLetters,
                 context: context,
               ),

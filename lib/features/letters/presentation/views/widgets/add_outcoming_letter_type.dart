@@ -1,6 +1,6 @@
 import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_state.dart';
 import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_cubit.dart';
-import '/features/show_projects/data/models/enum/letter_type.dart';
+import '/features/letters/data/models/enum/letter_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';

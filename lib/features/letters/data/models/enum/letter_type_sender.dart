@@ -1,0 +1,1 @@
+enum LetterTypeSender { incoming, outgoing }
