@@ -1,8 +1,10 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import '/core/models/files_nav_data.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import '/core/routes/app_pages.dart';
+import '/core/models/step_type.dart';
 
 class ProjectDetailsLargeViewMenu extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -100,7 +102,10 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               onTap: () => AppPages.to(
-                data: projectDetails,
+                data: FilesNavData(
+                  projectDetails: projectDetails,
+                  stepType: StepType(),
+                ),
                 path: AppRoutes.incomingOutgoingLetters,
                 context: context,
               ),

@@ -6,13 +6,16 @@ import '/features/letters/data/repository/letters_implement.dart';
 import 'widgets/incoming_outgoing_letters_view_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import '/core/models/step_type.dart';
 
 class IncomingOutgoingLettersView extends StatefulWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
 
   const IncomingOutgoingLettersView({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -43,6 +46,7 @@ class _IncomingOutgoingLettersViewState
         ],
         child: IncomingOutgoingLettersViewBody(
           projectDetails: widget.projectDetails,
+          stepType: widget.stepType,
         ),
       ),
     );

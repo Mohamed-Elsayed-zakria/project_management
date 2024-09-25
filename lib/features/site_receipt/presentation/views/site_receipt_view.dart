@@ -1,7 +1,12 @@
 import '/features/show_projects/presentation/views/widgets/project_details_form_shape_list_tile.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/core/models/enums/step_type.dart';
+import '/core/models/files_nav_data.dart';
 import 'widgets/site_receipt_header.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/models/step_type.dart';
+import '/core/routes/app_pages.dart';
 
 class SiteReceiptView extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -34,7 +39,16 @@ class SiteReceiptView extends StatelessWidget {
                   subtitle:
                       "خطاب طلب تسمية المقاول لمندوبه لاستلام موقع المشروع",
                   guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.siteReceipt.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
@@ -42,7 +56,16 @@ class SiteReceiptView extends StatelessWidget {
                   title: "PMF-007-INT-029",
                   subtitle: "قرار إداري لتشكيل لجنة تسليم موقع مشروع",
                   guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.siteReceipt.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
@@ -50,7 +73,16 @@ class SiteReceiptView extends StatelessWidget {
                   title: "PMF-007-INT-030",
                   subtitle: "محضر تسليم موقع",
                   guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.siteReceipt.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
@@ -58,7 +90,16 @@ class SiteReceiptView extends StatelessWidget {
                   title: "PMF-007-INT-031",
                   subtitle: "محضر تأجيل تسليم موقع",
                   guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.siteReceipt.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
@@ -66,7 +107,16 @@ class SiteReceiptView extends StatelessWidget {
                   title: "PMF-007-INT-032",
                   subtitle: "إنذار بسبب عدم حضور المقاول لتسليم الموقع",
                   guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.siteReceipt.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
               ],
             ),

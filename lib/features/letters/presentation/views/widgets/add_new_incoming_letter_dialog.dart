@@ -7,14 +7,17 @@ import 'add_new_incoming_letter_take_date.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'add_incoming_letter_type.dart';
 import 'package:flutter/material.dart';
+import '/core/models/step_type.dart';
 import '/core/constant/style.dart';
 
 class AddNewIncomingLetterDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
 
   const AddNewIncomingLetterDialog({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -80,6 +83,7 @@ class AddNewIncomingLetterDialog extends StatelessWidget {
               const SizedBox(height: 10),
               AddNewIncomingLetterDialogButton(
                 projectDetails: projectDetails,
+                stepType: stepType,
               ),
               const SizedBox(height: 10),
             ],

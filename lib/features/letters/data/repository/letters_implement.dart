@@ -2,6 +2,7 @@ import '/features/letters/data/models/letter_data/letter_data.dart';
 import '/features/letters/data/models/add_letter.dart';
 import 'package:file_picker/file_picker.dart';
 import '/core/constant/api_end_point.dart';
+import '/core/models/step_type.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'letters_repo.dart';
@@ -59,11 +60,16 @@ class LettersImplement extends LettersRepo {
   @override
   Future<Either<Failures, List<LetterData>>> getAllLetter({
     required String projectId,
+    required StepType stepType,
   }) async {
     try {
       String url = "${APIEndPoint.url}${APIEndPoint.letters}/$projectId";
       final response = await dio.get(
         url,
+        queryParameters: {
+          "stepType": stepType.stepType,
+          "stepTypeId": stepType.stepTypeId,
+        },
       );
       final List<LetterData> session = (response.data["data"] as List)
           .map((data) => LetterData.fromJson(data))

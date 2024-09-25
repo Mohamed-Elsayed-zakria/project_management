@@ -6,14 +6,17 @@ import 'incoming_outgoing_letters_search.dart';
 import 'add_new_incoming_letter_dialog.dart';
 import 'package:flutter/material.dart';
 import 'incoming_letters_table.dart';
+import '/core/models/step_type.dart';
 import 'add_new_letter_button.dart';
 
 class IncomingLettersContent extends StatelessWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
 
   const IncomingLettersContent({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -44,6 +47,7 @@ class IncomingLettersContent extends StatelessWidget {
                     ],
                     child: AddNewIncomingLetterDialog(
                       projectDetails: projectDetails,
+                      stepType: stepType,
                     ),
                   ),
                 );

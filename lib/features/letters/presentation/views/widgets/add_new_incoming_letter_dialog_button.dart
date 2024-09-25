@@ -8,15 +8,18 @@ import '/features/letters/data/models/add_letter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/models/step_type.dart';
 import '/core/routes/app_pages.dart';
 import '/core/utils/show_toast.dart';
 
 class AddNewIncomingLetterDialogButton extends StatelessWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
 
   const AddNewIncomingLetterDialogButton({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -68,6 +71,8 @@ class AddNewIncomingLetterDialogButton extends StatelessWidget {
                   type: cubit.selectedLitterType.name,
                   replyTo: cubit.letterReplyNumber.text,
                   letterFile: cubit.addLetterFile!,
+                  stepType: stepType.stepType,
+                  stepTypeId: stepType.stepTypeId,
                 ),
               );
             }

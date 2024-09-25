@@ -7,14 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'add_outcoming_letter_type.dart';
 import 'package:flutter/material.dart';
+import '/core/models/step_type.dart';
 import '/core/constant/style.dart';
 
 class AddNewOutgoingLetterDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
 
   const AddNewOutgoingLetterDialog({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -80,6 +83,7 @@ class AddNewOutgoingLetterDialog extends StatelessWidget {
               const SizedBox(height: 10),
               AddNewOutgoingLetterDialogButton(
                 projectDetails: projectDetails,
+                stepType: stepType,
               ),
               const SizedBox(height: 10),
             ],

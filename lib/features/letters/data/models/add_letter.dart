@@ -11,6 +11,8 @@ class AddLetter {
   final String type;
   final String replyTo;
   final String letterFile;
+  final String? stepType;
+  final String? stepTypeId;
 
   AddLetter({
     required this.projectId,
@@ -21,6 +23,8 @@ class AddLetter {
     required this.type,
     required this.replyTo,
     required this.letterFile,
+    required this.stepType,
+    required this.stepTypeId,
   });
 
   FormData toFormDataJson({required String letterFilePath}) {
@@ -37,6 +41,8 @@ class AddLetter {
         letterFilePath,
         filename: "$generatId-$fileName",
       ),
+      'stepType': stepType,
+      'stepTypeId': stepTypeId,
     });
     return formData;
   }

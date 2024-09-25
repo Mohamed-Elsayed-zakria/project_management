@@ -7,6 +7,7 @@ import '../../features/forms/presentation/views/forms_view.dart';
 import '/features/auth/presentation/views/login_view.dart';
 import '/features/home/presentation/views/home_view.dart';
 import 'package:go_router/go_router.dart';
+import '/core/models/files_nav_data.dart';
 import '/core/routes/app_routes.dart';
 import 'package:flutter/widgets.dart';
 import '/initial_view.dart';
@@ -48,31 +49,39 @@ class AppPages {
       GoRoute(
         path: AppRoutes.incomingOutgoingLetters,
         builder: (context, state) {
-          final type = state.extra as ProjectDetails;
+          final details = state.extra as FilesNavData;
+          final projectDetails = details.projectDetails;
+          final stepType = details.stepType;
           return IncomingOutgoingLettersView(
-            projectDetails: type,
+            projectDetails: projectDetails,
+            stepType: stepType,
           );
         },
       ),
       GoRoute(
         path: AppRoutes.forms,
         builder: (context, state) {
-          final type = state.extra as ProjectDetails;
+          final details = state.extra as FilesNavData;
+          final projectDetails = details.projectDetails;
+          final stepType = details.stepType;
           return FormsView(
-            projectDetails: type,
+            projectDetails: projectDetails,
+            stepType: stepType,
           );
         },
       ),
       GoRoute(
         path: AppRoutes.otherAdditions,
         builder: (context, state) {
-          final type = state.extra as ProjectDetails;
+          final details = state.extra as FilesNavData;
+          final projectDetails = details.projectDetails;
+          final stepType = details.stepType;
           return OtherAdditionsView(
-            projectDetails: type,
+            projectDetails: projectDetails,
+            stepType: stepType,
           );
         },
       ),
-      
     ],
   );
   static void to({

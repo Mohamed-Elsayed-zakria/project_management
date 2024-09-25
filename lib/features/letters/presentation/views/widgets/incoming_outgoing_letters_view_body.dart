@@ -7,12 +7,16 @@ import '/core/widgets/loading_widget.dart';
 import 'incoming_letters_content.dart';
 import 'package:flutter/material.dart';
 import 'outgoing_letters_content.dart';
+import '/core/models/step_type.dart';
 
 class IncomingOutgoingLettersViewBody extends StatefulWidget {
   final ProjectDetails projectDetails;
+  final StepType stepType;
+
   const IncomingOutgoingLettersViewBody({
     super.key,
     required this.projectDetails,
+    required this.stepType,
   });
 
   @override
@@ -26,7 +30,10 @@ class _IncomingOutgoingLettersViewBodyState
   @override
   void initState() {
     cubit = BlocProvider.of<LettersCubit>(context);
-    cubit.getAllLetter(projectId: widget.projectDetails.id!);
+    cubit.getAllLetter(
+      projectId: widget.projectDetails.id!,
+      stepType: widget.stepType,
+    );
     super.initState();
   }
 
@@ -45,10 +52,12 @@ class _IncomingOutgoingLettersViewBodyState
                 cubit.incomingLettersIsActive
                     ? IncomingLettersContent(
                         projectDetails: widget.projectDetails,
+                        stepType: widget.stepType,
                       )
                     : cubit.outgoingLettersIsActive
                         ? OutgoingLettersContent(
                             projectDetails: widget.projectDetails,
+                            stepType: widget.stepType,
                           )
                         : const SizedBox(),
               ],

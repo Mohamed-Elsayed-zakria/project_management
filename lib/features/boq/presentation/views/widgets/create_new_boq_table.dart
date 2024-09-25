@@ -4,10 +4,13 @@ import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_state
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/models/enums/step_type.dart';
+import '/core/models/files_nav_data.dart';
 import 'edite_quantity_boq_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_routes.dart';
 import 'add_new_boq_item_button.dart';
+import '/core/models/step_type.dart';
 import '/core/routes/app_pages.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
@@ -39,17 +42,35 @@ class CreateNewBoqTable extends StatelessWidget {
             ),
             ProjectDetailsAddOnsLetters(
               otherAdditionsOnTap: () => AppPages.to(
-                data: projectDetails,
+                data: FilesNavData(
+                  projectDetails: projectDetails,
+                  stepType: StepType(
+                    stepType: StepTypeName.boq.name,
+                    stepTypeId: boqData.id,
+                  ),
+                ),
                 path: AppRoutes.otherAdditions,
                 context: context,
               ),
               formsOnTap: () => AppPages.to(
-                data: projectDetails,
+                data: FilesNavData(
+                  projectDetails: projectDetails,
+                  stepType: StepType(
+                    stepType: StepTypeName.boq.name,
+                    stepTypeId: boqData.id,
+                  ),
+                ),
                 path: AppRoutes.forms,
                 context: context,
               ),
               lettersOnTap: () => AppPages.to(
-                data: projectDetails,
+                data: FilesNavData(
+                  projectDetails: projectDetails,
+                  stepType: StepType(
+                    stepType: StepTypeName.boq.name,
+                    stepTypeId: boqData.id,
+                  ),
+                ),
                 path: AppRoutes.incomingOutgoingLetters,
                 context: context,
               ),
