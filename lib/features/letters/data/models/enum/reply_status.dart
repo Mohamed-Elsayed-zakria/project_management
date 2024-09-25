@@ -1,0 +1,1 @@
+enum ReplyStatus { answered, pending }

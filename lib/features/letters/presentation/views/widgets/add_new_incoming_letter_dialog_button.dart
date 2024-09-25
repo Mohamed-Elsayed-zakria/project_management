@@ -1,6 +1,7 @@
 import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_cubit.dart';
 import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_state.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
 import '/features/letters/data/models/enum/letter_type_sender.dart';
 import '/features/letters/data/models/enum/letter_type.dart';
 import '/features/letters/data/models/add_letter.dart';
@@ -21,9 +22,16 @@ class AddNewIncomingLetterDialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     IncomingLetterCubit cubit = BlocProvider.of<IncomingLetterCubit>(context);
+    LettersCubit letterCubit = BlocProvider.of<LettersCubit>(context);
     return BlocConsumer<IncomingLetterCubit, IncomingLetterState>(
       listener: (context, state) {
         if (state is IncomingLetterSuccess) {
+          cubit.letterNumber.clear();
+          cubit.letterSubject.clear();
+          cubit.letterReplyNumber.clear();
+          cubit.addLetterFile = null;
+          cubit.newLetterDate = null;
+          cubit.selectedLitterType = LetterType.newletter;
           AppPages.back(context);
         }
         if (state is IncomingLetterFailure) {
@@ -49,6 +57,8 @@ class AddNewIncomingLetterDialogButton extends StatelessWidget {
                 cubit.addLetterFileValidator &&
                 letterNumber) {
               cubit.addNewLetter(
+                incomingLetters: letterCubit.incomingLetters,
+                outgoingLetters: letterCubit.outgoingLetters,
                 newLetterDate: AddLetter(
                   projectId: projectDetails.id!,
                   date: cubit.newLetterDate.toString(),

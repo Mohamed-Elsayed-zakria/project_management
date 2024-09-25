@@ -63,7 +63,7 @@ class ServerFailures extends Failures {
                 ? response['message']
                 : response.containsKey('errors') &&
                         response['errors'].isNotEmpty
-                    ? response['errors'][0]
+                    ? response['errors'][0]['msg']
                     : 'Something went wrong',
           );
         } catch (e) {

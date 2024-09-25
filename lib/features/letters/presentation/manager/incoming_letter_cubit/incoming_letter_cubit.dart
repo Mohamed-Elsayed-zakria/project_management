@@ -1,3 +1,5 @@
+import '/features/letters/data/models/letter_data/letter_data.dart';
+import '/features/letters/data/models/enum/reply_status.dart';
 import '/features/letters/data/models/enum/letter_type.dart';
 import '/features/letters/data/repository/letters_repo.dart';
 import '/features/letters/data/models/add_letter.dart';
@@ -99,14 +101,28 @@ class IncomingLetterCubit extends Cubit<IncomingLetterState> {
   //=====================================
   Future<void> addNewLetter({
     required AddLetter newLetterDate,
+    required List<LetterData> incomingLetters,
+    required List<LetterData> outgoingLetters,
   }) async {
     emit(IncomingLetterLoading());
-    Either<Failures, void> result = await _lettersRepo.addNewLetter(
+    Either<Failures, LetterData> result = await _lettersRepo.addNewLetter(
       newLetterDate: newLetterDate,
     );
     result.fold(
       (failure) => emit(IncomingLetterFailure(failure.errMessage)),
-      (result) => emit(IncomingLetterSuccess()),
+      (result) {
+        if (result.replyTo!.isEmpty) {
+          incomingLetters.add(result);
+        } else {
+          for (var element in outgoingLetters) {
+            if (result.replyTo == element.number) {
+              element.replyStatus = ReplyStatus.answered.name;
+            }
+          }
+          incomingLetters.add(result);
+        }
+        emit(IncomingLetterSuccess());
+      },
     );
   }
 }

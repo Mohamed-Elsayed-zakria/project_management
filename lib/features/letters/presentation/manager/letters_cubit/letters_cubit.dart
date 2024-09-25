@@ -1,21 +1,63 @@
+import '/features/letters/data/models/enum/letter_type_sender.dart';
+import '/features/letters/data/models/letter_data/letter_data.dart';
+import '/features/letters/data/repository/letters_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '/core/errors/failures.dart';
+import 'package:dartz/dartz.dart';
 import 'letters_state.dart';
 
 class LettersCubit extends Cubit<LettersState> {
-  LettersCubit() : super(LettersInitial());
+  final LettersRepo _lettersRepo;
+
+  LettersCubit(this._lettersRepo) : super(LettersInitial());
 
   bool incomingLettersIsActive = false;
   bool outgoingLettersIsActive = false;
 
+  List<LetterData> incomingLetters = [];
+  List<LetterData> outgoingLetters = [];
+
   void changeIncomingLettersIsActive() {
     incomingLettersIsActive = true;
     outgoingLettersIsActive = false;
-    emit(LettersInitial());
+    emit(LetterSuccess());
   }
 
   void changeOutgoingLettersIsActive() {
     outgoingLettersIsActive = true;
     incomingLettersIsActive = false;
-    emit(LettersInitial());
+    emit(LetterSuccess());
+  }
+
+  Future<void> getAllLetter({
+    required String projectId,
+  }) async {
+    emit(LetterLoading());
+    Either<Failures, List<LetterData>> result = await _lettersRepo.getAllLetter(
+      projectId: projectId,
+    );
+    result.fold(
+      (failures) => emit(LetterFailure(failures.errMessage)),
+      (result) {
+        for (var element in result) {
+          if (element.letterType == LetterTypeSender.incoming.name) {
+            incomingLetters.add(element);
+          } else if (element.letterType == LetterTypeSender.outgoing.name) {
+            outgoingLetters.add(element);
+          }
+        }
+        emit(LetterSuccess());
+      },
+    );
+  }
+
+  Future<void> openFile(String url) async {
+    // Open file in external application (browser or appropriate viewer)
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

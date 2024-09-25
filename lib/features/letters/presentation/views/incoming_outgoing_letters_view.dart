@@ -7,7 +7,7 @@ import 'widgets/incoming_outgoing_letters_view_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class IncomingOutgoingLettersView extends StatelessWidget {
+class IncomingOutgoingLettersView extends StatefulWidget {
   final ProjectDetails projectDetails;
 
   const IncomingOutgoingLettersView({
@@ -15,6 +15,13 @@ class IncomingOutgoingLettersView extends StatelessWidget {
     required this.projectDetails,
   });
 
+  @override
+  State<IncomingOutgoingLettersView> createState() =>
+      _IncomingOutgoingLettersViewState();
+}
+
+class _IncomingOutgoingLettersViewState
+    extends State<IncomingOutgoingLettersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +32,7 @@ class IncomingOutgoingLettersView extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => LettersCubit(),
+            create: (context) => LettersCubit(LettersImplement()),
           ),
           BlocProvider(
             create: (context) => OutgoingLetterCubit(LettersImplement()),
@@ -35,7 +42,7 @@ class IncomingOutgoingLettersView extends StatelessWidget {
           ),
         ],
         child: IncomingOutgoingLettersViewBody(
-          projectDetails: projectDetails,
+          projectDetails: widget.projectDetails,
         ),
       ),
     );
