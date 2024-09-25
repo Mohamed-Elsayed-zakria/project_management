@@ -20,12 +20,16 @@ class IncomingLettersTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LettersCubit lettersCubit = BlocProvider.of<LettersCubit>(context);
+    IncomingLetterCubit incomingLetterCubit =
+        BlocProvider.of<IncomingLetterCubit>(context);
     return ShowUp(
       delay: 1,
       child: BlocBuilder<IncomingLetterCubit, IncomingLetterState>(
         builder: (context, state) {
           return Visibility(
-            visible: lettersCubit.incomingLetters.isNotEmpty,
+            visible: incomingLetterCubit.searchText.text.isNotEmpty
+                ? incomingLetterCubit.allLettersAfterSearch.isNotEmpty
+                : lettersCubit.incomingLetters.isNotEmpty,
             replacement:
                 const EmptyPlaceholder(message: 'لا توجد خطابات الواردة'),
             child: Table(
@@ -125,7 +129,10 @@ class IncomingLettersTable extends StatelessWidget {
                     ),
                   ],
                 ),
-                ...buildTableIncomingLettersNewElements(lettersCubit),
+                ...buildTableIncomingLettersNewElements(
+                  lettersCubit: lettersCubit,
+                  incomingLetterCubit: incomingLetterCubit,
+                ),
               ],
             ),
           );
@@ -134,9 +141,17 @@ class IncomingLettersTable extends StatelessWidget {
     );
   }
 
-  List<TableRow> buildTableIncomingLettersNewElements(LettersCubit cubit) {
-    List<LetterData> incomingLetters = cubit.incomingLetters;
+  List<TableRow> buildTableIncomingLettersNewElements({
+    required LettersCubit lettersCubit,
+    required IncomingLetterCubit incomingLetterCubit,
+  }) {
     List<TableRow> letters = [];
+    List<LetterData> incomingLetters = [];
+    if (incomingLetterCubit.searchText.text.isEmpty) {
+      incomingLetters = lettersCubit.incomingLetters;
+    } else {
+      incomingLetters = incomingLetterCubit.allLettersAfterSearch;
+    }
     for (var element in incomingLetters) {
       if (element.letterType == LetterTypeSender.incoming.name) {
         letters.add(
@@ -208,7 +223,7 @@ class IncomingLettersTable extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6),
                   child: InkWell(
-                    onTap: () => cubit.openFile(
+                    onTap: () => lettersCubit.openFile(
                       "${APIEndPoint.mediaBaseUrl}${element.letterFile!}",
                     ),
                     child: const Icon(

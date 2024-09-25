@@ -2,10 +2,10 @@ import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_le
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'incoming_outgoing_letters_search.dart';
 import 'add_new_outgoing_letter_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/models/step_type.dart';
+import 'outgoing_letters_search.dart';
 import 'outgoing_letters_table.dart';
 import 'add_new_letter_button.dart';
 
@@ -23,7 +23,7 @@ class OutgoingLettersContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const IncomingOutgoingLettersSearch(),
+        const OutgoingLettersSearch(),
         const Divider(),
         const SizedBox(height: 10),
         Row(

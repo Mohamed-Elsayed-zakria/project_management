@@ -1,3 +1,4 @@
+import '/features/letters/data/models/enum/letters_search_type.dart';
 import '/features/letters/data/models/letter_data/letter_data.dart';
 import '/features/letters/data/models/enum/reply_status.dart';
 import '/features/letters/data/models/enum/letter_type.dart';
@@ -21,11 +22,35 @@ class IncomingLetterCubit extends Cubit<IncomingLetterState> {
   final GlobalKey<FormState> formKeyLetter = GlobalKey();
   final GlobalKey<FormState> letterNumberFormKey = GlobalKey();
 
+  final TextEditingController searchText = TextEditingController();
+
   final TextEditingController letterNumber = TextEditingController();
   final TextEditingController letterSubject = TextEditingController();
   final TextEditingController letterReplyNumber = TextEditingController();
 
+  LettersSearchType searchType = LettersSearchType.letterTopic;
+
   LetterType selectedLitterType = LetterType.newletter;
+
+  List<LetterData> allLettersAfterSearch = [];
+
+  void lettersSearch({
+    required List<LetterData> letters,
+  }) {
+    allLettersAfterSearch.clear();
+    allLettersAfterSearch = letters;
+    String searchQuery = searchText.text.toLowerCase();
+    if (searchType == LettersSearchType.letterTopic) {
+      allLettersAfterSearch = letters.where((letter) {
+        return letter.subject?.toLowerCase().contains(searchQuery) ?? false;
+      }).toList();
+    } else if (searchType == LettersSearchType.letterNumber) {
+      allLettersAfterSearch = letters.where((letter) {
+        return letter.number?.toLowerCase().contains(searchQuery) ?? false;
+      }).toList();
+    }
+    emit(IncomingLetterInitial());
+  }
 
   void changeSelectedLitterType(LetterType value) {
     selectedLitterType = value;

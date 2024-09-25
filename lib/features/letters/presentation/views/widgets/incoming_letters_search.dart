@@ -1,18 +1,30 @@
-import '../../../data/models/enum/letters_search_type.dart';
+import '/features/letters/presentation/manager/incoming_letter_cubit/incoming_letter_cubit.dart';
+import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
+import '/features/letters/data/models/enum/letters_search_type.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 
-class IncomingOutgoingLettersSearch extends StatefulWidget {
-  const IncomingOutgoingLettersSearch({super.key});
+class IncomingLettersSearch extends StatefulWidget {
+  const IncomingLettersSearch({super.key});
 
   @override
-  State<IncomingOutgoingLettersSearch> createState() =>
-      _IncomingOutgoingLettersSearchState();
+  State<IncomingLettersSearch> createState() => _IncomingLettersSearchState();
 }
 
-class _IncomingOutgoingLettersSearchState
-    extends State<IncomingOutgoingLettersSearch> {
-  LettersSearchType searchType = LettersSearchType.letterTopic;
+class _IncomingLettersSearchState extends State<IncomingLettersSearch> {
+  late IncomingLetterCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = BlocProvider.of<IncomingLetterCubit>(context);
+    LettersCubit letterCubit = BlocProvider.of<LettersCubit>(context);
+    cubit.searchText.addListener(() {
+      cubit.lettersSearch(letters: letterCubit.incomingLetters);
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +48,11 @@ class _IncomingOutgoingLettersSearchState
             ),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<LettersSearchType>(
-                value: searchType,
+                value: cubit.searchType,
                 isExpanded: true,
                 onChanged: (LettersSearchType? newValue) {
                   setState(() {
-                    searchType = newValue!;
+                    cubit.searchType = newValue!;
                   });
                 },
                 items: LettersSearchType.values
@@ -66,11 +78,21 @@ class _IncomingOutgoingLettersSearchState
             ),
           ),
           const SizedBox(width: 10),
-          const Expanded(
+          Expanded(
             child: CustomFormField(
+              controller: cubit.searchText,
               label: "بحث",
               hintText: "ادخل قيمة البحث",
-              prefixIcon: Icon(Icons.search_outlined),
+              prefixIcon: const Icon(Icons.search_outlined),
+              suffixIcon: Visibility(
+                visible: cubit.searchText.text.isNotEmpty,
+                child: IconButton(
+                  onPressed: () => cubit.searchText.clear(),
+                  icon: const Icon(
+                    Icons.clear_outlined,
+                  ),
+                ),
+              ),
             ),
           ),
         ],
