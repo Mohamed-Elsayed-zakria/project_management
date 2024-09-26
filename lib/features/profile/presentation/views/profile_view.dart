@@ -27,7 +27,7 @@ class ProfileView extends StatelessWidget {
                     constraints: const BoxConstraints(
                       maxWidth: 700,
                     ),
-                    child:  Column(
+                    child: Column(
                       children: [
                         const SizedBox(height: 10),
                         const Text(

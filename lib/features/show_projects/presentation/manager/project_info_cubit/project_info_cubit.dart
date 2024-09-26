@@ -1,7 +1,6 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/show_projects/data/repository/project_info_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
 import '/core/errors/failures.dart';
@@ -345,14 +344,5 @@ class ProjectInfoCubit extends Cubit<ProjectInfoState> {
       },
     );
     emit(UpdateProjectInitial());
-  }
-
-  Future<void> openFile(String url) async {
-    // Open file in external application (browser or appropriate viewer)
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

@@ -10,4 +10,5 @@ abstract class APIEndPoint {
   static const projectDurationPerDay = "projectDurationPerDay";
   static const letters = "letters";
   static const forms = "forms";
+  static const otherAdditions = "otherAdditions";
 }

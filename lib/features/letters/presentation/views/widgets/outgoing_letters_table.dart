@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/show_up_animation.dart';
 import '/core/widgets/empty_placeholder.dart';
 import '/core/constant/api_end_point.dart';
+import '/core/utils/url_open_file.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
@@ -29,7 +30,7 @@ class OutgoingLettersTable extends StatelessWidget {
           return Visibility(
             visible: outgoingLetterCubit.searchText.text.isNotEmpty
                 ? outgoingLetterCubit.allLettersAfterSearch.isNotEmpty
-                : lettersCubit.incomingLetters.isNotEmpty,
+                : lettersCubit.outgoingLetters.isNotEmpty,
             replacement:
                 const EmptyPlaceholder(message: 'لا توجد خطابات الواردة'),
             child: Table(
@@ -223,7 +224,7 @@ class OutgoingLettersTable extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(6),
                   child: InkWell(
-                    onTap: () => lettersCubit.openFile(
+                    onTap: () => UrlOpenFile.openFile(
                       "${APIEndPoint.mediaBaseUrl}${element.letterFile!}",
                     ),
                     child: const Icon(

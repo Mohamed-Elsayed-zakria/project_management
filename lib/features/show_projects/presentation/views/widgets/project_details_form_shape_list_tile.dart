@@ -1,4 +1,6 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/core/constant/api_end_point.dart';
+import '/core/utils/url_open_file.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
@@ -50,7 +52,11 @@ class ProjectDetailsFormShapeListTile extends StatelessWidget {
       trailing: Visibility(
         visible: formFile != null,
         child: InkWell(
-          onTap: () {},
+          onTap: () async {
+            await UrlOpenFile.openFile(
+              "${APIEndPoint.mediaBaseUrl}$formFile",
+            );
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(

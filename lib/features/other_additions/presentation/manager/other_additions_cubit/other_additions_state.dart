@@ -10,3 +10,12 @@ final class OtherAdditionsFailure extends OtherAdditionsState {
   String errMessage;
   OtherAdditionsFailure(this.errMessage);
 }
+
+final class AddOtherAdditionsLoading extends OtherAdditionsState {}
+
+final class AddOtherAdditionsSuccess extends OtherAdditionsState {}
+
+final class AddOtherAdditionsFailure extends OtherAdditionsState {
+  String errMessage;
+  AddOtherAdditionsFailure(this.errMessage);
+}

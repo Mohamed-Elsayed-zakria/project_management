@@ -2,7 +2,6 @@ import '/features/letters/data/models/enum/letter_type_sender.dart';
 import '/features/letters/data/models/letter_data/letter_data.dart';
 import '/features/letters/data/repository/letters_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '/core/models/step_type.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -53,14 +52,5 @@ class LettersCubit extends Cubit<LettersState> {
         emit(LetterSuccess());
       },
     );
-  }
-
-  Future<void> openFile(String url) async {
-    // Open file in external application (browser or appropriate viewer)
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

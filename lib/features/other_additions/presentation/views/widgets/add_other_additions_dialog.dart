@@ -1,11 +1,14 @@
 import '/features/other_additions/presentation/manager/other_additions_cubit/other_additions_cubit.dart';
 import '/features/other_additions/presentation/manager/other_additions_cubit/other_additions_state.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/other_additions/data/models/add_other_additions_model.dart';
 import '/core/widgets/custom_list_tile_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
+import '/core/utils/show_toast.dart';
 import '/core/models/step_type.dart';
 import '/core/constant/style.dart';
 
@@ -82,10 +85,40 @@ class AddOtherAdditionsDialog extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            CustomButton(
-              text: 'اضافة',
-              onPressed: () {
-                if (cubit.formKey.currentState!.validate()) {}
+            BlocConsumer<OtherAdditionsCubit, OtherAdditionsState>(
+              listener: (context, state) {
+                if (state is AddOtherAdditionsSuccess) {
+                  cubit.otherAdditionsSubject.clear();
+                  cubit.otherAdditionsNumber.clear();
+                  cubit.addOtherAdditionsFile = null;
+                  AppPages.back(context);
+                }
+                if (state is AddOtherAdditionsFailure) {
+                  ShowToast.show(
+                    context: context,
+                    msg: state.errMessage,
+                  );
+                }
+              },
+              builder: (context, state) {
+                return CustomButton(
+                  isLoading: state is AddOtherAdditionsLoading,
+                  text: 'اضافة',
+                  onPressed: () {
+                    if (cubit.formKey.currentState!.validate()) {
+                      cubit.addNewOtherAdditions(
+                        newFormData: AddOtherAdditionsModel(
+                          number: cubit.otherAdditionsNumber.text,
+                          description: cubit.otherAdditionsSubject.text,
+                          formFile: cubit.addOtherAdditionsFile,
+                          projectId: projectDetails.id!,
+                          stepType: stepType.stepType,
+                          stepTypeId: stepType.stepTypeId,
+                        ),
+                      );
+                    }
+                  },
+                );
               },
             ),
             const SizedBox(height: 10),
