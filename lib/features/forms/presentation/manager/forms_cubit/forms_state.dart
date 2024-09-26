@@ -10,3 +10,12 @@ final class FormsFailure extends FormsState {
   String errMessage;
   FormsFailure(this.errMessage);
 }
+
+final class AddFormLoading extends FormsState {}
+
+final class AddFormSuccess extends FormsState {}
+
+final class AddFormFailure extends FormsState {
+  String errMessage;
+  AddFormFailure(this.errMessage);
+}

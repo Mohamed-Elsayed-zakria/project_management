@@ -27,36 +27,31 @@ class OtherAdditionsViewBody extends StatelessWidget {
             stepType: stepType,
           ),
           const SizedBox(height: 10),
-          ProjectDetailsFormShapeListTile(
-            projectDetails: projectDetails,
-            title: "رقم النموذج",
-            subtitle: "اسم النموذج",
-            formFile: "",
-            outgoingIncomingLettersOnTap: () => AppPages.to(
-              data: FilesNavData(
-                projectDetails: projectDetails,
-                stepType: stepType,
-              ),
-              path: AppRoutes.incomingOutgoingLetters,
-              context: context,
+          Expanded(
+            child: ListView.separated(
+              itemCount: 12,
+              itemBuilder: (context, index) {
+                return ProjectDetailsFormShapeListTile(
+                  projectDetails: projectDetails,
+                  title: "رقم النموذج",
+                  subtitle: "اسم النموذج",
+                  formFile: "",
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: stepType.stepType,
+                        stepTypeId: "",
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const Divider(),
             ),
           ),
-          const Divider(),
-          ProjectDetailsFormShapeListTile(
-            projectDetails: projectDetails,
-            title: "رقم النموذج",
-            subtitle: "اسم النموذج",
-            formFile: "",
-            outgoingIncomingLettersOnTap: () => AppPages.to(
-              data: FilesNavData(
-                projectDetails: projectDetails,
-                stepType: stepType,
-              ),
-              path: AppRoutes.incomingOutgoingLetters,
-              context: context,
-            ),
-          ),
-          const Divider(),
         ],
       ),
     );

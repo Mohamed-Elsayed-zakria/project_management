@@ -1,6 +1,6 @@
 import '/features/show_projects/data/models/project_details/project_details.dart';
-import '/features/forms/presentation/manager/add_form_cubit/add_form_cubit.dart';
-import '/features/forms/presentation/manager/add_form_cubit/add_form_state.dart';
+import '/features/forms/presentation/manager/forms_cubit/forms_cubit.dart';
+import '/features/forms/presentation/manager/forms_cubit/forms_state.dart';
 import '/features/forms/data/models/add_form_model.dart';
 import '/core/widgets/custom_list_tile_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +23,7 @@ class AddFormDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddFormCubit cubit = BlocProvider.of<AddFormCubit>(context);
+    FormsCubit cubit = BlocProvider.of<FormsCubit>(context);
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -73,7 +73,7 @@ class AddFormDialog extends StatelessWidget {
                 ],
               ),
             ),
-            BlocBuilder<AddFormCubit, AddFormState>(
+            BlocBuilder<FormsCubit, FormsState>(
               builder: (context, state) {
                 return CustomListTileValidator(
                   leading: const Icon(Icons.file_copy_outlined),
@@ -85,7 +85,7 @@ class AddFormDialog extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            BlocConsumer<AddFormCubit, AddFormState>(
+            BlocConsumer<FormsCubit, FormsState>(
               listener: (context, state) {
                 if (state is AddFormSuccess) {
                   cubit.formDescreptionText.clear();

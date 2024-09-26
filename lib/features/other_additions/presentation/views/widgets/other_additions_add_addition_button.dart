@@ -1,5 +1,7 @@
+import '/features/other_additions/presentation/manager/other_additions_cubit/other_additions_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
-import '/features/forms/presentation/views/widgets/add_form_dialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'add_other_additions_dialog.dart';
 import 'package:flutter/material.dart';
 import '/core/models/step_type.dart';
 import '/core/constant/colors.dart';
@@ -18,11 +20,16 @@ class OtherAdditionsAddAdditionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        OtherAdditionsCubit cubit =
+            BlocProvider.of<OtherAdditionsCubit>(context);
         showDialog(
           context: context,
-          builder: (context) => AddFormDialog(
-            projectDetails: projectDetails,
-            stepType: stepType,
+          builder: (context) => BlocProvider.value(
+            value: cubit,
+            child: AddOtherAdditionsDialog(
+              projectDetails: projectDetails,
+              stepType: stepType,
+            ),
           ),
         );
       },

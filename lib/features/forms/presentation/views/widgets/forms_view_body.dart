@@ -51,32 +51,11 @@ class _FormsViewBodyState extends State<FormsViewBody> {
           const SizedBox(height: 10),
           BlocBuilder<FormsCubit, FormsState>(
             builder: (context, state) {
-              if (state is FormsSuccess) {
-                List<FormData> formDataList = _cubit.formDataList;
-                return Expanded(
-                  child: formDataList.isNotEmpty
-                      ? ListView.separated(
-                          itemCount: formDataList.length,
-                          itemBuilder: (context, index) {
-                            FormData formData = formDataList[index];
-                            return ProjectDetailsFormShapeListTile(
-                              projectDetails: widget.projectDetails,
-                              title: formData.formNumber ?? "--",
-                              subtitle: formData.formDescription ?? "--",
-                              formFile: formData.formFile,
-                              outgoingIncomingLettersOnTap: () => AppPages.to(
-                                data: FilesNavData(
-                                  projectDetails: widget.projectDetails,
-                                  stepType: widget.stepType,
-                                ),
-                                path: AppRoutes.incomingOutgoingLetters,
-                                context: context,
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => const Divider(),
-                        )
-                      : const EmptyPlaceholder(message: "لا يوجد نماذج"),
+              if (state is FormsLoading) {
+                return const Expanded(
+                  child: Center(
+                    child: LoadingWidget(),
+                  ),
                 );
               }
               if (state is FormsFailure) {
@@ -84,10 +63,34 @@ class _FormsViewBodyState extends State<FormsViewBody> {
                   child: Text(state.errMessage),
                 );
               }
-              return const Expanded(
-                child: Center(
-                  child: LoadingWidget(),
-                ),
+              List<FormData> formDataList = _cubit.formDataList;
+              return Expanded(
+                child: formDataList.isNotEmpty
+                    ? ListView.separated(
+                        itemCount: formDataList.length,
+                        itemBuilder: (context, index) {
+                          FormData formData = formDataList[index];
+                          return ProjectDetailsFormShapeListTile(
+                            projectDetails: widget.projectDetails,
+                            title: formData.formNumber ?? "--",
+                            subtitle: formData.formDescription ?? "--",
+                            formFile: formData.formFile,
+                            outgoingIncomingLettersOnTap: () => AppPages.to(
+                              data: FilesNavData(
+                                projectDetails: widget.projectDetails,
+                                stepType: StepType(
+                                  stepType: widget.stepType.stepType,
+                                  stepTypeId: formData.id,
+                                ),
+                              ),
+                              path: AppRoutes.incomingOutgoingLetters,
+                              context: context,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => const Divider(),
+                      )
+                    : const EmptyPlaceholder(message: "لا يوجد نماذج"),
               );
             },
           ),
