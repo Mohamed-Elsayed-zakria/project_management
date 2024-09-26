@@ -1,3 +1,9 @@
+import 'package:project_management/core/models/enums/step_type.dart';
+import 'package:project_management/core/models/files_nav_data.dart';
+import 'package:project_management/core/models/step_type.dart';
+import 'package:project_management/core/routes/app_pages.dart';
+import 'package:project_management/core/routes/app_routes.dart';
+
 import '/features/show_projects/presentation/views/widgets/project_details_form_shape_list_tile.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'widgets/kick_of_metting_header.dart';
@@ -32,15 +38,24 @@ class KickOfMettingView extends StatelessWidget {
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-033",
                   subtitle: "Kick of Meeting Agenda",
-                  guidanceLetterOnTap: () {},
-                  outgoingIncomingLettersOnTap: () {},
+                  formFile: "",
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.kickOfMetting.name,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
                 ),
                 const Divider(),
                 ProjectDetailsFormShapeListTile(
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-034",
                   subtitle: "Kick-off Meeting Minutes",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () {},
                 ),
                 const Divider(),

@@ -1,17 +1,29 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
 import 'package:flutter/material.dart';
+import '/core/models/step_type.dart';
 import '/core/constant/colors.dart';
 import 'forms_add_form_button.dart';
 
 class FormsHeader extends StatelessWidget {
-  const FormsHeader({super.key});
+  final ProjectDetails projectDetails;
+  final StepType stepType;
+
+  const FormsHeader({
+    super.key,
+    required this.projectDetails,
+    required this.stepType,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FormsAddFormButton(),
-        Divider(
+        FormsAddFormButton(
+          projectDetails: projectDetails,
+          stepType: stepType,
+        ),
+        const Divider(
           color: AppColors.kPrimaryColor,
         ),
       ],

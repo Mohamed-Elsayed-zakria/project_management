@@ -125,13 +125,13 @@ class IncomingLetterCubit extends Cubit<IncomingLetterState> {
 
   //=====================================
   Future<void> addNewLetter({
-    required AddLetter newLetterDate,
+    required AddLetter newLetterData,
     required List<LetterData> incomingLetters,
     required List<LetterData> outgoingLetters,
   }) async {
     emit(IncomingLetterLoading());
     Either<Failures, LetterData> result = await _lettersRepo.addNewLetter(
-      newLetterDate: newLetterDate,
+      newLetterData: newLetterData,
     );
     result.fold(
       (failure) => emit(IncomingLetterFailure(failure.errMessage)),

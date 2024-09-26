@@ -1,15 +1,15 @@
-import '/features/letters/data/models/letter_data/letter_data.dart';
-import '/features/letters/data/models/add_letter.dart';
+import '/features/forms/data/models/form_data/form_data.dart';
+import '/features/forms/data/models/add_form_model.dart';
 import 'package:file_picker/file_picker.dart';
 import '/core/constant/api_end_point.dart';
 import '/core/models/step_type.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'letters_repo.dart';
+import 'forms_repo.dart';
 
-class LettersImplement extends LettersRepo {
+class FormsImplement extends FormsRepo {
   @override
-  Future<Either<Failures, String>> pickLetterFile() async {
+  Future<Either<Failures, String>> pickFormFile() async {
     try {
       // Pick any file
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -37,20 +37,20 @@ class LettersImplement extends LettersRepo {
   }
 
   @override
-  Future<Either<Failures, LetterData>> addNewLetter({
-    required AddLetter newLetterData,
+  Future<Either<Failures, FormData>> addNewForm({
+    required AddFormModel newFormData,
   }) async {
     try {
       String url =
-          "${APIEndPoint.url}${APIEndPoint.letters}/${newLetterData.projectId}";
+          "${APIEndPoint.url}${APIEndPoint.forms}/${newFormData.projectId}";
       final response = await dio.post(
         url,
-        data: newLetterData.toFormDataJson(
-          letterFilePath: newLetterData.letterFile,
+        data: newFormData.toFormDataJson(
+          formFilePath: newFormData.formFile,
         ),
       );
       final session = response.data["data"];
-      LetterData boqItem = LetterData.fromJson(session);
+      FormData boqItem = FormData.fromJson(session);
       return right(boqItem);
     } catch (e) {
       return left(returnDioException(e));
@@ -58,12 +58,12 @@ class LettersImplement extends LettersRepo {
   }
 
   @override
-  Future<Either<Failures, List<LetterData>>> getAllLetter({
+  Future<Either<Failures, List<FormData>>> getAllForm({
     required String projectId,
     required StepType stepType,
   }) async {
     try {
-      String url = "${APIEndPoint.url}${APIEndPoint.letters}/$projectId";
+      String url = "${APIEndPoint.url}${APIEndPoint.forms}/$projectId";
       final response = await dio.get(
         url,
         queryParameters: {
@@ -71,8 +71,8 @@ class LettersImplement extends LettersRepo {
           "stepTypeId": stepType.stepTypeId,
         },
       );
-      final List<LetterData> session = (response.data["data"] as List)
-          .map((data) => LetterData.fromJson(data))
+      final List<FormData> session = (response.data["data"] as List)
+          .map((data) => FormData.fromJson(data))
           .toList();
       return right(session);
     } catch (e) {

@@ -38,7 +38,7 @@ class SiteReceiptView extends StatelessWidget {
                   title: "PMF-007-INT-028",
                   subtitle:
                       "خطاب طلب تسمية المقاول لمندوبه لاستلام موقع المشروع",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () => AppPages.to(
                     data: FilesNavData(
                       projectDetails: projectDetails,
@@ -55,7 +55,7 @@ class SiteReceiptView extends StatelessWidget {
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-029",
                   subtitle: "قرار إداري لتشكيل لجنة تسليم موقع مشروع",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () => AppPages.to(
                     data: FilesNavData(
                       projectDetails: projectDetails,
@@ -72,7 +72,7 @@ class SiteReceiptView extends StatelessWidget {
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-030",
                   subtitle: "محضر تسليم موقع",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () => AppPages.to(
                     data: FilesNavData(
                       projectDetails: projectDetails,
@@ -89,7 +89,7 @@ class SiteReceiptView extends StatelessWidget {
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-031",
                   subtitle: "محضر تأجيل تسليم موقع",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () => AppPages.to(
                     data: FilesNavData(
                       projectDetails: projectDetails,
@@ -106,7 +106,7 @@ class SiteReceiptView extends StatelessWidget {
                   projectDetails: projectDetails,
                   title: "PMF-007-INT-032",
                   subtitle: "إنذار بسبب عدم حضور المقاول لتسليم الموقع",
-                  guidanceLetterOnTap: () {},
+                  formFile: "",
                   outgoingIncomingLettersOnTap: () => AppPages.to(
                     data: FilesNavData(
                       projectDetails: projectDetails,

@@ -62,7 +62,7 @@ class AddNewIncomingLetterDialogButton extends StatelessWidget {
               cubit.addNewLetter(
                 incomingLetters: letterCubit.incomingLetters,
                 outgoingLetters: letterCubit.outgoingLetters,
-                newLetterDate: AddLetter(
+                newLetterData: AddLetter(
                   projectId: projectDetails.id!,
                   date: cubit.newLetterDate.toString(),
                   number: cubit.letterNumber.text,

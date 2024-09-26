@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart';
 abstract class LettersRepo extends BaseServices {
   Future<Either<Failures, String>> pickLetterFile();
   Future<Either<Failures, LetterData>> addNewLetter({
-    required AddLetter newLetterDate,
+    required AddLetter newLetterData,
   });
 
   Future<Either<Failures, List<LetterData>>> getAllLetter({

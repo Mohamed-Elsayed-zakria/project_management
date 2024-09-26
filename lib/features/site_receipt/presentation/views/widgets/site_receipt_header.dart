@@ -11,7 +11,6 @@ import '/core/constant/colors.dart';
 
 class ProjectDetailsSiteReceiptHeader extends StatelessWidget {
   final ProjectDetails projectDetails;
-
   const ProjectDetailsSiteReceiptHeader({
     super.key,
     required this.projectDetails,
@@ -24,7 +23,12 @@ class ProjectDetailsSiteReceiptHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const SiteReceiptAddFormsButton(),
+            SiteReceiptAddFormsButton(
+              projectDetails: projectDetails,
+              stepType: StepType(
+                stepType: StepTypeName.siteReceipt.name,
+              ),
+            ),
             ProjectDetailsAddOnsLetters(
               mainAxisAlignment: MainAxisAlignment.end,
               otherAdditionsOnTap: () => AppPages.to(

@@ -22,6 +22,7 @@ class OtherAdditionsView extends StatelessWidget {
       ),
       body: OtherAdditionsViewBody(
         projectDetails: projectDetails,
+        stepType: stepType,
       ),
     );
   }

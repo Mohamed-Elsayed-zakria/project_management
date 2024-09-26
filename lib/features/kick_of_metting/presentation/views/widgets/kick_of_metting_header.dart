@@ -24,7 +24,12 @@ class KickOfMettingHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const KickOfMettingAddFormsButton(),
+            KickOfMettingAddFormsButton(
+              projectDetails: projectDetails,
+              stepType: StepType(
+                stepType: StepTypeName.kickOfMetting.name,
+              ),
+            ),
             ProjectDetailsAddOnsLetters(
               mainAxisAlignment: MainAxisAlignment.end,
               otherAdditionsOnTap: () => AppPages.to(

@@ -21,43 +21,47 @@ class OutgoingLettersContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const OutgoingLettersSearch(),
-        const Divider(),
-        const SizedBox(height: 10),
-        Row(
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
           children: [
-            AddNewLetterButton(
-              onTap: () {
-                OutgoingLetterCubit outgoingLetterCubit =
-                    BlocProvider.of<OutgoingLetterCubit>(context);
-                LettersCubit letterCubit =
-                    BlocProvider.of<LettersCubit>(context);
-                showDialog(
-                  context: context,
-                  builder: (context) => MultiBlocProvider(
-                    providers: [
-                      BlocProvider.value(
-                        value: outgoingLetterCubit,
+            const OutgoingLettersSearch(),
+            const Divider(),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                AddNewLetterButton(
+                  onTap: () {
+                    OutgoingLetterCubit outgoingLetterCubit =
+                        BlocProvider.of<OutgoingLetterCubit>(context);
+                    LettersCubit letterCubit =
+                        BlocProvider.of<LettersCubit>(context);
+                    showDialog(
+                      context: context,
+                      builder: (context) => MultiBlocProvider(
+                        providers: [
+                          BlocProvider.value(
+                            value: outgoingLetterCubit,
+                          ),
+                          BlocProvider.value(
+                            value: letterCubit,
+                          ),
+                        ],
+                        child: AddNewOutgoingLetterDialog(
+                          projectDetails: projectDetails,
+                          stepType: stepType,
+                        ),
                       ),
-                      BlocProvider.value(
-                        value: letterCubit,
-                      ),
-                    ],
-                    child: AddNewOutgoingLetterDialog(
-                      projectDetails: projectDetails,
-                      stepType: stepType,
-                    ),
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             ),
+            const SizedBox(height: 14),
+            const OutgoingLettersTable(),
           ],
         ),
-        const SizedBox(height: 14),
-        const OutgoingLettersTable(),
-      ],
+      ),
     );
   }
 }

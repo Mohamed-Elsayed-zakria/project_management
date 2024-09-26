@@ -7,16 +7,16 @@ class ProjectDetailsFormShapeListTile extends StatelessWidget {
   final ProjectDetails projectDetails;
   final String title;
   final String subtitle;
-  final Function() guidanceLetterOnTap;
+  final String? formFile;
   final Function() outgoingIncomingLettersOnTap;
 
   const ProjectDetailsFormShapeListTile({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.guidanceLetterOnTap,
     required this.outgoingIncomingLettersOnTap,
     required this.projectDetails,
+    required this.formFile,
   });
 
   @override
@@ -47,16 +47,19 @@ class ProjectDetailsFormShapeListTile extends StatelessWidget {
           )
         ],
       ),
-      trailing: InkWell(
-        onTap: guidanceLetterOnTap,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "النموذج",
-            style: AppStyle.tabTextStyle.copyWith(
-              color: AppColors.kPrimaryColor,
+      trailing: Visibility(
+        visible: formFile != null,
+        child: InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "النموذج",
+              style: AppStyle.tabTextStyle.copyWith(
+                color: AppColors.kPrimaryColor,
+              ),
+              textAlign: TextAlign.start,
             ),
-            textAlign: TextAlign.start,
           ),
         ),
       ),
