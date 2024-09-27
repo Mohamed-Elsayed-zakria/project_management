@@ -18,4 +18,9 @@ abstract class BoqRepo extends BaseServices {
   Future<Either<Failures, BoqItem>> addNewBoqItem({
     required AddBoqItem boqItemData,
   });
+
+  Future<Either<Failures, BoqItem>> updateQuantityBoqItem({
+    required String boqItemId,
+    required int newQuantity,
+  });
 }

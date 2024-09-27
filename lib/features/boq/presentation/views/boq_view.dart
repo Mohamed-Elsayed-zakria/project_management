@@ -1,6 +1,6 @@
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
 import '/features/boq/presentation/manager/fetch_boq_cubit/fetch_boq_cubit.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_cubit.dart';
 import '/features/boq/data/repository/boq_implement.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,7 @@ class BoqView extends StatelessWidget {
           create: (context) => AddBoqCubit(BoqImplement()),
         ),
         BlocProvider(
-          create: (context) => AddBoqItemCubit(BoqImplement()),
+          create: (context) => BoqItemCubit(BoqImplement()),
         ),
       ],
       child: BoqViewBody(projectDetails: projectDetails),

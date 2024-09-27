@@ -1,7 +1,7 @@
 import '/features/show_projects/presentation/views/widgets/project_details_add_ons_letters.dart';
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_state.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_cubit.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_state.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/models/enums/step_type.dart';
@@ -30,7 +30,7 @@ class CreateNewBoqTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddBoqItemCubit cubit = BlocProvider.of<AddBoqItemCubit>(context);
+    BoqItemCubit cubit = BlocProvider.of<BoqItemCubit>(context);
     return Column(
       children: [
         Row(
@@ -95,16 +95,7 @@ class CreateNewBoqTable extends StatelessWidget {
             ),
           ),
         ),
-        BlocConsumer<AddBoqItemCubit, AddBoqItemState>(
-          listener: (context, state) {
-            if (state is AddBoqItemSuccess) {
-              cubit.itemNumberGetText.clear();
-              cubit.itemGetText.clear();
-              cubit.quantityGetText.clear();
-              cubit.individualPriceGetText.clear();
-              AppPages.back(context);
-            }
-          },
+        BlocBuilder<BoqItemCubit, BoqItemState>(
           builder: (context, state) {
             return Column(
               children: [
@@ -412,7 +403,6 @@ class CreateNewBoqTable extends StatelessWidget {
         );
       },
     );
-
     return boqItems;
   }
 
@@ -497,9 +487,14 @@ class CreateNewBoqTable extends StatelessWidget {
                   padding: const EdgeInsets.all(6),
                   child: InkWell(
                     onTap: () {
+                      BoqItemCubit cubit =
+                          BlocProvider.of<BoqItemCubit>(context);
                       showDialog(
                         context: context,
-                        builder: (context) => const EditeQuantityBoqDialog(),
+                        builder: (context) => BlocProvider.value(
+                          value: cubit,
+                          child: EditeQuantityBoqDialog(boqItemData: element),
+                        ),
                       );
                     },
                     child: const Icon(

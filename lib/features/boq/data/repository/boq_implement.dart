@@ -62,4 +62,25 @@ class BoqImplement extends BoqRepo {
       return left(returnDioException(e));
     }
   }
+
+  @override
+  Future<Either<Failures, BoqItem>> updateQuantityBoqItem({
+    required String boqItemId,
+    required int newQuantity,
+  }) async {
+    try {
+      String url = "${APIEndPoint.url}${APIEndPoint.boqItem}/$boqItemId";
+      final response = await dio.put(
+        url,
+        data: {
+          "quantity": newQuantity,
+        },
+      );
+      final session = response.data["data"];
+      BoqItem boqItem = BoqItem.fromJson(session);
+      return right(boqItem);
+    } catch (e) {
+      return left(returnDioException(e));
+    }
+  }
 }

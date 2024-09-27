@@ -1,10 +1,12 @@
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_state.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_cubit.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_state.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import '/features/boq/data/models/add_boq_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
+import '/core/routes/app_pages.dart';
+import '/core/utils/show_toast.dart';
 
 class AddBoqItemDataDialogButton extends StatelessWidget {
   final BoqData boqData;
@@ -16,8 +18,23 @@ class AddBoqItemDataDialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddBoqItemCubit cubit = BlocProvider.of<AddBoqItemCubit>(context);
-    return BlocBuilder<AddBoqItemCubit, AddBoqItemState>(
+    BoqItemCubit cubit = BlocProvider.of<BoqItemCubit>(context);
+    return BlocConsumer<BoqItemCubit, BoqItemState>(
+      listener: (context, state) {
+        if (state is AddBoqItemSuccess) {
+          cubit.itemNumberGetText.clear();
+          cubit.itemGetText.clear();
+          cubit.quantityGetText.clear();
+          cubit.individualPriceGetText.clear();
+          AppPages.back(context);
+        }
+        if (state is AddBoqItemFailure) {
+          ShowToast.show(
+            context: context,
+            msg: state.errMessage,
+          );
+        }
+      },
       builder: (context, state) {
         return CustomButton(
           isLoading: state is AddBoqItemLoading,

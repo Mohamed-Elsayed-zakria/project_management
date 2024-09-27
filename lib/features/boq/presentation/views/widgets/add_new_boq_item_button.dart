@@ -1,4 +1,4 @@
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_cubit.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class AddNewBoqItemButton extends StatelessWidget {
         showDialog(
           context: context,
           builder: (_) => BlocProvider.value(
-            value: BlocProvider.of<AddBoqItemCubit>(context),
+            value: BlocProvider.of<BoqItemCubit>(context),
             child: AddBoqItemDataDialog(
               boqData: boqData,
             ),

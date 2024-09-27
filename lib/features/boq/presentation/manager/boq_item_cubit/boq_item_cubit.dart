@@ -7,18 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'add_boq_item_state.dart';
+import 'boq_item_state.dart';
 
-class AddBoqItemCubit extends Cubit<AddBoqItemState> {
+class BoqItemCubit extends Cubit<BoqItemState> {
   final BoqRepo _boqRepo;
 
-  AddBoqItemCubit(this._boqRepo) : super(AddBoqItemInitial());
+  BoqItemCubit(this._boqRepo) : super(BoqItemInitial());
 
   final TextEditingController itemNumberGetText = TextEditingController();
   final TextEditingController itemGetText = TextEditingController();
   final TextEditingController quantityGetText = TextEditingController();
   final TextEditingController individualPriceGetText = TextEditingController();
+  final TextEditingController updateQuantityGetText = TextEditingController();
   final GlobalKey<FormState> addBoqItemformKey = GlobalKey();
+  final GlobalKey<FormState> updateFormKey = GlobalKey();
 
   double calculateTotalPrice({
     required BoqData boqData,
@@ -82,6 +84,25 @@ class AddBoqItemCubit extends Cubit<AddBoqItemState> {
       (result) {
         boqData.boqItems?.add(result);
         emit(AddBoqItemSuccess());
+      },
+    );
+  }
+
+  Future<void> updateQuantityBoqItem({
+    required BoqItem boqItemData,
+    required int newQuantity,
+  }) async {
+    emit(UpdateBoqItemLoading());
+    Either<Failures, BoqItem> result = await _boqRepo.updateQuantityBoqItem(
+      boqItemId: boqItemData.id!,
+      newQuantity: newQuantity,
+    );
+    result.fold(
+      (failures) => emit(UpdateBoqItemFailure(errMessage: failures.errMessage)),
+      (result) {
+        boqItemData.quantity = result.quantity;
+        boqItemData.totalPrice = result.totalPrice;
+        emit(UpdateBoqItemSuccess());
       },
     );
   }

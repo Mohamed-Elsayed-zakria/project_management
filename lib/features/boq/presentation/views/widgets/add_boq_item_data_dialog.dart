@@ -1,4 +1,4 @@
-import '/features/boq/presentation/manager/add_boq_item_cubit/add_boq_item_cubit.dart';
+import '/features/boq/presentation/manager/boq_item_cubit/boq_item_cubit.dart';
 import '/features/boq/data/models/boq_data/boq_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/parse_arabic_number.dart';
@@ -17,7 +17,7 @@ class AddBoqItemDataDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddBoqItemCubit cubit = BlocProvider.of<AddBoqItemCubit>(context);
+    BoqItemCubit cubit = BlocProvider.of<BoqItemCubit>(context);
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
