@@ -55,20 +55,56 @@ class BoqItemCubit extends Cubit<BoqItemState> {
   }
 
   double percentageTotalPrice({
+    required List<BoqData> boqDataList,
     required BoqData boqData,
     required ProjectDetails projectDetails,
+    required int index,
   }) {
-    double total = 0.0;
+    double primaryPrice = 0.0;
     double percentage = 0.0;
+
     boqData.boqItems?.forEach((element) {
-      total += element.totalPrice ?? 0.0;
+      primaryPrice += element.totalPrice ?? 0.0;
     });
 
-    percentage = double.parse(
-      (total / (projectDetails.projectPrice ?? 0.0)).toStringAsFixed(2),
+    if (index == 0) {
+      percentage = double.parse(
+        (primaryPrice / (projectDetails.projectPrice ?? 0.0))
+            .toStringAsFixed(2),
+      );
+    } else {
+      double secondPrice = 0.0;
+      boqDataList[index - 1].boqItems?.forEach((element) {
+        secondPrice += element.totalPrice ?? 0.0;
+      });
+      percentage = double.parse(
+        (primaryPrice / secondPrice).toStringAsFixed(2),
+      );
+    }
+
+    return percentage * 100;
+  }
+
+  double percentageQuantity({
+    required List<BoqData> boqDataList,
+    required BoqItem boqItem,
+    required int index,
+  }) {
+    num quantity = boqItem.quantity!;
+
+    int itemNumber = boqItem.itemNumber!;
+
+    boqDataList[index - 1].boqItems?.forEach(
+      (element) {
+        if (element.itemNumber == itemNumber) {
+          quantity = element.quantity ?? 0.0;
+        }
+      },
     );
 
-    return percentage;
+    return double.parse(
+      (boqItem.quantity! / quantity * 100).toStringAsFixed(2),
+    );
   }
 
   Future<void> addNewBoqItem({

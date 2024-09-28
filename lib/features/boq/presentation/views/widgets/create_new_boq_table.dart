@@ -19,13 +19,13 @@ class CreateNewBoqTable extends StatelessWidget {
   final ProjectDetails projectDetails;
   final BoqData boqData;
   final int index;
-  final int length;
+  final List<BoqData> boqDataList;
   const CreateNewBoqTable({
     super.key,
     required this.projectDetails,
     required this.boqData,
     required this.index,
-    required this.length,
+    required this.boqDataList,
   });
 
   @override
@@ -37,7 +37,7 @@ class CreateNewBoqTable extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Visibility(
-              visible: length == index + 1,
+              visible: boqDataList.length == index + 1,
               child: AddNewBoqItemButton(boqData: boqData),
             ),
             ProjectDetailsAddOnsLetters(
@@ -101,7 +101,7 @@ class CreateNewBoqTable extends StatelessWidget {
               children: [
                 Table(
                   columnWidths: const {
-                    5: FixedColumnWidth(95),
+                    5: FixedColumnWidth(105),
                     6: FixedColumnWidth(95),
                   },
                   border: TableBorder.all(
@@ -160,7 +160,7 @@ class CreateNewBoqTable extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(6),
                             child: Text(
-                              "${cubit.percentageTotalPrice(projectDetails: projectDetails, boqData: boqData).toString()} %",
+                              "${cubit.percentageTotalPrice(boqDataList: boqDataList, projectDetails: projectDetails, boqData: boqData, index: index).toString()} %",
                               textAlign: TextAlign.center,
                               style: AppStyle.tabTextStyle,
                             ),
@@ -409,6 +409,7 @@ class CreateNewBoqTable extends StatelessWidget {
   List<TableRow> buildTableRowBoqModifiedNewElements({
     required BuildContext context,
   }) {
+    BoqItemCubit cubit = BlocProvider.of<BoqItemCubit>(context);
     List<TableRow> boqItems = [];
     boqData.boqItems?.forEach(
       (element) {
@@ -470,12 +471,12 @@ class CreateNewBoqTable extends StatelessWidget {
                   ),
                 ),
               ),
-              const TableCell(
+              TableCell(
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: Text(
-                    "1 %",
+                    "${cubit.percentageQuantity(boqItem: element, boqDataList: boqDataList, index: index).toString()} %",
                     textAlign: TextAlign.center,
                     style: AppStyle.tabTextStyle,
                   ),
@@ -487,8 +488,6 @@ class CreateNewBoqTable extends StatelessWidget {
                   padding: const EdgeInsets.all(6),
                   child: InkWell(
                     onTap: () {
-                      BoqItemCubit cubit =
-                          BlocProvider.of<BoqItemCubit>(context);
                       showDialog(
                         context: context,
                         builder: (context) => BlocProvider.value(

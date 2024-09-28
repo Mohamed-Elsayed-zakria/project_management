@@ -71,7 +71,7 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
             projectDetails: widget.projectDetails,
             boqData: element,
             index: index,
-            length: item.length,
+            boqDataList: item,
           ),
         ),
       );
