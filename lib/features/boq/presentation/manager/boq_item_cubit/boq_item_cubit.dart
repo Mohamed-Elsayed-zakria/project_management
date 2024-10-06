@@ -68,21 +68,16 @@ class BoqItemCubit extends Cubit<BoqItemState> {
     });
 
     if (index == 0) {
-      percentage = double.parse(
-        (primaryPrice / (projectDetails.projectPrice ?? 0.0))
-            .toStringAsFixed(2),
-      );
+      percentage = primaryPrice / (projectDetails.projectPrice ?? 0.0);
     } else {
       double secondPrice = 0.0;
       boqDataList[index - 1].boqItems?.forEach((element) {
         secondPrice += element.totalPrice ?? 0.0;
       });
-      percentage = double.parse(
-        (primaryPrice / secondPrice).toStringAsFixed(2),
-      );
+      percentage = primaryPrice / secondPrice;
     }
 
-    return percentage * 100;
+    return double.parse((percentage * 100).toStringAsFixed(2));
   }
 
   double percentageQuantity({

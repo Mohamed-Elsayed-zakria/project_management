@@ -9,9 +9,7 @@ import 'package:dartz/dartz.dart';
 
 class FetchProjectsCubit extends Cubit<FetchProjectsState> {
   final FetchProjectsRepo _fetchProjectsRepo;
-  FetchProjectsCubit(this._fetchProjectsRepo) : super(FetchProjectsInitial()) {
-    fetchAllProjects();
-  }
+  FetchProjectsCubit(this._fetchProjectsRepo) : super(FetchProjectsInitial());
 
   final TextEditingController searchText = TextEditingController();
 

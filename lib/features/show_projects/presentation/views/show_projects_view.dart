@@ -17,7 +17,7 @@ class ShowProjectsView extends StatelessWidget {
     return BlocProvider(
       create: (context) => FetchProjectsCubit(
         FetchProjectsImplement(),
-      ),
+      )..fetchAllProjects(),
       child: Card(
         color: Colors.white,
         elevation: 3,
