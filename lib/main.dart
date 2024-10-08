@@ -1,3 +1,4 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 import 'core/services/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +28,17 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Project management',
       debugShowCheckedModeBanner: false,
-      theme: AppStyle.appTheme(),
       locale: const Locale('ar'),
-      builder: (context, widget) {
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: widget!,
-        );
-      },
+      supportedLocales: const [
+        Locale('ar', 'AE'),
+        Locale('en', 'US'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      theme: AppStyle.appTheme(),
       routerConfig: AppPages.router,
     );
   }

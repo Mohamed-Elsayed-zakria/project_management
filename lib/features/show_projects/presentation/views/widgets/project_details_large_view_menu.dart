@@ -94,6 +94,57 @@ class ProjectDetailsLargeViewMenu extends StatelessWidget {
                       onTap(indexScreen);
                     },
                   ),
+                  ListTile(
+                    selected: currentIndex == 3,
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'مرفقات الجدول الزمني',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 3;
+                      onTap(indexScreen);
+                    },
+                  ),
+                  ListTile(
+                    selected: currentIndex == 4,
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'اضافة الجدول الزمني',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 4;
+                      onTap(indexScreen);
+                    },
+                  ),
+                  ListTile(
+                    selected: currentIndex == 5,
+                    selectedTileColor: Colors.grey[300],
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    title: const Center(
+                      child: Text(
+                        'متابعة الجدول الزمني',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      indexScreen = 5;
+                      onTap(indexScreen);
+                    },
+                  ),
                 ],
               ),
             ),
