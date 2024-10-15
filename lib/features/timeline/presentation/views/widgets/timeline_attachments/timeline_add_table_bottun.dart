@@ -29,6 +29,9 @@ class TimelineAddTableBottun extends StatelessWidget {
     return BlocConsumer<TimelineAttachmentsCubit, TimelineAttachmentsState>(
       listener: (context, state) {
         if (state is AddTimelineTableSuccess) {
+          timelineData = TimelineTableServices.readTimelineList(
+            projectId: projectDetails.id!,
+          );
           ShowToast.show(
             success: true,
             context: context,

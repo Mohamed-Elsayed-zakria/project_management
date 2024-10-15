@@ -1,3 +1,4 @@
+import '/features/settings/presentation/views/widgets/edite_project_element/setting_edite_holidays.dart';
 import '/features/settings/presentation/views/widgets/edite_project_element/setting_edite_tax.dart';
 import 'package:flutter/material.dart';
 import 'setting_projects_title.dart';
@@ -7,7 +8,7 @@ class SettingProjectsInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double maxWidth = 700;
+    const double maxWidth = 750;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,6 +18,8 @@ class SettingProjectsInfo extends StatelessWidget {
           child: const Column(
             children: [
               SettingEditeTax(),
+              Divider(),
+              SettingEditeHolidays(),
               Divider(),
             ],
           ),

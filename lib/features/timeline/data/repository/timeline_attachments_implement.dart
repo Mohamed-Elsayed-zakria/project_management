@@ -1,7 +1,6 @@
-import 'package:project_management/core/services/timeline_table_services.dart';
-
 import '/features/timeline/data/repository/timeline_attachments_repo.dart';
 import '/features/timeline/data/models/timeline_structure.dart';
+import '/core/services/timeline_table_services.dart';
 import 'package:file_picker/file_picker.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -9,6 +8,34 @@ import 'package:excel/excel.dart';
 import 'dart:io';
 
 class TimelineAttachmentsImplement extends TimelineAttachmentsRepo {
+  @override
+  Future<Either<Failures, String>> addTimeLineTableFile() async {
+    try {
+      // Pick any file
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.any, // Allows picking any type of file
+      );
+      if (result != null) {
+        String? filePath = result.files.single.path;
+        if (filePath != null) {
+          return right(filePath);
+        } else {
+          return left(
+            LocalFailures.errorMessage(error: "لم يتم اختيار أي ملف"),
+          );
+        }
+      } else {
+        return left(
+          LocalFailures.errorMessage(error: "لم يتم اختيار أي ملف"),
+        );
+      }
+    } catch (e) {
+      return left(
+        LocalFailures.errorMessage(error: "حدث خطأ أثناء تحميل الملف"),
+      );
+    }
+  }
+
   @override
   Future<Either<Failures, void>> addTimeLineTable({
     required String projectId,
@@ -64,10 +91,13 @@ class TimelineAttachmentsImplement extends TimelineAttachmentsRepo {
                 complete: row[6]?.value?.toString(),
               ))
           .toList();
-      await TimelineTableServices.storeTimelineItem(
-        timelineData: timelineData,
-        projectId: projectId,
-      );
+      for (var element in timelineData) {
+        await TimelineTableServices.storeTimelineItem(
+          timelineList: element,
+          projectId: projectId,
+        );
+      }
+
       return right(null);
     } catch (e) {
       return left(

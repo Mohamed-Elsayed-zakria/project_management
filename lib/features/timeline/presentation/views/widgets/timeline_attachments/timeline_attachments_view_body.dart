@@ -2,6 +2,7 @@ import '/features/show_projects/data/models/project_details/project_details.dart
 import 'timeline_attachments_header.dart';
 import 'package:flutter/material.dart';
 import 'custom_linear_progress.dart';
+import 'timeline_show_table.dart';
 
 class TimelineAttachmentsViewBody extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -27,6 +28,8 @@ class TimelineAttachmentsViewBody extends StatelessWidget {
                 projectDetails: projectDetails,
               ),
               const CustomLinearProgress(),
+              const SizedBox(height: 8),
+              const TimelineShowTable(),
             ],
           ),
         ),

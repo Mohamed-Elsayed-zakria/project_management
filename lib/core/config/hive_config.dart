@@ -9,6 +9,6 @@ class HiveConfig {
     Hive.registerAdapter(UserCredentialsAdapter());
     Hive.registerAdapter(TimelineStructureAdapter());
     await Hive.openBox<UserCredentials>(HiveKeywords.kCreds);
-    await Hive.openBox<List<TimelineStructure>>(HiveKeywords.timeline);
+    await Hive.openBox<TimelineStructure>(HiveKeywords.timeline);
   }
 }

@@ -4,33 +4,25 @@ import 'package:hive/hive.dart';
 
 abstract class TimelineTableServices {
   static Future<void> storeTimelineItem({
-    required List<TimelineStructure> timelineData,
+    required TimelineStructure timelineList,
     required String projectId,
   }) async {
-    final box = Hive.box<List<TimelineStructure>>(HiveKeywords.timeline);
-    await box.put(projectId, timelineData);
+    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
+    await box.put(projectId, timelineList);
   }
 
   static Future<void> removeTimelineItem({
-    required int index,
     required String projectId,
   }) async {
-    final box = Hive.box<List<TimelineStructure>>(HiveKeywords.timeline);
-    List<TimelineStructure> timelineList =
-        box.get(projectId, defaultValue: []) ?? [];
-
-    // التحقق من أن الفهرس صالح
-    if (index >= 0 && index < timelineList.length) {
-      timelineList.removeAt(index);
-      await box.put(projectId, timelineList);
-    }
+    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
+    box.delete(projectId);
   }
 
   static List<TimelineStructure> readTimelineList({
     required String projectId,
   }) {
-    final box = Hive.box<List<TimelineStructure>>(HiveKeywords.timeline);
-    List<TimelineStructure>? timelineList = box.get(projectId);
-    return timelineList ?? [];
+    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
+    List<TimelineStructure> timelineList = box.values.toList();
+    return timelineList;
   }
 }

@@ -14,7 +14,7 @@ class SettingCompanyInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double maxWidth = 700;
+    const double maxWidth = 750;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
