@@ -1,1 +1,7 @@
-enum StepTypeName { boq, siteReceipt, kickOfMetting }
+enum StepTypeName {
+  boq,
+  siteReceipt,
+  kickOfMetting,
+  timelineAttachments,
+  followTimeline,
+}

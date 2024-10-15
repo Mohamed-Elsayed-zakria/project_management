@@ -3,7 +3,6 @@ import '/features/kick_of_metting/presentation/views/kick_of_metting_view.dart';
 import '/features/timeline/presentation/views/timeline_attachments_view.dart';
 import '/features/site_receipt/presentation/views/site_receipt_view.dart';
 import '/features/timeline/presentation/views/follow_timeline_view.dart';
-import '/features/timeline/presentation/views/add_timeline_view.dart';
 import '/features/boq/presentation/views/boq_view.dart';
 import 'widgets/project_details_large_view_menu.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +35,6 @@ class _ProjectDetailsViewState extends State<ProjectDetailsView> {
         projectDetails: widget.projectDetails,
       ),
       TimelineAttachmentsView(
-        projectDetails: widget.projectDetails,
-      ),
-      AddTimelineView(
         projectDetails: widget.projectDetails,
       ),
       FollowTimelineView(
