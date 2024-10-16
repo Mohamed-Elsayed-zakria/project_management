@@ -12,7 +12,7 @@ class InitialView extends StatelessWidget {
     return checkUserIsLogin() ? const HomeView() : const LoginView();
   }
 
-  bool checkUserIsLogin() {
+  bool checkUserIsLogin()  {
     UserCredentials? credentials = AuthServices.readCredentials();
     if (credentials != null &&
         credentials.token != null &&

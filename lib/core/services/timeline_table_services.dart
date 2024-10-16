@@ -1,28 +1,24 @@
 import '/features/timeline/data/models/timeline_structure.dart';
-import '/core/constant/hive_keywords.dart';
-import 'package:hive/hive.dart';
+import '/core/config/isar_config.dart';
+import 'package:isar/isar.dart';
 
 abstract class TimelineTableServices {
-  static Future<void> storeTimelineItem({
-    required TimelineStructure timelineList,
-    required String projectId,
+  static Future<void> storeTimelineList({
+    required List<TimelineStructure> timelineList,
   }) async {
-    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
-    await box.put(projectId, timelineList);
+    await IsarConfig.isar.writeTxn(
+      () async {
+        await IsarConfig.isar.timelineStructures.putAll(timelineList);
+      },
+    );
   }
 
-  static Future<void> removeTimelineItem({
+  static Future<List<TimelineStructure>> readTimelineList({
     required String projectId,
   }) async {
-    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
-    box.delete(projectId);
-  }
-
-  static List<TimelineStructure> readTimelineList({
-    required String projectId,
-  }) {
-    final box = Hive.box<TimelineStructure>(HiveKeywords.timeline);
-    List<TimelineStructure> timelineList = box.values.toList();
-    return timelineList;
+    return await IsarConfig.isar.timelineStructures
+        .filter()
+        .projectIdEqualTo(projectId)
+        .findAll();
   }
 }

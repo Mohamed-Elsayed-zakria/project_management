@@ -1,23 +1,16 @@
-import 'package:hive/hive.dart';
+import 'package:isar/isar.dart';
 part 'user_credentials.g.dart';
 
-@HiveType(typeId: 0)
-class UserCredentials extends HiveObject {
-  @HiveField(0)
+@collection
+class UserCredentials {
+  Id uId = Isar.autoIncrement;
   String? id;
-  @HiveField(1)
   String? username;
-  @HiveField(2)
   String? email;
-  @HiveField(3)
   bool? active;
-  @HiveField(4)
   String? token;
-  @HiveField(5)
   String? role;
-  @HiveField(6)
   String? createdAt;
-  @HiveField(7)
   String? updatedAt;
 
   UserCredentials({

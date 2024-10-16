@@ -1,8 +1,6 @@
 import '/features/timeline/presentation/manager/timeline_attachments_cubit/timeline_attachments_state.dart';
 import '/features/timeline/presentation/manager/timeline_attachments_cubit/timeline_attachments_cubit.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
-import '/features/timeline/data/models/timeline_structure.dart';
-import '/core/services/timeline_table_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/show_toast.dart';
@@ -22,16 +20,9 @@ class TimelineAddTableBottun extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<TimelineAttachmentsCubit>();
-    List<TimelineStructure> timelineData =
-        TimelineTableServices.readTimelineList(
-      projectId: projectDetails.id!,
-    );
     return BlocConsumer<TimelineAttachmentsCubit, TimelineAttachmentsState>(
       listener: (context, state) {
         if (state is AddTimelineTableSuccess) {
-          timelineData = TimelineTableServices.readTimelineList(
-            projectId: projectDetails.id!,
-          );
           ShowToast.show(
             success: true,
             context: context,
@@ -53,7 +44,8 @@ class TimelineAddTableBottun extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              timelineData.isEmpty ? "اضافة الجدول" : "تعديل الجدول",
+              "اضافة الجدول",
+              // timelineData.isEmpty ? "اضافة الجدول" : "تعديل الجدول",
               style: AppStyle.tabTextStyle.copyWith(
                 color: AppColors.kPrimaryColor,
               ),

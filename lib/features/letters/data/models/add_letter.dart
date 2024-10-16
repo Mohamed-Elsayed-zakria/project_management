@@ -27,7 +27,9 @@ class AddLetter {
     required this.stepTypeId,
   });
 
-  FormData toFormDataJson({required String letterFilePath}) {
+  FormData toFormDataJson({
+    required String letterFilePath,
+  }) {
     String generatId = const Uuid().v1();
     String fileName = basename(letterFile);
     FormData formData = FormData.fromMap({

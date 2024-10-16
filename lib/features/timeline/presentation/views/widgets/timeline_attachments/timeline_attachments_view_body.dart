@@ -22,15 +22,19 @@ class TimelineAttachmentsViewBody extends StatelessWidget {
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              TimelineAttachmentsHeader(
-                projectDetails: projectDetails,
-              ),
-              const CustomLinearProgress(),
-              const SizedBox(height: 8),
-              const TimelineShowTable(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TimelineAttachmentsHeader(
+                  projectDetails: projectDetails,
+                ),
+                const CustomLinearProgress(),
+                const SizedBox(height: 8),
+                TimelineShowTable(
+                  projectDetails: projectDetails,
+                ),
+              ],
+            ),
           ),
         ),
       ),

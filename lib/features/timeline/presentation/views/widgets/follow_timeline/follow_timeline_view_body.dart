@@ -28,7 +28,9 @@ class FollowTimelineViewBody extends StatelessWidget {
                   projectDetails: projectDetails,
                 ),
                 const SizedBox(height: 10),
-                const FollowTimelineCustomGanttChart(),
+                 FollowTimelineCustomGanttChart(
+                  projectDetails : projectDetails,
+                 ),
               ],
             ),
           ),

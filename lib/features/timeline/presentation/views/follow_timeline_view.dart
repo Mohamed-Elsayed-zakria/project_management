@@ -14,7 +14,8 @@ class FollowTimelineView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FollowTimelineCubit(),
+      create: (context) =>
+          FollowTimelineCubit()..getTimeLineTableFromLocal(projectDetails.id!),
       child: FollowTimelineViewBody(
         projectDetails: projectDetails,
       ),

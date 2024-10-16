@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class Failures {
+class Failures {
   final String errMessage;
   Failures({required this.errMessage});
 }
@@ -20,7 +20,9 @@ class LocalFailures extends Failures {
 class ServerFailures extends Failures {
   ServerFailures({required super.errMessage});
 
-  factory ServerFailures.fromDioError({required DioException dioError}) {
+  factory ServerFailures.fromDioError({
+    required DioException dioError,
+  }) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
         return ServerFailures(errMessage: 'Connection timeout with API server');

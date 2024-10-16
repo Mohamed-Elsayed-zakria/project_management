@@ -19,9 +19,12 @@ class FollowTimelineSettingDialog extends StatelessWidget {
         textAlign: TextAlign.center,
         style: AppStyle.kTextStyle20,
       ),
-      contentPadding: const EdgeInsets.all(14),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 14,
+      ),
       content: Container(
-        constraints: const BoxConstraints(maxWidth: 360),
+        constraints: const BoxConstraints(maxWidth: 400),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

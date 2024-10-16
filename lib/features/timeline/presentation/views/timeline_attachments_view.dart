@@ -17,7 +17,7 @@ class TimelineAttachmentsView extends StatelessWidget {
     return BlocProvider(
       create: (context) => TimelineAttachmentsCubit(
         TimelineAttachmentsImplement(),
-      ),
+      )..getTimeLineTableFromLocal(projectDetails.id!),
       child: TimelineAttachmentsViewBody(
         projectDetails: projectDetails,
       ),
