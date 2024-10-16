@@ -44,8 +44,9 @@ class TimelineAddTableBottun extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "اضافة الجدول",
-              // timelineData.isEmpty ? "اضافة الجدول" : "تعديل الجدول",
+              cubit.timelineTableResult.isEmpty
+                  ? "اضافة الجدول"
+                  : "تعديل الجدول",
               style: AppStyle.tabTextStyle.copyWith(
                 color: AppColors.kPrimaryColor,
               ),

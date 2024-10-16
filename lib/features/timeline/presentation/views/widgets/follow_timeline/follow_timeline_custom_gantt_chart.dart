@@ -9,13 +9,33 @@ import 'package:gantt_chart/gantt_chart.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 
-class FollowTimelineCustomGanttChart extends StatelessWidget {
+class FollowTimelineCustomGanttChart extends StatefulWidget {
   final ProjectDetails projectDetails;
 
   const FollowTimelineCustomGanttChart({
     super.key,
     required this.projectDetails,
   });
+
+  @override
+  State<FollowTimelineCustomGanttChart> createState() =>
+      _FollowTimelineCustomGanttChartState();
+}
+
+class _FollowTimelineCustomGanttChartState
+    extends State<FollowTimelineCustomGanttChart> {
+  ScrollController? scrollController = ScrollController();
+  @override
+  void initState() {
+    scrollController?.addListener(() {
+      double maxScrollExtent = scrollController!.position.maxScrollExtent;
+      double currentScrollPosition = scrollController!.position.pixels;
+      if (currentScrollPosition >= maxScrollExtent * 0.50) {
+        print("وصلت إلى 25% من الشاشة");
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,98 +53,105 @@ class FollowTimelineCustomGanttChart extends StatelessWidget {
           );
         }
         return cubit.timelineTableResult.isNotEmpty
-            ? GanttChartView(
-                stickyAreaWeekBuilder: (context) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: Colors.black,
-                        ),
-                        top: BorderSide(
-                          color: Colors.black,
-                        ),
+            ? CustomScrollView(
+                controller: scrollController,
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: GanttChartView(
+                      stickyAreaWeekBuilder: (context) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                color: Colors.black,
+                              ),
+                              top: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          child: Visibility(
+                            visible: !cubit.showDaysRow,
+                            child: const Text(
+                              'اسم النشاط',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      stickyAreaDayBuilder: (context) {
+                        return Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          child: const Text(
+                            'اسم النشاط',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        );
+                      },
+                      maxDuration: cubit.maxDuration(
+                        timelineData: cubit.timelineTableResult,
+                      ),
+                      startDate: DateTime(2024, 9, 1),
+                      dayWidth: cubit.dayWidth,
+                      eventHeight: 65,
+                      stickyAreaWidth: 200,
+                      showStickyArea: cubit.showStickyArea,
+                      stickyAreaEventBuilder:
+                          (context, eventIndex, event, eventColor) {
+                        return GanttChartDefaultStickyAreaCell(
+                          event: event,
+                          eventIndex: eventIndex,
+                          eventColor: eventColor,
+                          widgetBuilder: (context) => AutoSizeText(
+                            "${event.displayName}",
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      },
+                      weekHeaderBuilder: cubit.customWeekHeader
+                          ? (context, weekDate) => GanttChartDefaultWeekHeader(
+                              weekDate: weekDate,
+                              color: Colors.black,
+                              backgroundColor: Colors.yellow,
+                              border: const BorderDirectional(
+                                end: BorderSide(color: Colors.green),
+                              ))
+                          : null,
+                      dayHeaderBuilder: cubit.customDayHeader
+                          ? (context, date, bool isHoliday) =>
+                              GanttChartDefaultDayHeader(
+                                date: date,
+                                isHoliday: isHoliday,
+                                color: isHoliday ? Colors.yellow : Colors.black,
+                                backgroundColor:
+                                    isHoliday ? Colors.grey : Colors.yellow,
+                              )
+                          : null,
+                      showDays: cubit.showDaysRow,
+                      weekEnds: const {WeekDay.friday, WeekDay.saturday},
+                      isExtraHoliday: (context, day) {
+                        //define custom holiday logic for each day
+                        return DateUtils.isSameDay(DateTime(2022, 7, 1), day);
+                      },
+                      startOfTheWeek: WeekDay.sunday,
+                      events: buildEvents(
+                        timelineData: cubit.timelineTableResult,
                       ),
                     ),
-                    child: Visibility(
-                      visible: !cubit.showDaysRow,
-                      child: const Text(
-                        'اسم النشاط',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                stickyAreaDayBuilder: (context) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      'اسم النشاط',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  );
-                },
-                maxDuration: cubit.maxDuration(
-                  timelineData: cubit.timelineTableResult,
-                ),
-                startDate: DateTime(2024, 9, 1),
-                dayWidth: cubit.dayWidth,
-                eventHeight: 65,
-                stickyAreaWidth: 200,
-                showStickyArea: cubit.showStickyArea,
-                stickyAreaEventBuilder:
-                    (context, eventIndex, event, eventColor) {
-                  return GanttChartDefaultStickyAreaCell(
-                    event: event,
-                    eventIndex: eventIndex,
-                    eventColor: eventColor,
-                    widgetBuilder: (context) => AutoSizeText(
-                      "${event.displayName}",
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                },
-                weekHeaderBuilder: cubit.customWeekHeader
-                    ? (context, weekDate) => GanttChartDefaultWeekHeader(
-                        weekDate: weekDate,
-                        color: Colors.black,
-                        backgroundColor: Colors.yellow,
-                        border: const BorderDirectional(
-                          end: BorderSide(color: Colors.green),
-                        ))
-                    : null,
-                dayHeaderBuilder: cubit.customDayHeader
-                    ? (context, date, bool isHoliday) =>
-                        GanttChartDefaultDayHeader(
-                          date: date,
-                          isHoliday: isHoliday,
-                          color: isHoliday ? Colors.yellow : Colors.black,
-                          backgroundColor:
-                              isHoliday ? Colors.grey : Colors.yellow,
-                        )
-                    : null,
-                showDays: cubit.showDaysRow,
-                weekEnds: const {WeekDay.friday, WeekDay.saturday},
-                isExtraHoliday: (context, day) {
-                  //define custom holiday logic for each day
-                  return DateUtils.isSameDay(DateTime(2022, 7, 1), day);
-                },
-                startOfTheWeek: WeekDay.sunday,
-                events: buildEvents(
-                  timelineData: cubit.timelineTableResult,
-                ),
+                  ),
+                ],
               )
             : const Center(
                 child: EmptyPlaceholder(
@@ -139,7 +166,7 @@ class FollowTimelineCustomGanttChart extends StatelessWidget {
     required List<TimelineStructure> timelineData,
   }) {
     List<GanttEventBase> items = [];
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 40; i++) {
       TimelineStructure element = timelineData[i];
       if (element.activityName != null) {
         if (element.start != null && element.finish != null) {

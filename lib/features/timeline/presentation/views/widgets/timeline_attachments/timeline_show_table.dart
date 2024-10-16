@@ -34,21 +34,23 @@ class TimelineShowTable extends StatelessWidget {
           );
         }
         return cubit.timelineTableResult.isNotEmpty
-            ? Table(
-                border: TableBorder.all(
-                  color: AppColors.kPrimaryColor,
-                ),
-                columnWidths: const {
-                  4: FixedColumnWidth(110),
-                },
-                children: [
-                  timelineTableHeader(),
-                  ...buildTimelineTable(
-                    context: context,
-                    timelineTable: cubit.timelineTableResult,
+            ? SingleChildScrollView(
+              child: Table(
+                  border: TableBorder.all(
+                    color: AppColors.kPrimaryColor,
                   ),
-                ],
-              )
+                  columnWidths: const {
+                    4: FixedColumnWidth(110),
+                  },
+                  children: [
+                    timelineTableHeader(),
+                    ...buildTimelineTable(
+                      context: context,
+                      timelineTable: cubit.timelineTableResult,
+                    ),
+                  ],
+                ),
+            )
             : const Center(
                 child: EmptyPlaceholder(
                   message: "لم يتم اضافة الجدول",

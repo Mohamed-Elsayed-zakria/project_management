@@ -1,6 +1,6 @@
+import '/features/timeline/data/models/timeline_structure.dart';
+import '/core/services/timeline_table_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_management/core/services/timeline_table_services.dart';
-import 'package:project_management/features/timeline/data/models/timeline_structure.dart';
 import 'follow_timeline_state.dart';
 
 class FollowTimelineCubit extends Cubit<FollowTimelineState> {
