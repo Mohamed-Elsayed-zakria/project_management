@@ -1,5 +1,5 @@
-import '/features/settings/presentation/manager/cubit/setting_cubit.dart';
-import '/features/settings/presentation/manager/cubit/setting_state.dart';
+import '../../manager/setting_cubit/setting_cubit.dart';
+import '../../manager/setting_cubit/setting_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/colors.dart';

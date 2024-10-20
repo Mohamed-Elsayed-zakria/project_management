@@ -1,3 +1,5 @@
+import '/core/constant/api_end_point.dart';
+import '/core/utils/url_open_file.dart';
 import 'package:flutter/material.dart';
 
 class SettingCompanyFileItem extends StatelessWidget {
@@ -18,7 +20,11 @@ class SettingCompanyFileItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await UrlOpenFile.openFile(
+                    "${APIEndPoint.mediaBaseUrl}$fileName",
+                  );
+                },
                 icon: const Icon(
                   Icons.visibility_outlined,
                   color: Colors.blueAccent,

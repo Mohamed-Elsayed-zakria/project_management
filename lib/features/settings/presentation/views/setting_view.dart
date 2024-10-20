@@ -1,53 +1,31 @@
-import '/features/settings/presentation/manager/cubit/setting_state.dart';
-import '/features/settings/presentation/manager/cubit/setting_cubit.dart';
-import 'widgets/projects_setting/setting_projects_info.dart';
+import '/features/settings/presentation/manager/setting_projects_cubit/setting_projects_cubit.dart';
+import '/features/settings/presentation/manager/setting_company_cubit/setting_company_cubit.dart';
+import '/features/settings/presentation/manager/setting_cubit/setting_cubit.dart';
+import '/features/settings/data/repository/company_info_implement.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'widgets/setting_company_info.dart';
+import 'widgets/setting_view_body.dart';
 import 'package:flutter/material.dart';
-import 'widgets/setting_header.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SettingCubit(),
-      child: Card(
-        color: Colors.white,
-        elevation: 3,
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          padding: const EdgeInsets.all(8.0),
-          child: BlocBuilder<SettingCubit, SettingState>(
-            builder: (context, state) {
-              SettingCubit cubit = BlocProvider.of<SettingCubit>(context);
-              return Column(
-                children: [
-                  const SizedBox(height: 10),
-                  const SettingHeader(),
-                  const SizedBox(height: 10),
-                  const Divider(),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          cubit.projectSettingIsActive
-                              ? const SettingProjectsInfo()
-                              : cubit.companySettingIsActive
-                                  ? const SettingCompanyInfo()
-                                  : const SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SettingCubit(),
         ),
-      ),
+        BlocProvider(
+          create: (context) => SettingCompanyCubit(
+            CompanyInfoImplement(),
+          )..getCompanyInfo(),
+        ),
+        BlocProvider(
+          create: (context) => SettingProjectsCubit(),
+        ),
+      ],
+      child: const SettingViewBody(),
     );
   }
 }

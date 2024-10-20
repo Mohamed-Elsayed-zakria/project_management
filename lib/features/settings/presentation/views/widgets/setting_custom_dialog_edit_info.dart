@@ -6,11 +6,13 @@ class SettingCustomDialogEditInfo extends StatelessWidget {
   final String title;
   final Widget content;
   final Function() onPressed;
+  final bool isLoading;
   const SettingCustomDialogEditInfo({
     super.key,
     required this.title,
     required this.content,
     required this.onPressed,
+    required this.isLoading,
   });
 
   @override

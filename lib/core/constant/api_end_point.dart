@@ -12,4 +12,6 @@ abstract class APIEndPoint {
   static const forms = "forms";
   static const otherAdditions = "otherAdditions";
   static const timelineAttachments = "timelineAttachments";
+  static const companyInfo = "companyInfo";
+  static const addCompanyFiles = "addCompanyFiles";
 }

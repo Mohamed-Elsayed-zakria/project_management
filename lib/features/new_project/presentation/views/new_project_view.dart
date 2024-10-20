@@ -1,6 +1,6 @@
 import '/features/new_project/presentation/manager/new_project_cubit/new_project_cubit.dart';
+import '/features/settings/presentation/manager/setting_cubit/setting_cubit.dart';
 import '/features/new_project/data/repository/new_project_implement.dart';
-import '/features/settings/presentation/manager/cubit/setting_cubit.dart';
 import 'widgets/new_project_button_create.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/new_project_take_data.dart';
