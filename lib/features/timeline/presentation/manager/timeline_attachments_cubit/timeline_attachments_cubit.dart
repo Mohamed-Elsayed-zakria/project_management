@@ -1,23 +1,27 @@
-import 'package:project_management/core/services/timeline_table_services.dart';
-import '/features/timeline/data/repository/timeline_attachments_repo.dart';
 import '/features/timeline/data/models/timeline_structure.dart';
+import '/features/timeline/data/repository/timeline_repo.dart';
+import '/core/services/timeline_table_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'timeline_attachments_state.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 
 class TimelineAttachmentsCubit extends Cubit<TimelineAttachmentsState> {
-  final TimelineAttachmentsRepo _attachmentsRepo;
-  TimelineAttachmentsCubit(this._attachmentsRepo)
+  final TimelineRepo _timelineRepo;
+  TimelineAttachmentsCubit(this._timelineRepo)
       : super(TimelineAttachmentsInitial());
 
   List<TimelineStructure> timelineTableResult = [];
+  List<TimelineStructure> originalTimelineTable = [];
+
+  int itemsCount = 60;
+  int currentOffset = 0;
 
   Future<void> addTimeLineTable({
     required String projectId,
   }) async {
     Either<Failures, List<TimelineStructure>> result =
-        await _attachmentsRepo.addTimeLineTable(
+        await _timelineRepo.addTimeLineTable(
       projectId: projectId,
     );
     result.fold(
@@ -25,18 +29,19 @@ class TimelineAttachmentsCubit extends Cubit<TimelineAttachmentsState> {
         AddTimelineTableFailure(failures.errMessage),
       ),
       (result) {
-        timelineTableResult = result;
+        originalTimelineTable = result;
+        loadMoreEvents(itemsCount);
         emit(AddTimelineTableSuccess());
       },
     );
   }
 
-  Future<void> getTimeLineTable({
+  Future<void> getTimeLineTableFromClaude({
     required String projectId,
   }) async {
     emit(GetTimelineTableLoading());
     Either<Failures, List<TimelineStructure>> result =
-        await _attachmentsRepo.getTimeLineTable(
+        await _timelineRepo.getTimeLineTableFromClaude(
       projectId: projectId,
     );
     result.fold(
@@ -44,7 +49,8 @@ class TimelineAttachmentsCubit extends Cubit<TimelineAttachmentsState> {
         GetTimelineTableFailure(failures.errMessage),
       ),
       (result) {
-        timelineTableResult = result;
+        originalTimelineTable = result;
+        loadMoreEvents(itemsCount);
         emit(GetTimelineTableSuccess());
       },
     );
@@ -60,9 +66,31 @@ class TimelineAttachmentsCubit extends Cubit<TimelineAttachmentsState> {
         projectId: projectId,
       );
       emit(GetTimelineTableSuccess());
-      timelineTableResult = timelineTable;
+      if (timelineTable.isEmpty) {
+        getTimeLineTableFromClaude(projectId: projectId);
+      } else {
+        originalTimelineTable = timelineTable;
+        loadMoreEvents(itemsCount);
+      }
     } catch (e) {
       emit(GetTimelineTableFailure(e.toString()));
     }
+  }
+
+  void loadMoreEvents(int count) {
+    if (currentOffset >= originalTimelineTable.length) return;
+
+    int remainingItems = originalTimelineTable.length - currentOffset;
+    int loadCount = remainingItems >= count ? count : remainingItems;
+
+    timelineTableResult.addAll(
+      originalTimelineTable.sublist(
+        currentOffset,
+        currentOffset + loadCount,
+      ),
+    );
+
+    currentOffset += loadCount;
+    emit(GetTimelineTableSuccess());
   }
 }

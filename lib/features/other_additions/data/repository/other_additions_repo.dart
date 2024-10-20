@@ -6,7 +6,6 @@ import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class OtherAdditionsRepo extends BaseServices {
-  Future<Either<Failures, String>> pickOtherAdditionsFile();
   Future<Either<Failures, List<OtherAdditionsData>>> getAllOtherAdditions({
     required String projectId,
     required StepType stepType,

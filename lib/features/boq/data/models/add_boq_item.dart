@@ -1,6 +1,6 @@
 class AddBoqItem {
   final String boqId;
-  final int itemNumber;
+  final String itemNumber;
   final String item;
   final int quantity;
   final double individualPrice;

@@ -32,7 +32,7 @@ class IncomingLettersTable extends StatelessWidget {
                 ? incomingLetterCubit.allLettersAfterSearch.isNotEmpty
                 : lettersCubit.incomingLetters.isNotEmpty,
             replacement:
-                const EmptyPlaceholder(message: 'لا توجد خطابات الواردة'),
+                const EmptyPlaceholder(message: 'لا يوجد خطابات واردة'),
             child: Table(
               border: TableBorder.all(
                 color: AppColors.kPrimaryColor,

@@ -3,6 +3,7 @@ import '/features/new_project/data/models/new_project_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
+import '/core/utils/pick_file.dart';
 import '/core/errors/failures.dart';
 import '/core/constant/colors.dart';
 import 'package:dartz/dartz.dart';
@@ -116,7 +117,7 @@ class NewProjectCubit extends Cubit<NewProjectState> {
   }
 
   Future<void> pickFilePo() async {
-    Either<Failures, String> result = await _newProjectRepo.pickFilePo();
+    Either<Failures, String> result = await PickFile.pick();
     result.fold(
       (failure) => emit(NewProjectFailure(failure.errMessage)),
       (result) {

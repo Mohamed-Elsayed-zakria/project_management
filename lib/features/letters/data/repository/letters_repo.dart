@@ -6,7 +6,6 @@ import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class LettersRepo extends BaseServices {
-  Future<Either<Failures, String>> pickLetterFile();
   Future<Either<Failures, LetterData>> addNewLetter({
     required AddLetter newLetterData,
   });

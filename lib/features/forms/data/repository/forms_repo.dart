@@ -6,7 +6,6 @@ import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class FormsRepo extends BaseServices {
-  Future<Either<Failures, String>> pickFormFile();
   Future<Either<Failures, FormData>> addNewForm({
     required AddFormModel newFormData,
   });

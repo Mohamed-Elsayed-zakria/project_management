@@ -32,7 +32,7 @@ class OutgoingLettersTable extends StatelessWidget {
                 ? outgoingLetterCubit.allLettersAfterSearch.isNotEmpty
                 : lettersCubit.outgoingLetters.isNotEmpty,
             replacement:
-                const EmptyPlaceholder(message: 'لا توجد خطابات الواردة'),
+                const EmptyPlaceholder(message: 'لا يوجد خطابات صادرة'),
             child: Table(
               border: TableBorder.all(
                 color: AppColors.kPrimaryColor,

@@ -4,6 +4,7 @@ import '/features/other_additions/data/repository/other_additions_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 import '/core/models/step_type.dart';
+import '/core/utils/pick_file.dart';
 import 'other_additions_state.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
@@ -23,7 +24,7 @@ class OtherAdditionsCubit extends Cubit<OtherAdditionsState> {
 
   Future<void> pickOtherAdditionsFile() async {
     Either<Failures, String> result =
-        await _otherAdditionsRepo.pickOtherAdditionsFile();
+        await PickFile.pick();
     result.fold(
       (failure) => emit(OtherAdditionsFailure(failure.errMessage)),
       (result) {

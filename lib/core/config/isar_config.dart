@@ -5,7 +5,7 @@ import 'package:isar/isar.dart';
 
 class IsarConfig {
   static late Isar isar;
-  static Future<void> initHive() async {
+  static Future<void> initIsar() async {
     final dir = await getApplicationDocumentsDirectory();
     isar = await Isar.open(
       [

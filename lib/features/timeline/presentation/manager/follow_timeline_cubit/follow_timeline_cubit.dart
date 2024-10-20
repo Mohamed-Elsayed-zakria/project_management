@@ -1,10 +1,14 @@
 import '/features/timeline/data/models/timeline_structure.dart';
+import '/features/timeline/data/repository/timeline_repo.dart';
 import '/core/services/timeline_table_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/errors/failures.dart';
 import 'follow_timeline_state.dart';
+import 'package:dartz/dartz.dart';
 
 class FollowTimelineCubit extends Cubit<FollowTimelineState> {
-  FollowTimelineCubit() : super(FollowTimelineInitial());
+  final TimelineRepo _timelineRepo;
+  FollowTimelineCubit(this._timelineRepo) : super(FollowTimelineInitial());
 
   double dayWidth = 30;
   bool showDaysRow = true;
@@ -34,6 +38,25 @@ class FollowTimelineCubit extends Cubit<FollowTimelineState> {
 
   List<TimelineStructure> timelineTableResult = [];
 
+  Future<void> getTimeLineTableFromClaude({
+    required String projectId,
+  }) async {
+    emit(GetTimelineTableLoading());
+    Either<Failures, List<TimelineStructure>> result =
+        await _timelineRepo.getTimeLineTableFromClaude(
+      projectId: projectId,
+    );
+    result.fold(
+      (failures) => emit(
+        GetTimelineTableFailure(failures.errMessage),
+      ),
+      (result) {
+        timelineTableResult = result;
+        emit(GetTimelineTableSuccess());
+      },
+    );
+  }
+
   Future<void> getTimeLineTableFromLocal(
     String projectId,
   ) async {
@@ -44,10 +67,34 @@ class FollowTimelineCubit extends Cubit<FollowTimelineState> {
         projectId: projectId,
       );
       emit(GetTimelineTableSuccess());
-      timelineTableResult = timelineTable;
+      if (timelineTable.isEmpty) {
+        getTimeLineTableFromClaude(projectId: projectId);
+      } else {
+        timelineTableResult = timelineTable;
+      }
     } catch (e) {
       emit(GetTimelineTableFailure(e.toString()));
     }
+  }
+
+  DateTime? startDate({
+    required List<TimelineStructure> timelineData,
+  }) {
+    DateTime? earliestDate;
+    for (var element in timelineData) {
+      if (element.start != null) {
+        DateTime? startDate;
+        try {
+          startDate = DateTime.parse(element.start!);
+        } catch (e) {
+          continue;
+        }
+        if (earliestDate == null || startDate.isBefore(earliestDate)) {
+          earliestDate = startDate;
+        }
+      }
+    }
+    return earliestDate;
   }
 
   Duration maxDuration({

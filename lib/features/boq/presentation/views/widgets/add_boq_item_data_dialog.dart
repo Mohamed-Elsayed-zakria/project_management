@@ -42,13 +42,8 @@ class AddBoqItemDataDialog extends StatelessWidget {
                 hintText: "ادخل الرقم",
                 prefixIcon: const Icon(Icons.numbers_outlined),
                 validator: (value) {
-                  int? itemNumber = ParseArabicNumber.parseArabicNumber(
-                    cubit.itemNumberGetText.text,
-                  );
                   if (value!.isEmpty) {
                     return "مطلوب";
-                  } else if (itemNumber == null) {
-                    return "خطأ في الرقم";
                   } else {
                     return null;
                   }

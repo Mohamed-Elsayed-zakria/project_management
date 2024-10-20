@@ -87,7 +87,7 @@ class BoqItemCubit extends Cubit<BoqItemState> {
   }) {
     num quantity = boqItem.quantity!;
 
-    int itemNumber = boqItem.itemNumber!;
+    String itemNumber = boqItem.itemNumber!;
 
     boqDataList[index - 1].boqItems?.forEach(
       (element) {

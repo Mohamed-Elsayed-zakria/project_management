@@ -8,30 +8,16 @@ import '/core/widgets/accordion/accordion_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import '/core/constant/style.dart';
 import 'create_new_boq_table.dart';
 
-class BoqCustomAccordionList extends StatefulWidget {
+class BoqCustomAccordionList extends StatelessWidget {
   final ProjectDetails projectDetails;
 
   const BoqCustomAccordionList({
     super.key,
     required this.projectDetails,
   });
-
-  @override
-  State<BoqCustomAccordionList> createState() => _BoqCustomAccordionListState();
-}
-
-class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
-  late FetchBoqCubit boqCubit;
-  @override
-  void initState() {
-    boqCubit = BlocProvider.of<FetchBoqCubit>(context);
-    boqCubit.fetchAllBoq(
-      projectId: widget.projectDetails.id!,
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +32,12 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
         }
         if (state is FetchBoqFailure) {
           return SliverToBoxAdapter(
-            child: Text(state.errMessage),
+            child: Center(
+              child: Text(
+                state.errMessage,
+                style: AppStyle.tabTextStyle,
+              ),
+            ),
           );
         }
         return const SliverFillRemaining(
@@ -61,14 +52,13 @@ class _BoqCustomAccordionListState extends State<BoqCustomAccordionList> {
 
   List<AccordionItems> _buildAccordionItem(List<BoqData> item) {
     List<AccordionItems> accordionItems = [];
-
     for (var index = 0; index < item.length; index++) {
       var element = item[index];
       accordionItems.add(
         AccordionItems(
           title: element.name ?? '--',
           content: CreateNewBoqTable(
-            projectDetails: widget.projectDetails,
+            projectDetails: projectDetails,
             boqData: element,
             index: index,
             boqDataList: item,

@@ -45,9 +45,7 @@ class AddBoqItemDataDialogButton extends StatelessWidget {
                 boqData: boqData,
                 boqItemData: AddBoqItem(
                   boqId: boqData.id!,
-                  itemNumber: int.parse(
-                    cubit.itemNumberGetText.text,
-                  ),
+                  itemNumber: cubit.itemNumberGetText.text,
                   item: cubit.itemGetText.text,
                   quantity: int.parse(
                     cubit.quantityGetText.text,

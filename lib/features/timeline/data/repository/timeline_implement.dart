@@ -1,4 +1,3 @@
-import '/features/timeline/data/repository/timeline_attachments_repo.dart';
 import '/features/timeline/data/models/timeline_structure.dart';
 import '/core/services/timeline_table_services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -8,9 +7,10 @@ import 'package:dartz/dartz.dart';
 import 'package:excel/excel.dart';
 import 'package:uuid/uuid.dart';
 import 'package:dio/dio.dart';
+import 'timeline_repo.dart';
 import 'dart:io';
 
-class TimelineAttachmentsImplement extends TimelineAttachmentsRepo {
+class TimelineImplement extends TimelineRepo {
   @override
   Future<Either<Failures, List<TimelineStructure>>> addTimeLineTable({
     required String projectId,
@@ -94,7 +94,7 @@ class TimelineAttachmentsImplement extends TimelineAttachmentsRepo {
   }
 
   @override
-  Future<Either<Failures, List<TimelineStructure>>> getTimeLineTable({
+  Future<Either<Failures, List<TimelineStructure>>> getTimeLineTableFromClaude({
     required String projectId,
   }) async {
     try {
@@ -156,6 +156,9 @@ class TimelineAttachmentsImplement extends TimelineAttachmentsRepo {
                   complete: row[6]?.value?.toString(),
                 ))
             .toList();
+        await TimelineTableServices.storeTimelineList(
+          timelineList: timelineData,
+        );
         return right(timelineData);
       } else {
         return left(Failures(errMessage: "No data available"));

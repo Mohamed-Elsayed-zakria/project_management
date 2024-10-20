@@ -1,5 +1,4 @@
-import 'package:project_management/features/letters/data/models/enum/letters_search_type.dart';
-
+import '/features/letters/data/models/enum/letters_search_type.dart';
 import '/features/letters/data/models/letter_data/letter_data.dart';
 import '/features/letters/data/models/enum/reply_status.dart';
 import '/features/letters/data/models/enum/letter_type.dart';
@@ -8,6 +7,7 @@ import '/features/letters/data/models/add_letter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
+import '/core/utils/pick_file.dart';
 import 'outgoing_letter_state.dart';
 import '/core/constant/colors.dart';
 import '/core/errors/failures.dart';
@@ -114,7 +114,7 @@ class OutgoingLetterCubit extends Cubit<OutgoingLetterState> {
   }
 
   Future<void> pickLetterFile() async {
-    Either<Failures, String> result = await _lettersRepo.pickLetterFile();
+    Either<Failures, String> result = await PickFile.pick();
     result.fold(
       (failure) => emit(OutgoingLetterFailure(failure.errMessage)),
       (result) {

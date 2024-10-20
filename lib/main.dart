@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SetupLocator().setup();
   DioConfig().setupDio();
-  await IsarConfig.initHive();
+  await IsarConfig.initIsar();
   if (Platform.isWindows) {
     await windowManager.ensureInitialized();
     await windowManager.setMinimumSize(const Size(670, 600));

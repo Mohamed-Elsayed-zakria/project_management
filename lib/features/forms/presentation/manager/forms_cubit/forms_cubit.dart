@@ -4,6 +4,7 @@ import '/features/forms/data/models/add_form_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
 import '/core/models/step_type.dart';
+import '/core/utils/pick_file.dart';
 import '/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'forms_state.dart';
@@ -22,7 +23,7 @@ class FormsCubit extends Cubit<FormsState> {
   List<FormData> formDataList = [];
 
   Future<void> pickFormFile() async {
-    Either<Failures, String> result = await _formsRepo.pickFormFile();
+    Either<Failures, String> result = await PickFile.pick();
     result.fold(
       (failures) => emit(AddFormFailure(failures.errMessage)),
       (result) {

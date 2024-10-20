@@ -20,7 +20,10 @@ class BoqView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => FetchBoqCubit(BoqImplement()),
+          create: (context) => FetchBoqCubit(BoqImplement())
+            ..fetchAllBoq(
+              projectId: projectDetails.id!,
+            ),
         ),
         BlocProvider(
           create: (context) => AddBoqCubit(BoqImplement()),

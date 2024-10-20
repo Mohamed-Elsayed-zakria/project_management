@@ -10,7 +10,7 @@ import '/core/utils/my_date_util.dart';
 import '/core/constant/colors.dart';
 import '/core/constant/style.dart';
 
-class TimelineShowTable extends StatelessWidget {
+class TimelineShowTable extends StatefulWidget {
   final ProjectDetails projectDetails;
 
   const TimelineShowTable({
@@ -19,8 +19,30 @@ class TimelineShowTable extends StatelessWidget {
   });
 
   @override
+  State<TimelineShowTable> createState() => _TimelineShowTableState();
+}
+
+class _TimelineShowTableState extends State<TimelineShowTable> {
+  final ScrollController scrollController = ScrollController();
+  late TimelineAttachmentsCubit cubit;
+
+  @override
+  void initState() {
+    cubit = context.read<TimelineAttachmentsCubit>();
+    scrollController.addListener(() {
+      double maxScrollExtent = scrollController.position.maxScrollExtent;
+      double currentScrollPosition = scrollController.position.pixels;
+
+      // Check if the user has reached 60% of the scroll length
+      if (currentScrollPosition >= 0.6 * maxScrollExtent) {
+        cubit.loadMoreEvents(cubit.itemsCount);
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var cubit = context.read<TimelineAttachmentsCubit>();
     return BlocBuilder<TimelineAttachmentsCubit, TimelineAttachmentsState>(
       builder: (context, state) {
         if (state is GetTimelineTableLoading) {
@@ -30,32 +52,37 @@ class TimelineShowTable extends StatelessWidget {
         }
         if (state is GetTimelineTableFailure) {
           return Center(
-            child: Text(state.errMessage),
+            child: Text(
+              state.errMessage,
+              style: AppStyle.tabTextStyle,
+            ),
           );
         }
-        return cubit.timelineTableResult.isNotEmpty
-            ? SingleChildScrollView(
-              child: Table(
-                  border: TableBorder.all(
-                    color: AppColors.kPrimaryColor,
-                  ),
-                  columnWidths: const {
-                    4: FixedColumnWidth(110),
-                  },
-                  children: [
-                    timelineTableHeader(),
-                    ...buildTimelineTable(
-                      context: context,
-                      timelineTable: cubit.timelineTableResult,
-                    ),
-                  ],
-                ),
-            )
-            : const Center(
-                child: EmptyPlaceholder(
-                  message: "لم يتم اضافة الجدول",
-                ),
-              );
+        if (cubit.timelineTableResult.isEmpty) {
+          return const Center(
+            child: EmptyPlaceholder(
+              message: "لم يتم اضافة الجدول",
+            ),
+          );
+        }
+        return SingleChildScrollView(
+          controller: scrollController,
+          child: Table(
+            border: TableBorder.all(
+              color: AppColors.kPrimaryColor,
+            ),
+            columnWidths: const {
+              4: FixedColumnWidth(110),
+            },
+            children: [
+              timelineTableHeader(),
+              ...buildTimelineTable(
+                context: context,
+                timelineTable: cubit.timelineTableResult,
+              ),
+            ],
+          ),
+        );
       },
     );
   }
@@ -132,7 +159,6 @@ class TimelineShowTable extends StatelessWidget {
     required List<TimelineStructure> timelineTable,
   }) {
     List<TableRow> boqItems = [];
-
     for (var i = 0; i < timelineTable.length; i++) {
       TimelineStructure element = timelineTable[i];
       boqItems.add(
@@ -216,7 +242,6 @@ class TimelineShowTable extends StatelessWidget {
         ),
       );
     }
-
     return boqItems;
   }
 }

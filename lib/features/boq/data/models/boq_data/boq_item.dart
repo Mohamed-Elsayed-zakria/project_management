@@ -1,6 +1,6 @@
 class BoqItem {
   String? id;
-  int? itemNumber;
+  String? itemNumber;
   String? item;
   int? quantity;
   int? individualPrice;
@@ -19,7 +19,7 @@ class BoqItem {
 
   factory BoqItem.fromJson(Map<String, dynamic> json) => BoqItem(
         id: json['_id'] as String?,
-        itemNumber: json['itemNumber'] as int?,
+        itemNumber: json['itemNumber'] as String?,
         item: json['item'] as String?,
         quantity: json['quantity'] as int?,
         individualPrice: json['individualPrice'] as int?,

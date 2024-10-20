@@ -44,7 +44,7 @@ class ServerFailures extends Failures {
       case DioExceptionType.connectionError:
         return ServerFailures(errMessage: 'Connection error with API server');
       case DioExceptionType.unknown:
-        if (dioError.message!.contains('SocketException')) {
+        if (dioError.message?.contains('SocketException') ?? false) {
           return ServerFailures(errMessage: 'No internet connection');
         }
         return ServerFailures(errMessage: 'Something went wrong');

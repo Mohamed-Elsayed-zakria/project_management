@@ -7,6 +7,7 @@ import '/features/letters/data/models/add_letter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/utils/my_date_util.dart';
 import 'package:flutter/material.dart';
+import '/core/utils/pick_file.dart';
 import '/core/constant/colors.dart';
 import 'incoming_letter_state.dart';
 import '/core/errors/failures.dart';
@@ -113,7 +114,7 @@ class IncomingLetterCubit extends Cubit<IncomingLetterState> {
   }
 
   Future<void> pickLetterFile() async {
-    Either<Failures, String> result = await _lettersRepo.pickLetterFile();
+    Either<Failures, String> result = await PickFile.pick();
     result.fold(
       (failure) => emit(IncomingLetterFailure(failure.errMessage)),
       (result) {
