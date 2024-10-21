@@ -14,4 +14,5 @@ abstract class APIEndPoint {
   static const timelineAttachments = "timelineAttachments";
   static const companyInfo = "companyInfo";
   static const addCompanyFiles = "addCompanyFiles";
+  static const projectSettings = "projectSettings";
 }

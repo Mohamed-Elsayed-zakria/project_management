@@ -1,11 +1,10 @@
-import 'package:project_management/core/utils/pick_file.dart';
+import '/features/settings/data/models/company_info/company_info.dart';
 import '/features/settings/data/models/add_company_info.dart';
-import '/features/settings/data/models/company_info.dart';
 import '/core/constant/api_end_point.dart';
 import '/core/errors/failures.dart';
+import '/core/utils/pick_file.dart';
 import 'package:dartz/dartz.dart';
 import 'company_info_repo.dart';
-import 'package:uuid/uuid.dart';
 import 'package:path/path.dart';
 import 'package:dio/dio.dart';
 
@@ -51,12 +50,10 @@ class CompanyInfoImplement extends CompanyInfoRepo {
         try {
           const String url =
               "${APIEndPoint.url}${APIEndPoint.companyInfo}/${APIEndPoint.addCompanyFiles}";
-          String generatId = const Uuid().v1();
-
           final List<MultipartFile> companyFiles = result
               .map((file) => MultipartFile.fromFileSync(
                     file,
-                    filename: "$generatId-${basename(file)}",
+                    filename: basename(file),
                   ))
               .toList();
 
@@ -76,5 +73,18 @@ class CompanyInfoImplement extends CompanyInfoRepo {
         }
       },
     );
+  }
+
+  @override
+  Future<Either<Failures, void>> deleteCompanyFile({
+    required String fileId,
+  }) async {
+    try {
+      String url = "${APIEndPoint.url}${APIEndPoint.companyInfo}/$fileId";
+      await dio.delete(url);
+      return right(null);
+    } catch (e) {
+      return left(returnDioException(e));
+    }
   }
 }

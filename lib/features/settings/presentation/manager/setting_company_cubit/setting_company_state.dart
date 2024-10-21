@@ -11,7 +11,6 @@ final class SettingCompanyFailure extends SettingCompanyState {
   SettingCompanyFailure(this.message);
 }
 
-
 final class UpdateCompanyLoading extends SettingCompanyState {}
 
 final class UpdateCompanySuccess extends SettingCompanyState {}
@@ -21,12 +20,11 @@ final class UpdateCompanyFailure extends SettingCompanyState {
   UpdateCompanyFailure(this.message);
 }
 
+final class CompanyFileLoading extends SettingCompanyState {}
 
-final class AddCompanyFileLoading extends SettingCompanyState {}
+final class CompanyFileSuccess extends SettingCompanyState {}
 
-final class AddCompanyFileSuccess extends SettingCompanyState {}
-
-final class AddCompanyFileFailure extends SettingCompanyState {
+final class CompanyFileFailure extends SettingCompanyState {
   final String message;
-  AddCompanyFileFailure(this.message);
+  CompanyFileFailure(this.message);
 }

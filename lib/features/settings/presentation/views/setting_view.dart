@@ -1,6 +1,7 @@
 import '/features/settings/presentation/manager/setting_projects_cubit/setting_projects_cubit.dart';
 import '/features/settings/presentation/manager/setting_company_cubit/setting_company_cubit.dart';
 import '/features/settings/presentation/manager/setting_cubit/setting_cubit.dart';
+import '/features/settings/data/repository/project_settings_implement.dart';
 import '/features/settings/data/repository/company_info_implement.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'widgets/setting_view_body.dart';
@@ -22,7 +23,9 @@ class SettingView extends StatelessWidget {
           )..getCompanyInfo(),
         ),
         BlocProvider(
-          create: (context) => SettingProjectsCubit(),
+          create: (context) => SettingProjectsCubit(
+            ProjectSettingsImplement(),
+          )..getProjectSettings(),
         ),
       ],
       child: const SettingViewBody(),

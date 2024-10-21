@@ -1,3 +1,5 @@
+import 'company_file.dart';
+
 class CompanyInfo {
   String? id;
   String? companyName;
@@ -5,7 +7,7 @@ class CompanyInfo {
   String? phoneNumber;
   String? address;
   String? website;
-  List<dynamic>? companyFiles;
+  List<CompanyFile>? companyFiles;
   String? createdAt;
   String? updatedAt;
   int? v;
@@ -31,7 +33,9 @@ class CompanyInfo {
         phoneNumber: json['phoneNumber'] as String?,
         address: json['address'] as String?,
         website: json['website'] as String?,
-        companyFiles: json['companyFiles'] as List<dynamic>?,
+        companyFiles: (json['companyFiles'] as List<dynamic>?)
+            ?.map((e) => CompanyFile.fromJson(e as Map<String, dynamic>))
+            .toList(),
         createdAt: json['createdAt'] as String?,
         updatedAt: json['updatedAt'] as String?,
         v: json['__v'] as int?,
@@ -44,7 +48,7 @@ class CompanyInfo {
         'phoneNumber': phoneNumber,
         'address': address,
         'website': website,
-        'companyFiles': companyFiles,
+        'companyFiles': companyFiles?.map((e) => e.toJson()).toList(),
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         '__v': v,
