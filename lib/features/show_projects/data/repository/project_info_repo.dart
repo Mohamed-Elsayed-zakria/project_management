@@ -48,4 +48,11 @@ abstract class ProjectInfoRepo extends BaseServices {
     required String newDate,
     required ProjectDetails projectDetails,
   });
+  Future<Either<Failures, void>> changeProjectHolidays({
+    required List<dynamic> newHolidays,
+    required ProjectDetails projectDetails,
+  });
+  Future<Either<Failures, void>> deleteProject({
+    required ProjectDetails projectDetails,
+  });
 }

@@ -7,7 +7,6 @@ import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/my_date_util.dart';
 import '/core/routes/app_pages.dart';
-import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
 class ProjectEditeReceiptDateDialog extends StatelessWidget {
@@ -37,12 +36,6 @@ class ProjectEditeReceiptDateDialog extends StatelessWidget {
             if (state is UpdateProjectSuccess) {
               cubit.projectReceiptDate = null;
               AppPages.back(context);
-            }
-            if (state is UpdateProjectFailure) {
-              ShowToast.show(
-                context: context,
-                msg: state.errMessage,
-              );
             }
           },
           builder: (context, state) {

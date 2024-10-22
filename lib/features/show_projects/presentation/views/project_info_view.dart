@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 
 class ProjectInfoView extends StatelessWidget {
   final ProjectDetails projectDetails;
+  final List<ProjectDetails> allProjects;
+
   const ProjectInfoView({
     super.key,
     required this.projectDetails,
+    required this.allProjects,
   });
 
   @override
@@ -25,6 +28,7 @@ class ProjectInfoView extends StatelessWidget {
         ),
         child: ProjectInfoViewBody(
           projectDetails: projectDetails,
+          allProjects: allProjects,
         ),
       ),
     );

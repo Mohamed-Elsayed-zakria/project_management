@@ -69,7 +69,6 @@ class NewProjectButtonCreate extends StatelessWidget {
                   projectReceiptDate: cubit.projectReceiptDate.toString(),
                   projectDatePo: cubit.projectDatePo.toString(),
                   projectFilePo: cubit.projectFilePo!,
-                  projectValueAddedTax: 15,
                 ),
               );
             }

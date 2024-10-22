@@ -24,36 +24,33 @@ class ShowProjectsViewBody extends StatelessWidget {
             const Divider(),
             BlocBuilder<FetchProjectsCubit, FetchProjectsState>(
               builder: (context, state) {
-                FetchProjectsCubit cubit =
-                    BlocProvider.of<FetchProjectsCubit>(context);
+                var cubit = context.read<FetchProjectsCubit>();
                 if (state is FetchProjectsSuccess) {
                   return Expanded(
-                    child: cubit.searchText.text.isEmpty
-                        ? cubit.allProjects.isNotEmpty
-                            ? ListView.builder(
-                                itemCount: cubit.allProjects.length,
-                                itemBuilder: (context, index) {
-                                  return ShowProjectsProjectItem(
-                                    projectDetails: cubit.allProjects[index],
-                                  );
-                                },
-                              )
-                            : const EmptyPlaceholder(
-                                message: 'لا يوجد مشاريع',
-                              )
-                        : cubit.allAfterSearchProjects.isNotEmpty
-                            ? ListView.builder(
-                                itemCount: cubit.allAfterSearchProjects.length,
-                                itemBuilder: (context, index) {
-                                  return ShowProjectsProjectItem(
-                                    projectDetails:
-                                        cubit.allAfterSearchProjects[index],
-                                  );
-                                },
-                              )
-                            : const EmptyPlaceholder(
-                                message: 'لا يوجد مشاريع',
-                              ),
+                    child: Builder(
+                      builder: (context) {
+                        final isSearchEmpty = cubit.searchText.text.isEmpty;
+                        final projects = isSearchEmpty
+                            ? cubit.allProjects
+                            : cubit.allAfterSearchProjects;
+
+                        if (projects.isEmpty) {
+                          return const EmptyPlaceholder(
+                            message: 'لا يوجد مشاريع',
+                          );
+                        }
+
+                        return ListView.builder(
+                          itemCount: projects.length,
+                          itemBuilder: (context, index) {
+                            return ShowProjectsProjectItem(
+                              projectDetails: projects[index],
+                              allProjects: cubit.allProjects,
+                            );
+                          },
+                        );
+                      },
+                    ),
                   );
                 } else if (state is FetchProjectsFailure) {
                   return Text(

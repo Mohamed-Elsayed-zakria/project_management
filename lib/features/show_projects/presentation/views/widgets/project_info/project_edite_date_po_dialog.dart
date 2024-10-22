@@ -7,7 +7,6 @@ import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/my_date_util.dart';
 import '/core/routes/app_pages.dart';
-import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
 class ProjectEditeDatePoDialog extends StatelessWidget {
@@ -19,7 +18,7 @@ class ProjectEditeDatePoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProjectInfoCubit cubit = BlocProvider.of<ProjectInfoCubit>(context);
+    var cubit = BlocProvider.of<ProjectInfoCubit>(context);
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -37,12 +36,6 @@ class ProjectEditeDatePoDialog extends StatelessWidget {
             if (state is UpdateProjectSuccess) {
               cubit.projectDatePo = null;
               AppPages.back(context);
-            }
-            if (state is UpdateProjectFailure) {
-              ShowToast.show(
-                context: context,
-                msg: state.errMessage,
-              );
             }
           },
           builder: (context, state) {

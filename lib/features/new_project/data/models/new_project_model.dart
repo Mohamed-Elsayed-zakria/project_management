@@ -13,8 +13,9 @@ class NewProjectModel {
   final String projectCity;
   final String projectDatePo;
   final String projectReceiptDate;
-  final double projectValueAddedTax;
   final String projectFilePo;
+  double? projectValueAddedTax;
+  List<dynamic>? holidays;
 
   NewProjectModel({
     required this.projectName,
@@ -26,9 +27,10 @@ class NewProjectModel {
     required this.projectArea,
     required this.projectCity,
     required this.projectDatePo,
-    required this.projectValueAddedTax,
     required this.projectReceiptDate,
     required this.projectFilePo,
+    this.projectValueAddedTax,
+    this.holidays,
   });
 
   FormData toFormDataJson({required String filePoPath}) {
@@ -40,7 +42,6 @@ class NewProjectModel {
       'projectPrice': projectPrice,
       'projectDurationPerDay': projectDurationPerDay,
       'projectDatePo': projectDatePo,
-      'projectValueAddedTax': projectValueAddedTax,
       'projectReceiptDate': projectReceiptDate,
       'projectManager': projectManager,
       'projectOwner': projectOwner,
@@ -50,6 +51,8 @@ class NewProjectModel {
         filePoPath,
         filename: "$generatId-$fileName",
       ),
+      'projectValueAddedTax': projectValueAddedTax,
+      'holidays': holidays,
     });
     return formData;
   }

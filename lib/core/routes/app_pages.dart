@@ -1,11 +1,13 @@
-import '../../features/letters/presentation/views/incoming_outgoing_letters_view.dart';
+import '/features/letters/presentation/views/incoming_outgoing_letters_view.dart';
 import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/other_additions/presentation/views/other_additions_view.dart';
 import '/features/show_projects/presentation/views/project_details_view.dart';
-import '../../features/other_additions/presentation/views/other_additions_view.dart';
 import '/features/show_projects/presentation/views/project_info_view.dart';
-import '../../features/forms/presentation/views/forms_view.dart';
+import '/features/show_projects/data/models/project_info_route.dart';
+import '/features/forms/presentation/views/forms_view.dart';
 import '/features/auth/presentation/views/login_view.dart';
 import '/features/home/presentation/views/home_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '/core/models/files_nav_data.dart';
 import '/core/routes/app_routes.dart';
@@ -31,9 +33,13 @@ class AppPages {
       GoRoute(
         path: AppRoutes.projectInfo,
         builder: (context, state) {
-          final type = state.extra as ProjectDetails;
-          return ProjectInfoView(
-            projectDetails: type,
+          final projectInfoRoute = state.extra as ProjectInfoRoute;
+          return BlocProvider.value(
+            value: projectInfoRoute.fetchProjectsCubit,
+            child: ProjectInfoView(
+              projectDetails: projectInfoRoute.projectDetails,
+              allProjects: projectInfoRoute.allProjects,
+            ),
           );
         },
       ),

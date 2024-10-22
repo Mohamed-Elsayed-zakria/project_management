@@ -25,6 +25,7 @@ class ProjectInfoCubit extends Cubit<ProjectInfoState> {
   final TextEditingController editeProjectValueAddedTax =
       TextEditingController();
   final TextEditingController editeDurationPerDay = TextEditingController();
+  final TextEditingController deleteProjectController = TextEditingController();
   //=============================================================
 
   final GlobalKey<FormState> formKeyChangeName = GlobalKey();
@@ -35,7 +36,30 @@ class ProjectInfoCubit extends Cubit<ProjectInfoState> {
   final GlobalKey<FormState> formKeyChangeArea = GlobalKey();
   final GlobalKey<FormState> formKeyChangeCity = GlobalKey();
   final GlobalKey<FormState> formKeyChangeTax = GlobalKey();
+  final GlobalKey<FormState> formKeyDeleteProject = GlobalKey();
   final GlobalKey<FormState> formKeyChangeDurationPerDay = GlobalKey();
+
+  // List of days in English and Arabic
+  final Map<String, String> daysOfWeek = {
+    'Friday': 'الجمعة',
+    'Saturday': 'السبت',
+    'Sunday': 'الأحد',
+    'Monday': 'الإثنين',
+    'Tuesday': 'الثلاثاء',
+    'Wednesday': 'الأربعاء',
+    'Thursday': 'الخميس',
+  };
+
+  // List to control the selection status for each day (by default all are unselected)
+  Map<String, bool> selectedDays = {
+    'Friday': false,
+    'Saturday': false,
+    'Sunday': false,
+    'Monday': false,
+    'Tuesday': false,
+    'Wednesday': false,
+    'Thursday': false,
+  };
 
   final DateTime dateNow = MyDateUtil.currentDateTimeFromDevice();
   final DateTime firstDate = MyDateUtil.currentDateTimeFromDevice()
@@ -344,5 +368,45 @@ class ProjectInfoCubit extends Cubit<ProjectInfoState> {
       },
     );
     emit(UpdateProjectInitial());
+  }
+
+  Future<void> changeProjectHolidays({
+    required List<dynamic> newHolidays,
+    required ProjectDetails projectDetails,
+  }) async {
+    emit(UpdateProjectLoading());
+    Either<Failures, void> result =
+        await _projectInfoRepo.changeProjectHolidays(
+      newHolidays: newHolidays,
+      projectDetails: projectDetails,
+    );
+    result.fold(
+      (failures) => emit(
+        UpdateProjectFailure(errMessage: failures.errMessage),
+      ),
+      (result) {
+        projectDetails.holidays = newHolidays;
+        emit(UpdateProjectSuccess());
+      },
+    );
+  }
+
+  Future<void> deleteProject({
+    required ProjectDetails projectDetails,
+    required List<ProjectDetails> allProjects,
+  }) async {
+    emit(DeleteProjectLoading());
+    Either<Failures, void> result = await _projectInfoRepo.deleteProject(
+      projectDetails: projectDetails,
+    );
+    result.fold(
+      (failures) => emit(
+        DeleteProjectFailure(errMessage: failures.errMessage),
+      ),
+      (result) {
+        allProjects.remove(projectDetails);
+        emit(DeleteProjectSuccess());
+      },
+    );
   }
 }

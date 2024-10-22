@@ -42,8 +42,9 @@ class SettingViewBody extends StatelessWidget {
                   },
                   child: Expanded(
                     child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context)
-                          .copyWith(scrollbars: false),
+                      behavior: ScrollConfiguration.of(context).copyWith(
+                        scrollbars: false,
+                      ),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [

@@ -9,9 +9,10 @@ class ProjectDetails {
   String? projectArea;
   String? projectCity;
   String? projectDatePo;
-  num? projectValueAddedTax;
   String? projectReceiptDate;
   String? projectFilePo;
+  num? projectValueAddedTax;
+  List<dynamic>? holidays;
   int? v;
 
   ProjectDetails({
@@ -25,9 +26,10 @@ class ProjectDetails {
     this.projectArea,
     this.projectCity,
     this.projectDatePo,
-    this.projectValueAddedTax,
     this.projectReceiptDate,
     this.projectFilePo,
+    this.projectValueAddedTax,
+    this.holidays,
     this.v,
   });
 
@@ -45,9 +47,10 @@ class ProjectDetails {
       projectArea: json['projectArea'] as String?,
       projectCity: json['projectCity'] as String?,
       projectDatePo: json['projectDatePo'] as String?,
-      projectValueAddedTax: json['projectValueAddedTax'] as num? ?? 15.0,
       projectReceiptDate: json['projectReceiptDate'] as String?,
       projectFilePo: json['projectFilePo'] as String?,
+      projectValueAddedTax: json['projectValueAddedTax'] as num? ?? 15.0,
+      holidays: json['holidays'] as List<dynamic>? ?? [],
       v: json['__v'] as int?,
     );
   }
@@ -63,9 +66,10 @@ class ProjectDetails {
         'projectArea': projectArea,
         'projectCity': projectCity,
         'projectDatePo': projectDatePo,
-        'projectValueAddedTax': projectValueAddedTax,
         'projectReceiptDate': projectReceiptDate,
         'projectFilePo': projectFilePo,
+        'projectValueAddedTax': projectValueAddedTax,
+        'holidays': holidays,
         '__v': v,
       };
 }

@@ -6,7 +6,6 @@ import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
-import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
 class ProjectEditeAreaDialog extends StatelessWidget {
@@ -19,6 +18,7 @@ class ProjectEditeAreaDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProjectInfoCubit cubit = BlocProvider.of<ProjectInfoCubit>(context);
+    cubit.editeProjectArea.text = projectDetails.projectArea ?? '';
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -34,18 +34,10 @@ class ProjectEditeAreaDialog extends StatelessWidget {
         child: BlocConsumer<ProjectInfoCubit, ProjectInfoState>(
           listener: (context, state) {
             if (state is UpdateProjectSuccess) {
-              cubit.editeProjectArea.clear();
               AppPages.back(context);
-            }
-            if (state is UpdateProjectFailure) {
-              ShowToast.show(
-                context: context,
-                msg: state.errMessage,
-              );
             }
           },
           builder: (context, state) {
-            cubit.editeProjectArea.text = projectDetails.projectArea ?? '';
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [

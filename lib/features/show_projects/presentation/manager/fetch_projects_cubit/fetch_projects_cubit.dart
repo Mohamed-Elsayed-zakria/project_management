@@ -47,4 +47,8 @@ class FetchProjectsCubit extends Cubit<FetchProjectsState> {
     }
     emit(FetchProjectsSuccess());
   }
+
+  void updateState() {
+    emit(FetchProjectsSuccess());
+  }
 }

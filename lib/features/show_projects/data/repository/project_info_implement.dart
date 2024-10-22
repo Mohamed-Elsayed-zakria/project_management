@@ -224,4 +224,38 @@ class ProjectInfoImplement extends ProjectInfoRepo {
       return left(returnDioException(e));
     }
   }
+
+  @override
+  Future<Either<Failures, void>> changeProjectHolidays({
+    required List newHolidays,
+    required ProjectDetails projectDetails,
+  }) async {
+    try {
+      String url =
+          "${APIEndPoint.url}${APIEndPoint.projects}/${projectDetails.id}";
+      await dio.put(
+        url,
+        data: {
+          "holidays": newHolidays,
+        },
+      );
+      return right(null);
+    } catch (e) {
+      return left(returnDioException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failures, void>> deleteProject({
+    required ProjectDetails projectDetails,
+  }) async {
+    try {
+      String url =
+          "${APIEndPoint.url}${APIEndPoint.projects}/${projectDetails.id}";
+      await dio.delete(url);
+      return right(null);
+    } catch (e) {
+      return left(returnDioException(e));
+    }
+  }
 }

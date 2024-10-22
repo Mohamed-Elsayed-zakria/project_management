@@ -7,7 +7,6 @@ import '/core/utils/parse_arabic_number.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
-import '/core/utils/show_toast.dart';
 import '/core/constant/style.dart';
 
 class ProjectEditeDurationPerDayDialog extends StatelessWidget {
@@ -20,6 +19,8 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProjectInfoCubit cubit = BlocProvider.of<ProjectInfoCubit>(context);
+    cubit.editeDurationPerDay.text =
+        projectDetails.projectDurationPerDay.toString();
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -35,19 +36,10 @@ class ProjectEditeDurationPerDayDialog extends StatelessWidget {
         child: BlocConsumer<ProjectInfoCubit, ProjectInfoState>(
           listener: (context, state) {
             if (state is UpdateProjectSuccess) {
-              cubit.editeDurationPerDay.clear();
               AppPages.back(context);
-            }
-            if (state is UpdateProjectFailure) {
-              ShowToast.show(
-                context: context,
-                msg: state.errMessage,
-              );
             }
           },
           builder: (context, state) {
-            cubit.editeDurationPerDay.text =
-                projectDetails.projectDurationPerDay.toString();
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
