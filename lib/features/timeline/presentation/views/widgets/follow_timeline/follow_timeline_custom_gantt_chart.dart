@@ -10,12 +10,12 @@ import '/core/widgets/gantt_chart-master/week_day.dart';
 import '/core/widgets/gantt_chart-master/event.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'custom_sticky_area_week_builder.dart';
 import '/core/widgets/empty_placeholder.dart';
+import 'custom_sticky_area_day_builder.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import '/core/constant/style.dart';
-import 'custom_sticky_area_day_builder.dart';
-import 'custom_sticky_area_week_builder.dart';
 
 class FollowTimelineCustomGanttChart extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -36,6 +36,13 @@ class FollowTimelineCustomGanttChart extends StatelessWidget {
           );
         }
         if (state is GetTimelineTableFailure) {
+          if (state.errMessage == "No data available") {
+            return const Center(
+              child: EmptyPlaceholder(
+                message: "لم يتم اضافة الجدول",
+              ),
+            );
+          }
           return Center(
             child: Text(
               state.errMessage,

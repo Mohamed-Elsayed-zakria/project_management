@@ -10,3 +10,5 @@ final class OutgoingLetterFailure extends OutgoingLetterState {
   String errMessage;
   OutgoingLetterFailure(this.errMessage);
 }
+
+final class SearchTextChanged extends OutgoingLetterState {}

@@ -1,0 +1,51 @@
+import '/features/show_projects/data/models/project_details/project_details.dart';
+import '/features/forms/data/models/form_data/form_data.dart';
+import '/core/widgets/form_shape_list_tile.dart';
+import '/core/widgets/empty_placeholder.dart';
+import '/core/models/enums/step_type.dart';
+import '/core/models/files_nav_data.dart';
+import 'package:flutter/material.dart';
+import '/core/routes/app_routes.dart';
+import '/core/models/step_type.dart';
+import '/core/routes/app_pages.dart';
+
+class KickOfMettingItems extends StatelessWidget {
+  final List<FormData> formDataList;
+  final ProjectDetails projectDetails;
+  const KickOfMettingItems({
+    super.key,
+    required this.formDataList,
+    required this.projectDetails,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: formDataList.isNotEmpty
+          ? ListView.builder(
+              itemCount: formDataList.length,
+              itemBuilder: (context, index) {
+                FormData formData = formDataList[index];
+                return FormShapeListTile(
+                  projectDetails: projectDetails,
+                  title: formData.formNumber ?? "--",
+                  subtitle: formData.formDescription ?? "--",
+                  formFile: formData.formFile,
+                  outgoingIncomingLettersOnTap: () => AppPages.to(
+                    data: FilesNavData(
+                      projectDetails: projectDetails,
+                      stepType: StepType(
+                        stepType: StepTypeName.kickOfMetting.name,
+                        stepTypeId: formData.id,
+                      ),
+                    ),
+                    path: AppRoutes.incomingOutgoingLetters,
+                    context: context,
+                  ),
+                );
+              },
+            )
+          : const EmptyPlaceholder(message: "لا يوجد نماذج"),
+    );
+  }
+}

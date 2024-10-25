@@ -15,7 +15,7 @@ void main() async {
   await IsarConfig.initIsar();
   if (Platform.isWindows) {
     await windowManager.ensureInitialized();
-    await windowManager.setMinimumSize(const Size(670, 600));
+    await windowManager.setMinimumSize(const Size(680, 600));
     await windowManager.center();
   }
   runApp(const MainApp());

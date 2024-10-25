@@ -26,7 +26,10 @@ class OtherAdditionsView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => OtherAdditionsCubit(
           OtherAdditionsImplement(),
-        ),
+        )..getAllOtherAdditions(
+            projectId: projectDetails.id!,
+            stepType: stepType,
+          ),
         child: OtherAdditionsViewBody(
           projectDetails: projectDetails,
           stepType: stepType,

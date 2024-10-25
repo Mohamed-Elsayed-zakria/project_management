@@ -1,3 +1,4 @@
+import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_state.dart';
 import '/features/letters/presentation/manager/outgoing_letter_cubit/outgoing_letter_cubit.dart';
 import '/features/letters/presentation/manager/letters_cubit/letters_cubit.dart';
 import '/features/letters/data/models/enum/letters_search_type.dart';
@@ -22,7 +23,6 @@ class _OutgoingLettersSearchState extends State<OutgoingLettersSearch> {
     LettersCubit letterCubit = BlocProvider.of<LettersCubit>(context);
     cubit.searchText.addListener(() {
       cubit.lettersSearch(letters: letterCubit.outgoingLetters);
-      setState(() {});
     });
   }
 
@@ -78,22 +78,27 @@ class _OutgoingLettersSearchState extends State<OutgoingLettersSearch> {
             ),
           ),
           const SizedBox(width: 10),
-          Expanded(
-            child: CustomFormField(
-              controller: cubit.searchText,
-              label: "بحث",
-              hintText: "ادخل قيمة البحث",
-              prefixIcon: const Icon(Icons.search_outlined),
-              suffixIcon: Visibility(
-                visible: cubit.searchText.text.isNotEmpty,
-                child: IconButton(
-                  onPressed: () => cubit.searchText.clear(),
-                  icon: const Icon(
-                    Icons.clear_outlined,
+          BlocBuilder<OutgoingLetterCubit, OutgoingLetterState>(
+            buildWhen: (previous, current) => current is SearchTextChanged,
+            builder: (context, state) {
+              return Expanded(
+                child: CustomFormField(
+                  controller: cubit.searchText,
+                  label: "بحث",
+                  hintText: "ادخل قيمة البحث",
+                  prefixIcon: const Icon(Icons.search_outlined),
+                  suffixIcon: Visibility(
+                    visible: cubit.searchText.text.isNotEmpty,
+                    child: IconButton(
+                      onPressed: () => cubit.searchText.clear(),
+                      icon: const Icon(
+                        Icons.clear_outlined,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),

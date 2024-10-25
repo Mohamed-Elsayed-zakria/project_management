@@ -3,12 +3,12 @@ import '/features/boq/presentation/manager/fetch_boq_cubit/fetch_boq_cubit.dart'
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_cubit.dart';
 import '/features/boq/presentation/manager/add_boq_cubit/add_boq_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '/core/widgets/custom_alert_dialog.dart';
 import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/show_toast.dart';
 import '/core/routes/app_pages.dart';
-import '/core/constant/style.dart';
 
 class CreateNewBoqDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -20,66 +20,55 @@ class CreateNewBoqDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddBoqCubit addBoqCubit = BlocProvider.of<AddBoqCubit>(context);
-    FetchBoqCubit fetchBoqCubit = BlocProvider.of<FetchBoqCubit>(context);
-    return AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-      title: const Text(
-        "اضافة جدول معدل جديد",
-        textAlign: TextAlign.center,
-        style: AppStyle.kTextStyle20,
-      ),
-      contentPadding: const EdgeInsets.all(14),
-      content: Container(
-        constraints: const BoxConstraints(maxWidth: 360),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10),
-            Form(
-              key: addBoqCubit.formKeyBoq,
-              child: CustomFormField(
-                controller: addBoqCubit.addNewBoqController,
-                label: "اسم الجدول المعدل",
-                hintText: "ادخل اسم الجدول",
-                prefixIcon: const Icon(Icons.table_rows_outlined),
-              ),
+    var addBoqCubit = context.read<AddBoqCubit>();
+    var fetchBoqCubit = context.read<FetchBoqCubit>();
+    return CustomAlertDialog(
+      title: "اضافة جدول معدل جديد",
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 10),
+          Form(
+            key: addBoqCubit.formKeyBoq,
+            child: CustomFormField(
+              controller: addBoqCubit.addNewBoqController,
+              label: "اسم الجدول المعدل",
+              hintText: "ادخل اسم الجدول",
+              prefixIcon: const Icon(Icons.table_rows_outlined),
             ),
-            const SizedBox(height: 10),
-            BlocConsumer<AddBoqCubit, AddBoqState>(
-              listener: (context, state) {
-                if (state is AddBoqSuccess) {
-                  addBoqCubit.addNewBoqController.clear();
-                  AppPages.back(context);
-                }
-                if (state is AddBoqFailure) {
-                  ShowToast.show(
-                    context: context,
-                    msg: state.errMessage,
-                  );
-                }
-              },
-              builder: (context, state) {
-                return CustomButton(
-                  isLoading: state is AddBoqLoading,
-                  text: 'اضافة',
-                  onPressed: () {
-                    if (addBoqCubit.formKeyBoq.currentState!.validate()) {
-                      addBoqCubit.addNewBoq(
-                        name: addBoqCubit.addNewBoqController.text,
-                        projectId: projectDetails.id!,
-                        boqData: fetchBoqCubit.boqData,
-                      );
-                    }
-                  },
+          ),
+          const SizedBox(height: 10),
+          BlocConsumer<AddBoqCubit, AddBoqState>(
+            listener: (context, state) {
+              if (state is AddBoqSuccess) {
+                addBoqCubit.addNewBoqController.clear();
+                AppPages.back(context);
+              }
+              if (state is AddBoqFailure) {
+                ShowToast.show(
+                  context: context,
+                  msg: state.errMessage,
                 );
-              },
-            ),
-            const SizedBox(height: 10),
-          ],
-        ),
+              }
+            },
+            builder: (context, state) {
+              return CustomButton(
+                isLoading: state is AddBoqLoading,
+                text: 'اضافة',
+                onPressed: () {
+                  if (addBoqCubit.formKeyBoq.currentState!.validate()) {
+                    addBoqCubit.addNewBoq(
+                      name: addBoqCubit.addNewBoqController.text,
+                      projectId: projectDetails.id!,
+                      boqData: fetchBoqCubit.boqData,
+                    );
+                  }
+                },
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+        ],
       ),
     );
   }

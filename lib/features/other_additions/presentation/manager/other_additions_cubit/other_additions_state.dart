@@ -19,3 +19,10 @@ final class AddOtherAdditionsFailure extends OtherAdditionsState {
   String errMessage;
   AddOtherAdditionsFailure(this.errMessage);
 }
+
+
+final class PickFileSuccess extends OtherAdditionsState {}
+final class PickFileFailure extends OtherAdditionsState {
+  String errMessage;
+  PickFileFailure(this.errMessage);
+}

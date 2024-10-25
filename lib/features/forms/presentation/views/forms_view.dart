@@ -24,7 +24,11 @@ class FormsView extends StatelessWidget {
         centerTitle: true,
       ),
       body: BlocProvider(
-        create: (context) => FormsCubit(FormsImplement()),
+        create: (context) => FormsCubit(FormsImplement())
+          ..getAllForm(
+            projectId: projectDetails.id!,
+            stepType: stepType,
+          ),
         child: FormsViewBody(
           projectDetails: projectDetails,
           stepType: stepType,

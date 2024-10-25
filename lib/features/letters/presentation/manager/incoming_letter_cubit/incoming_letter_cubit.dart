@@ -50,7 +50,7 @@ class IncomingLetterCubit extends Cubit<IncomingLetterState> {
         return letter.number?.toLowerCase().contains(searchQuery) ?? false;
       }).toList();
     }
-    emit(IncomingLetterInitial());
+    emit(SearchTextChanged());
   }
 
   void changeSelectedLitterType(LetterType value) {

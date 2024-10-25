@@ -23,13 +23,12 @@ class OtherAdditionsCubit extends Cubit<OtherAdditionsState> {
   List<OtherAdditionsData> otherAdditionsData = [];
 
   Future<void> pickOtherAdditionsFile() async {
-    Either<Failures, String> result =
-        await PickFile.pick();
+    Either<Failures, String> result = await PickFile.pick();
     result.fold(
-      (failure) => emit(OtherAdditionsFailure(failure.errMessage)),
+      (failure) => emit(PickFileFailure(failure.errMessage)),
       (result) {
         addOtherAdditionsFile = result;
-        emit(OtherAdditionsInitial());
+        emit(PickFileSuccess());
       },
     );
   }

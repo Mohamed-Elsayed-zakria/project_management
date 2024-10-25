@@ -8,7 +8,6 @@ import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
-import '/core/utils/show_toast.dart';
 import '/core/models/step_type.dart';
 import '/core/constant/style.dart';
 
@@ -23,7 +22,7 @@ class AddOtherAdditionsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OtherAdditionsCubit cubit = BlocProvider.of<OtherAdditionsCubit>(context);
+    var cubit = context.read<OtherAdditionsCubit>();
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -35,73 +34,75 @@ class AddOtherAdditionsDialog extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.all(14),
       content: Container(
-        constraints: const BoxConstraints(maxWidth: 360),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10),
-            Form(
-              key: cubit.formKey,
-              child: Column(
-                children: [
-                  CustomFormField(
-                    controller: cubit.otherAdditionsNumber,
-                    label: "رقم الموضوع",
-                    hintText: "ادخل رقم الموضوع",
-                    prefixIcon: const Icon(Icons.numbers_outlined),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "مطلوب";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  CustomFormField(
-                    controller: cubit.otherAdditionsSubject,
-                    label: "وصف الموضوع",
-                    hintText: "ادخل وصف الموضوع",
-                    prefixIcon: const Icon(Icons.description_outlined),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "مطلوب";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                ],
+        constraints: const BoxConstraints(maxWidth: 360, maxHeight: 450),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 10),
+              Form(
+                key: cubit.formKey,
+                child: Column(
+                  children: [
+                    CustomFormField(
+                      controller: cubit.otherAdditionsNumber,
+                      label: "رقم الموضوع",
+                      hintText: "ادخل رقم الموضوع",
+                      prefixIcon: const Icon(Icons.numbers_outlined),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "مطلوب";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    CustomFormField(
+                      controller: cubit.otherAdditionsSubject,
+                      label: "وصف الموضوع",
+                      hintText: "ادخل وصف الموضوع",
+                      maxLines: null,
+                      prefixIcon: const Icon(Icons.description_outlined),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "مطلوب";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            BlocBuilder<OtherAdditionsCubit, OtherAdditionsState>(
-              builder: (context, state) {
-                return CustomListTileValidator(
-                  leading: const Icon(Icons.file_copy_outlined),
-                  title: cubit.addOtherAdditionsFile == null
-                      ? "ارفاق ملف"
-                      : "تم ارفاق الملف",
-                  onTap: () => cubit.pickOtherAdditionsFile(),
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-            BlocConsumer<OtherAdditionsCubit, OtherAdditionsState>(
-              listener: (context, state) {
-                if (state is AddOtherAdditionsSuccess) {
-                  cubit.otherAdditionsSubject.clear();
-                  cubit.otherAdditionsNumber.clear();
-                  cubit.addOtherAdditionsFile = null;
-                  AppPages.back(context);
-                }
-                if (state is AddOtherAdditionsFailure) {
-                  ShowToast.show(
-                    context: context,
-                    msg: state.errMessage,
+              BlocBuilder<OtherAdditionsCubit, OtherAdditionsState>(
+                builder: (context, state) {
+                  return CustomListTileValidator(
+                    leading: const Icon(Icons.file_copy_outlined),
+                    title: cubit.addOtherAdditionsFile == null
+                        ? "ارفاق ملف"
+                        : "تم ارفاق الملف",
+                    onTap: () => cubit.pickOtherAdditionsFile(),
                   );
-                }
-              },
-              builder: (context, state) {
-                return CustomButton(
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      actionsPadding: EdgeInsets.zero,
+      actions: [
+        BlocConsumer<OtherAdditionsCubit, OtherAdditionsState>(
+          listener: (context, state) {
+            if (state is AddOtherAdditionsSuccess) {
+              AppPages.back(context);
+            }
+          },
+          builder: (context, state) {
+            return Center(
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                constraints: const BoxConstraints(maxWidth: 360),
+                child: CustomButton(
                   isLoading: state is AddOtherAdditionsLoading,
                   text: 'اضافة',
                   onPressed: () {
@@ -118,13 +119,12 @@ class AddOtherAdditionsDialog extends StatelessWidget {
                       );
                     }
                   },
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-          ],
+                ),
+              ),
+            );
+          },
         ),
-      ),
+      ],
     );
   }
 }

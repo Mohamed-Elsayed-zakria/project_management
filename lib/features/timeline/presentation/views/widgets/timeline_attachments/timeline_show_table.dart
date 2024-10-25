@@ -51,6 +51,13 @@ class _TimelineShowTableState extends State<TimelineShowTable> {
           );
         }
         if (state is GetTimelineTableFailure) {
+          if (state.errMessage == "No data available") {
+            return const Center(
+              child: EmptyPlaceholder(
+                message: "لم يتم اضافة الجدول",
+              ),
+            );
+          }
           return Center(
             child: Text(
               state.errMessage,
