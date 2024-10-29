@@ -10,6 +10,7 @@ class SettingCompanyCubit extends Cubit<SettingCompanyState> {
 
   CompanyInfo companyInfoResult = CompanyInfo();
 
+
   Future<void> getCompanyInfo() async {
     emit(SettingCompanyLoading());
     final result = await _companyInfoRepo.getCompanyInfo();

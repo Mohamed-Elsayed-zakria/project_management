@@ -1,11 +1,8 @@
-import '/features/settings/presentation/manager/setting_projects_cubit/setting_projects_cubit.dart';
-import '/features/settings/presentation/manager/setting_projects_cubit/setting_projects_state.dart';
 import '/features/settings/presentation/manager/setting_cubit/setting_cubit.dart';
 import '/features/settings/presentation/manager/setting_cubit/setting_state.dart';
 import 'projects_setting/setting_projects_info.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import '/core/utils/show_toast.dart';
 import 'setting_company_info.dart';
 import 'setting_header.dart';
 
@@ -30,31 +27,20 @@ class SettingViewBody extends StatelessWidget {
                 const SettingHeader(),
                 const SizedBox(height: 10),
                 const Divider(),
-                BlocListener<SettingProjectsCubit, SettingProjectsState>(
-                  listener: (context, state) {
-                    if (state is UpdateSettingProjectsSuccess) {
-                      ShowToast.show(
-                        context: context,
-                        msg: "تم التحديث",
-                        success: true,
-                      );
-                    }
-                  },
-                  child: Expanded(
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(
-                        scrollbars: false,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            cubit.projectSettingIsActive
-                                ? const SettingProjectsInfo()
-                                : cubit.companySettingIsActive
-                                    ? const SettingCompanyInfo()
-                                    : const SizedBox(),
-                          ],
-                        ),
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      scrollbars: false,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          cubit.projectSettingIsActive
+                              ? const SettingProjectsInfo()
+                              : cubit.companySettingIsActive
+                                  ? const SettingCompanyInfo()
+                                  : const SizedBox(),
+                        ],
                       ),
                     ),
                   ),

@@ -7,6 +7,7 @@ import '/core/widgets/custom_form_field.dart';
 import '/core/widgets/custom_buttom.dart';
 import 'package:flutter/material.dart';
 import '/core/routes/app_pages.dart';
+import '/core/constant/style.dart';
 
 class DeleteProjectDialog extends StatelessWidget {
   final ProjectDetails projectDetails;
@@ -34,6 +35,24 @@ class DeleteProjectDialog extends StatelessWidget {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const SizedBox(height: 4),
+              RichText(
+                text: TextSpan(
+                  text:
+                      "قم بتأكيد رغبتك في حذف هذا المشروع عن طريق كتابة اسم المشروع :",
+                  style: AppStyle.kTextStyle16,
+                  children: [
+                    WidgetSpan(
+                      child: SelectableText(
+                        projectDetails.projectNumber ?? '',
+                        style: AppStyle.kTextStyle16.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 10),
               Form(
                 key: cubit.formKeyDeleteProject,
@@ -44,6 +63,9 @@ class DeleteProjectDialog extends StatelessWidget {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "مطلوب";
+                    } else if (cubit.deleteProjectController.text !=
+                        projectDetails.projectNumber) {
+                      return "الرقم غير صحيح";
                     } else {
                       return null;
                     }
@@ -56,13 +78,10 @@ class DeleteProjectDialog extends StatelessWidget {
                 text: 'حذف',
                 onPressed: () {
                   if (cubit.formKeyDeleteProject.currentState!.validate()) {
-                    if (cubit.deleteProjectController.text ==
-                        projectDetails.projectNumber) {
-                      cubit.deleteProject(
-                        projectDetails: projectDetails,
-                        allProjects: allProjects,
-                      );
-                    }
+                    cubit.deleteProject(
+                      projectDetails: projectDetails,
+                      allProjects: allProjects,
+                    );
                   }
                 },
               ),

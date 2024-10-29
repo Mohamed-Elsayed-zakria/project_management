@@ -19,7 +19,7 @@ class LoginImplement extends LoginRepo {
       );
       final jsonData = response.data as Map<String, dynamic>;
       final session = UserSession.fromJson(jsonData);
-      AuthServices.storeCredentials(
+      await AuthServices.storeCredentials(
         session.convertToUserCredentials(),
       );
       return right(null);

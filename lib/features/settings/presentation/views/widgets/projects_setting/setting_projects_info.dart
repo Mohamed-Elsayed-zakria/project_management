@@ -5,6 +5,7 @@ import '/features/settings/presentation/manager/setting_projects_cubit/setting_p
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/core/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
+import '/core/utils/show_toast.dart';
 import 'setting_projects_title.dart';
 import '/core/constant/style.dart';
 
@@ -14,7 +15,16 @@ class SettingProjectsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double maxWidth = 750;
-    return BlocBuilder<SettingProjectsCubit, SettingProjectsState>(
+    return BlocConsumer<SettingProjectsCubit, SettingProjectsState>(
+      listener: (context, state) {
+        if (state is UpdateSettingProjectsSuccess) {
+          ShowToast.show(
+            context: context,
+            msg: "تم التحديث",
+            success: true,
+          );
+        }
+      },
       builder: (context, state) {
         if (state is SettingProjectsLoading) {
           return const Center(

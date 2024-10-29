@@ -13,7 +13,7 @@ abstract class AuthServices extends BaseServices {
     await removeCurrentUser();
   }
 
-  static void storeCredentials(UserCredentials credentials) async {
+  static Future<void> storeCredentials(UserCredentials credentials) async {
     await IsarConfig.isar.writeTxn(
       () async {
         await IsarConfig.isar.userCredentials.put(credentials);
@@ -49,7 +49,7 @@ abstract class AuthServices extends BaseServices {
         final jsonData = response.data as Map<String, dynamic>;
         if (response.statusCode == 200) {
           credentials.token = jsonData['token'];
-          storeCredentials(credentials);
+          await storeCredentials(credentials);
           return right(credentials);
         }
       }
